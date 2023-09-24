@@ -1,0 +1,96 @@
+package model;
+
+import model.enums.ReservaStatus;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+public class Reserva {
+    private Leitor leitor;
+    private Livro livro;
+    private ReservaStatus status;
+
+    private LocalDateTime dataReservado;
+
+    private LocalDateTime dataLimite;
+
+    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado) {
+        this.leitor = leitor;
+        this.livro = livro;
+        this.status = status;
+        this.dataReservado = dataReservado;
+        this.dataLimite = null;
+    }
+
+    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
+        this.leitor = leitor;
+        this.livro = livro;
+        this.status = status;
+        this.dataReservado = dataReservado;
+        this.dataLimite = dataLimite;
+    }
+
+    public Leitor getLeitor() {
+        return leitor;
+    }
+
+    public void setLeitor(Leitor leitor) {
+        this.leitor = leitor;
+    }
+
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+
+    public ReservaStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReservaStatus status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getDataReservado() {
+        return dataReservado;
+    }
+
+    public void setDataReservado(LocalDateTime dataReservado) {
+        this.dataReservado = dataReservado;
+    }
+
+    public LocalDateTime getDataLimite() {
+        return dataLimite;
+    }
+
+    public void setDataLimite(LocalDateTime dataLimite) {
+        this.dataLimite = dataLimite;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return Objects.equals(leitor, reserva.leitor) && Objects.equals(livro, reserva.livro) && Objects.equals(dataReservado, reserva.dataReservado);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(leitor, livro, dataReservado);
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "leitor=" + leitor +
+                ", livro=" + livro +
+                ", status=" + status +
+                ", dataReservado=" + dataReservado +
+                ", dataLimite=" + dataLimite +
+                '}';
+    }
+}

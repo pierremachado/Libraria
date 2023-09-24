@@ -1,5 +1,7 @@
 package model;
 
+import model.enums.LeitorStatus;
+
 public class Leitor extends Usuario{
     private String endereco;
     private String telefone;

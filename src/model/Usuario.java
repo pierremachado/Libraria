@@ -1,6 +1,8 @@
 package model;
 
-public class Usuario {
+import java.util.Objects;
+
+abstract class Usuario {
     private String nome;
     private String id;
     private String cargo;
@@ -46,12 +48,15 @@ public class Usuario {
     }
 
     @Override
-    public String toString() {
-        return "Usuario{" +
-                ", nome='" + nome + '\'' +
-                ", id=" + id +
-                ", cargo='" + cargo + '\'' +
-                ", senha='" + senha + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(senha, usuario.senha);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, senha);
     }
 }

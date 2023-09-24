@@ -7,7 +7,12 @@ public class Administrador extends Usuario{
 
     @Override
     public String toString() {
-        return "Administrador{} " + super.toString();
+        return "Administrador{" +
+                ", nome='" + getNome() + '\'' +
+                ", id=" + getId() +
+                ", cargo='" + getCargo() + '\'' +
+                ", senha='" + getSenha() + '\'' +
+                '}';
     }
 }
 

@@ -1,17 +1,10 @@
 package model;
 
-public class Livro {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, String categoria, String id, int quantidadeDisponiveis) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editora = editora;
-        this.isbn = isbn;
-        this.anoPublicacao = anoPublicacao;
-        this.categoria = categoria;
-        this.id = id;
-        this.quantidadeDisponiveis = quantidadeDisponiveis;
-    }
+public class Livro {
 
     private String titulo;
 
@@ -23,11 +16,22 @@ public class Livro {
 
     private String anoPublicacao;
 
-    private String categoria;
-
-    private String id;
+    private List<String> categoria;
 
     private int quantidadeDisponiveis;
+
+    private int vezesPesquisado;
+
+    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, List<String> categoria, int quantidadeDisponiveis, int vezesPesquisado) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editora = editora;
+        this.isbn = isbn;
+        this.anoPublicacao = anoPublicacao;
+        this.categoria = categoria;
+        this.quantidadeDisponiveis = quantidadeDisponiveis;
+        this.vezesPesquisado = vezesPesquisado;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -69,28 +73,25 @@ public class Livro {
         this.anoPublicacao = anoPublicacao;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public int getQuantidadeDisponiveis() {
         return quantidadeDisponiveis;
     }
 
     public void setQuantidadeDisponiveis(int quantidadeDisponiveis) {
         this.quantidadeDisponiveis = quantidadeDisponiveis;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return Objects.equals(isbn, livro.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
     }
 
     @Override
@@ -102,7 +103,6 @@ public class Livro {
                 ", isbn='" + isbn + '\'' +
                 ", anoPublicacao='" + anoPublicacao + '\'' +
                 ", categoria='" + categoria + '\'' +
-                ", id='" + id + '\'' +
                 ", quantidadeDisponiveis=" + quantidadeDisponiveis +
                 '}';
     }
