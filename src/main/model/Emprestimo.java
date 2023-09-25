@@ -1,11 +1,11 @@
-package model;
+package main.model;
 
-import model.enums.EmprestimoStatus;
+import main.model.enums.EmprestimoStatus;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public class Emprestimo {
+    private String id;
     private Bibliotecario bibliotecario;
     private Leitor leitor;
     private Livro livro;
@@ -15,7 +15,8 @@ public class Emprestimo {
     private int vezesRenovado;
     private EmprestimoStatus status;
 
-    public Emprestimo(Bibliotecario bibliotecario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataDeRetorno, int vezesRenovado, EmprestimoStatus status, Reserva reserva) {
+    public Emprestimo(String id, Bibliotecario bibliotecario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataDeRetorno, int vezesRenovado, EmprestimoStatus status, Reserva reserva) {
+        this.id = id;
         this.bibliotecario = bibliotecario;
         this.leitor = leitor;
         this.livro = livro;
@@ -24,6 +25,14 @@ public class Emprestimo {
         this.vezesRenovado = vezesRenovado;
         this.status = status;
         this.reserva = reserva;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Emprestimo(Bibliotecario bibliotecario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataDeRetorno, int vezesRenovado, EmprestimoStatus status) {
@@ -102,21 +111,9 @@ public class Emprestimo {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Emprestimo that = (Emprestimo) o;
-        return Objects.equals(bibliotecario, that.bibliotecario) && Objects.equals(leitor, that.leitor) && Objects.equals(livro, that.livro) && Objects.equals(dataEmprestimo, that.dataEmprestimo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bibliotecario, leitor, livro, dataEmprestimo);
-    }
-
-    @Override
     public String toString() {
         return "Emprestimo{" +
+                "id=" + id +
                 "bibliotecario=" + bibliotecario +
                 ", leitor=" + leitor +
                 ", livro=" + livro +

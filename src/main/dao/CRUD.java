@@ -1,12 +1,12 @@
-package dao;
+package main.dao;
 
 import java.util.List;
 
-public interface crudDAO<T>{
+public interface CRUD<T>{
 
     T update(T obj);
     void deleteID(String id);
     T create(T obj);
     T findID(String id);
-    List<T> findall();
+    List<T> findAll();
 }

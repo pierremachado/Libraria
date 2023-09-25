@@ -1,11 +1,11 @@
-package model;
+package main.model;
 
-import model.enums.ReservaStatus;
+import main.model.enums.ReservaStatus;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 public class Reserva {
+    private String id;
     private Leitor leitor;
     private Livro livro;
     private ReservaStatus status;
@@ -14,7 +14,8 @@ public class Reserva {
 
     private LocalDateTime dataLimite;
 
-    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado) {
+    public Reserva(String id, Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado) {
+        this.id = id;
         this.leitor = leitor;
         this.livro = livro;
         this.status = status;
@@ -22,12 +23,21 @@ public class Reserva {
         this.dataLimite = null;
     }
 
-    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
+    public Reserva(String id, Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
+        this.id = id;
         this.leitor = leitor;
         this.livro = livro;
         this.status = status;
         this.dataReservado = dataReservado;
         this.dataLimite = dataLimite;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Leitor getLeitor() {
@@ -71,21 +81,9 @@ public class Reserva {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Reserva reserva = (Reserva) o;
-        return Objects.equals(leitor, reserva.leitor) && Objects.equals(livro, reserva.livro) && Objects.equals(dataReservado, reserva.dataReservado);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(leitor, livro, dataReservado);
-    }
-
-    @Override
     public String toString() {
         return "Reserva{" +
+                "id=" + id +
                 "leitor=" + leitor +
                 ", livro=" + livro +
                 ", status=" + status +

@@ -1,8 +1,6 @@
-package model;
+package main.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Livro {
 
@@ -16,13 +14,13 @@ public class Livro {
 
     private String anoPublicacao;
 
-    private List<String> categoria;
+    private List<Categoria> categoria;
 
     private int quantidadeDisponiveis;
 
     private int vezesPesquisado;
 
-    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, List<String> categoria, int quantidadeDisponiveis, int vezesPesquisado) {
+    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, List<Categoria> categoria, int quantidadeDisponiveis, int vezesPesquisado) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
@@ -81,19 +79,21 @@ public class Livro {
         this.quantidadeDisponiveis = quantidadeDisponiveis;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Livro livro = (Livro) o;
-        return Objects.equals(isbn, livro.isbn);
+    public List<Categoria> getCategoria() {
+        return categoria;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(isbn);
+    public void setCategoria(List<Categoria> categoria) {
+        this.categoria = categoria;
     }
 
+    public int getVezesPesquisado() {
+        return vezesPesquisado;
+    }
+
+    public void setVezesPesquisado(int vezesPesquisado) {
+        this.vezesPesquisado = vezesPesquisado;
+    }
     @Override
     public String toString() {
         return "Livro{" +

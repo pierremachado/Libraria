@@ -1,15 +1,15 @@
-package dao.Administrador;
+package main.dao.Administrador;
 
-import model.Administrador;
+import main.model.Administrador;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministradorList implements AdministradorDAO{
+public class AdministradorListDAO implements AdministradorDAO{
 
     private List<Administrador> lista;
 
-    public AdministradorList() {
+    public AdministradorListDAO() {
         this.lista = new ArrayList<>();
     }
 
@@ -47,7 +47,7 @@ public class AdministradorList implements AdministradorDAO{
     }
 
     @Override
-    public List<Administrador> findall() {
+    public List<Administrador> findAll() {
         return this.lista;
     }
 }

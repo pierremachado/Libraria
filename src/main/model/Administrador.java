@@ -1,13 +1,13 @@
-package model;
+package main.model;
 
-public class Bibliotecario extends Usuario{
-    public Bibliotecario(String nome, String id, String cargo, String senha){
+public class Administrador extends Usuario{
+    public Administrador(String nome, String id, String cargo, String senha){
         super(nome, id, cargo, senha);
     }
 
     @Override
     public String toString() {
-        return "Bibliotecario{" +
+        return "Administrador{" +
                 ", nome='" + getNome() + '\'' +
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
@@ -15,3 +15,4 @@ public class Bibliotecario extends Usuario{
                 '}';
     }
 }
+

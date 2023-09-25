@@ -1,17 +1,22 @@
-package model;
+package main.model;
 
-import model.enums.LeitorStatus;
+import main.model.enums.LeitorStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Leitor extends Usuario{
     private String endereco;
     private String telefone;
     private LeitorStatus status;
+    private List<Reserva> reservaList;
 
     public Leitor(String nome, String id, String cargo, String senha, String endereco, String telefone, LeitorStatus Status){
         super(nome, id, cargo, senha);
         this.endereco = endereco;
         this.telefone = telefone;
         this.status = Status;
+        this.reservaList = new ArrayList<>();
     }
 
     public String getEndereco(){
@@ -36,6 +41,14 @@ public class Leitor extends Usuario{
 
     public void setStatus(LeitorStatus status){
         this.status = status;
+    }
+
+    public List<Reserva> getReservaList() {
+        return reservaList;
+    }
+
+    public void setReservaList(List<Reserva> reservaList) {
+        this.reservaList = reservaList;
     }
 
     @Override
