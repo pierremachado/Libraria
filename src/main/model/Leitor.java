@@ -10,6 +10,7 @@ public class Leitor extends Usuario{
     private String telefone;
     private LeitorStatus status;
     private List<Reserva> reservaList;
+    private List<Emprestimo> emprestimoList;
 
     public Leitor(String nome, String id, String cargo, String senha, String endereco, String telefone, LeitorStatus Status){
         super(nome, id, cargo, senha);
@@ -17,6 +18,7 @@ public class Leitor extends Usuario{
         this.telefone = telefone;
         this.status = Status;
         this.reservaList = new ArrayList<>();
+        this.emprestimoList = new ArrayList<>();
     }
 
     public String getEndereco(){
@@ -49,6 +51,14 @@ public class Leitor extends Usuario{
 
     public void setReservaList(List<Reserva> reservaList) {
         this.reservaList = reservaList;
+    }
+
+    public List<Emprestimo> getEmprestimoList() {
+        return emprestimoList;
+    }
+
+    public void setEmprestimoList(List<Emprestimo> emprestimoList) {
+        this.emprestimoList = emprestimoList;
     }
 
     @Override
