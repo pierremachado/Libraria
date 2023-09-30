@@ -1,6 +1,6 @@
-package main.model;
+package main.java.libraria.model;
 
-import main.model.enums.ReservaStatus;
+import main.java.libraria.model.enums.ReservaStatus;
 
 import java.time.LocalDateTime;
 

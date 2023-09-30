@@ -1,4 +1,4 @@
-package main.model;
+package main.java.libraria.model;
 
 public class Categoria {
     private String categoria;

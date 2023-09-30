@@ -1,6 +1,7 @@
-package main.model;
+package main.java.libraria.model;
 
-import main.model.enums.LeitorStatus;
+import main.java.libraria.model.enums.LeitorStatus;
+import main.java.libraria.model.enums.UserPermissao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,8 @@ public class Leitor extends Usuario{
     private List<Reserva> reservaList;
     private List<Emprestimo> emprestimoList;
 
-    public Leitor(String nome, String id, String cargo, String senha, String endereco, String telefone, LeitorStatus Status){
-        super(nome, id, cargo, senha);
+    public Leitor(String nome, String sobrenome, String id, String senha, String endereco, String telefone, LeitorStatus Status){
+        super(nome, sobrenome, id, "Leitor", senha, UserPermissao.LEITOR);
         this.endereco = endereco;
         this.telefone = telefone;
         this.status = Status;

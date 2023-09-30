@@ -1,6 +1,6 @@
-package main.model;
+package main.java.libraria.model;
 
-import main.model.enums.EmprestimoStatus;
+import main.java.libraria.model.enums.EmprestimoStatus;
 
 import java.time.LocalDateTime;
 

@@ -1,5 +1,6 @@
-package main.model;
+package main.java.libraria.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Livro {
@@ -13,6 +14,7 @@ public class Livro {
     private String isbn;
 
     private String anoPublicacao;
+    private String chavePesquisa;
 
     private List<Categoria> categoria;
 
@@ -29,6 +31,23 @@ public class Livro {
         this.categoria = categoria;
         this.quantidadeDisponiveis = quantidadeDisponiveis;
         this.vezesPesquisado = vezesPesquisado;
+        this.chavePesquisa = (titulo + " " + autor + " " + editora + " " + isbn).replace(" ", "").toLowerCase();
+    }
+
+    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, int quantidadeDisponiveis, int vezesPesquisado) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editora = editora;
+        this.isbn = isbn;
+        this.anoPublicacao = anoPublicacao;
+        this.quantidadeDisponiveis = quantidadeDisponiveis;
+        this.vezesPesquisado = vezesPesquisado;
+        this.categoria = new ArrayList<>();
+        this.chavePesquisa = (titulo + " " + autor + " " + editora + " " + isbn).replace(" ", "").toLowerCase();
+    }
+
+    public void aumentarPesquisa(){
+        this.vezesPesquisado++;
     }
 
     public String getTitulo() {
@@ -94,6 +113,15 @@ public class Livro {
     public void setVezesPesquisado(int vezesPesquisado) {
         this.vezesPesquisado = vezesPesquisado;
     }
+
+    public String getChavePesquisa() {
+        return chavePesquisa;
+    }
+
+    public void updateChavePesquisa() {
+        this.chavePesquisa = (this.titulo + this.autor + this.isbn).replace(" ", "").toLowerCase();
+    }
+
     @Override
     public String toString() {
         return "Livro{" +

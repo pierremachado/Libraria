@@ -1,12 +1,14 @@
-package main.model;
+package main.java.libraria.model;
+
+import main.java.libraria.model.enums.UserPermissao;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class Bibliotecario extends Usuario{
     private List<Emprestimo> emprestimoList;
-    public Bibliotecario(String nome, String id, String cargo, String senha){
-        super(nome, id, cargo, senha);
+    public Bibliotecario(String nome, String sobrenome, String id, String senha){
+        super(nome, sobrenome, id, "Bibliotecário", senha, UserPermissao.BIBLIOTECARIO);
         this.emprestimoList = new ArrayList<>();
     }
 
