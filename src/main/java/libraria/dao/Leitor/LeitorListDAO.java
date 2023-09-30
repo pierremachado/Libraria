@@ -1,6 +1,6 @@
-package main.dao.Leitor;
+package main.java.libraria.dao.Leitor;
 
-import main.model.Leitor;
+import main.java.libraria.model.Leitor;
 
 import java.util.ArrayList;
 import java.util.List;

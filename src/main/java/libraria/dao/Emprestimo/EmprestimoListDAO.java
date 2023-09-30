@@ -1,6 +1,6 @@
-package main.dao.Emprestimo;
+package main.java.libraria.dao.Emprestimo;
 
-import main.model.Emprestimo;
+import main.java.libraria.model.Emprestimo;
 
 import java.util.ArrayList;
 import java.util.List;

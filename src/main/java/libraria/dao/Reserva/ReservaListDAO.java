@@ -1,6 +1,6 @@
-package main.dao.Reserva;
+package main.java.libraria.dao.Reserva;
 
-import main.model.Reserva;
+import main.java.libraria.model.Reserva;
 
 import java.util.ArrayList;
 import java.util.List;

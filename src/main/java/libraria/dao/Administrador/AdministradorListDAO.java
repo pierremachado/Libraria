@@ -1,6 +1,6 @@
-package main.dao.Administrador;
+package main.java.libraria.dao.Administrador;
 
-import main.model.Administrador;
+import main.java.libraria.model.Administrador;
 
 import java.util.ArrayList;
 import java.util.List;

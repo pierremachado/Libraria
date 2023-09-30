@@ -1,19 +1,19 @@
-package main.dao;
+package main.java.libraria.dao;
 
-import main.dao.Administrador.AdministradorDAO;
-import main.dao.Administrador.AdministradorListDAO;
-import main.dao.Bibliotecario.BibliotecarioDAO;
-import main.dao.Bibliotecario.BibliotecarioListDAO;
-import main.dao.Categoria.CategoriaDAO;
-import main.dao.Categoria.CategoriaListDAO;
-import main.dao.Emprestimo.EmprestimoDAO;
-import main.dao.Emprestimo.EmprestimoListDAO;
-import main.dao.Leitor.LeitorDAO;
-import main.dao.Leitor.LeitorListDAO;
-import main.dao.Livro.LivroDAO;
-import main.dao.Livro.LivroListDAO;
-import main.dao.Reserva.ReservaDAO;
-import main.dao.Reserva.ReservaListDAO;
+import main.java.libraria.dao.Administrador.AdministradorDAO;
+import main.java.libraria.dao.Administrador.AdministradorListDAO;
+import main.java.libraria.dao.Bibliotecario.BibliotecarioDAO;
+import main.java.libraria.dao.Bibliotecario.BibliotecarioListDAO;
+import main.java.libraria.dao.Categoria.CategoriaDAO;
+import main.java.libraria.dao.Categoria.CategoriaListDAO;
+import main.java.libraria.dao.Emprestimo.EmprestimoDAO;
+import main.java.libraria.dao.Emprestimo.EmprestimoListDAO;
+import main.java.libraria.dao.Leitor.LeitorDAO;
+import main.java.libraria.dao.Leitor.LeitorListDAO;
+import main.java.libraria.dao.Livro.LivroDAO;
+import main.java.libraria.dao.Livro.LivroListDAO;
+import main.java.libraria.dao.Reserva.ReservaDAO;
+import main.java.libraria.dao.Reserva.ReservaListDAO;
 
 public class DAO {
 

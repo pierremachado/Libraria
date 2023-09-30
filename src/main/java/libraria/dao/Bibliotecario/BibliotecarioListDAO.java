@@ -1,6 +1,6 @@
-package main.dao.Bibliotecario;
+package main.java.libraria.dao.Bibliotecario;
 
-import main.model.Bibliotecario;
+import main.java.libraria.model.Bibliotecario;
 
 import java.util.ArrayList;
 import java.util.List;

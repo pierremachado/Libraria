@@ -1,6 +1,6 @@
-package main.dao.Categoria;
+package main.java.libraria.dao.Categoria;
 
-import main.model.Categoria;
+import main.java.libraria.model.Categoria;
 
 import java.util.ArrayList;
 import java.util.List;
