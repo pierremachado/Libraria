@@ -1,9 +1,9 @@
-package main.test;
+package main.java.libraria.test;
 
-import main.model.*;
-import main.model.enums.EmprestimoStatus;
-import main.model.enums.LeitorStatus;
-import main.model.enums.ReservaStatus;
+import main.java.libraria.model.*;
+import main.java.libraria.model.enums.EmprestimoStatus;
+import main.java.libraria.model.enums.LeitorStatus;
+import main.java.libraria.model.enums.ReservaStatus;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
