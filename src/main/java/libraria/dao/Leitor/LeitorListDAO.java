@@ -5,9 +5,9 @@ import main.java.libraria.model.Leitor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeitorListDAO implements LeitorDAO{
+public class LeitorListDAO implements LeitorDAO {
 
-    private List<Leitor> lista;
+    private final List<Leitor> lista;
 
     public LeitorListDAO() {
         this.lista = new ArrayList<>();

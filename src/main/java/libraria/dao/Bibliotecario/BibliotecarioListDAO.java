@@ -5,13 +5,14 @@ import main.java.libraria.model.Bibliotecario;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BibliotecarioListDAO implements BibliotecarioDAO{
+public class BibliotecarioListDAO implements BibliotecarioDAO {
 
-    private List<Bibliotecario> lista;
+    private final List<Bibliotecario> lista;
 
     public BibliotecarioListDAO() {
         this.lista = new ArrayList<>();
     }
+
     @Override
     public Bibliotecario update(Bibliotecario obj) {
         int index = this.lista.indexOf(obj);
@@ -21,8 +22,8 @@ public class BibliotecarioListDAO implements BibliotecarioDAO{
 
     @Override
     public void deleteID(String id) {
-        for (Bibliotecario bib : this.lista){
-            if(bib.getId().equals(id)) {
+        for (Bibliotecario bib : this.lista) {
+            if (bib.getId().equals(id)) {
                 this.lista.remove(bib);
                 return;
             }
@@ -37,8 +38,8 @@ public class BibliotecarioListDAO implements BibliotecarioDAO{
 
     @Override
     public Bibliotecario findID(String id) {
-        for(Bibliotecario bib : this.lista){
-            if(bib.getId().equals(id))
+        for (Bibliotecario bib : this.lista) {
+            if (bib.getId().equals(id))
                 return bib;
         }
 

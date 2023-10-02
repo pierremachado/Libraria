@@ -5,26 +5,26 @@ import main.java.libraria.model.Administrador;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministradorListDAO implements AdministradorDAO{
+public class AdministradorListDAO implements AdministradorDAO {
 
-    private List<Administrador> lista;
+    private final List<Administrador> administradorList;
 
     public AdministradorListDAO() {
-        this.lista = new ArrayList<>();
+        this.administradorList = new ArrayList<>();
     }
 
     @Override
     public Administrador update(Administrador obj) {
-        int index = this.lista.indexOf(obj);
-        this.lista.set(index, obj);
+        int index = this.administradorList.indexOf(obj);
+        this.administradorList.set(index, obj);
         return obj;
     }
 
     @Override
     public void deleteID(String id) {
-        for (Administrador adm : this.lista){
-            if(adm.getId().equals(id)) {
-                this.lista.remove(adm);
+        for (Administrador adm : this.administradorList) {
+            if (adm.getId().equals(id)) {
+                this.administradorList.remove(adm);
                 return;
             }
         }
@@ -32,14 +32,14 @@ public class AdministradorListDAO implements AdministradorDAO{
 
     @Override
     public Administrador create(Administrador obj) {
-        this.lista.add(obj);
+        this.administradorList.add(obj);
         return obj;
     }
 
     @Override
     public Administrador findID(String id) {
-        for(Administrador adm : this.lista){
-            if(adm.getId().equals(id))
+        for (Administrador adm : this.administradorList) {
+            if (adm.getId().equals(id))
                 return adm;
         }
 
@@ -48,6 +48,6 @@ public class AdministradorListDAO implements AdministradorDAO{
 
     @Override
     public List<Administrador> findAll() {
-        return this.lista;
+        return this.administradorList;
     }
 }

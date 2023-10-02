@@ -4,8 +4,6 @@ import main.java.libraria.dao.Administrador.AdministradorDAO;
 import main.java.libraria.dao.Administrador.AdministradorListDAO;
 import main.java.libraria.dao.Bibliotecario.BibliotecarioDAO;
 import main.java.libraria.dao.Bibliotecario.BibliotecarioListDAO;
-import main.java.libraria.dao.Categoria.CategoriaDAO;
-import main.java.libraria.dao.Categoria.CategoriaListDAO;
 import main.java.libraria.dao.Emprestimo.EmprestimoDAO;
 import main.java.libraria.dao.Emprestimo.EmprestimoListDAO;
 import main.java.libraria.dao.Leitor.LeitorDAO;
@@ -19,7 +17,6 @@ public class DAO {
 
     private static AdministradorDAO administradorDAO;
     private static BibliotecarioDAO bibliotecarioDAO;
-    private static CategoriaDAO categoriaDAO;
     private static EmprestimoDAO emprestimoDAO;
     private static LeitorDAO leitorDAO;
     private static LivroDAO livroDAO;
@@ -37,13 +34,6 @@ public class DAO {
             bibliotecarioDAO = new BibliotecarioListDAO();
         }
         return bibliotecarioDAO;
-    }
-
-    public static CategoriaDAO getCategoriaDAO() {
-        if (categoriaDAO == null) {
-            categoriaDAO = new CategoriaListDAO();
-        }
-        return categoriaDAO;
     }
 
     public static EmprestimoDAO getEmprestimoDAO() {
@@ -67,6 +57,9 @@ public class DAO {
         return livroDAO;
     }
 
+    /**
+     * @return Instância do DAO.
+     */
     public static ReservaDAO getReservaDAO() {
         if (reservaDAO == null) {
             reservaDAO = new ReservaListDAO();

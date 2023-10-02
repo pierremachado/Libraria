@@ -3,12 +3,11 @@ package main.java.libraria.dao.Livro;
 import main.java.libraria.model.Livro;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
-public class LivroListDAO implements LivroDAO{
+public class LivroListDAO implements LivroDAO {
 
-    private List<Livro> lista;
+    private final List<Livro> lista;
 
     public LivroListDAO() {
         this.lista = new ArrayList<>();
@@ -40,24 +39,20 @@ public class LivroListDAO implements LivroDAO{
     @Override
     public Livro findID(String isbn) {
         for (Livro livro : this.lista) {
-            if (livro.getIsbn().equals(isbn)){
-                livro.aumentarPesquisa();
+            if (livro.getIsbn().equals(isbn)) {
                 return livro;
             }
         }
         return null;
     }
 
-    public List<Livro> findBySearchKey(String key){
+    public List<Livro> findBySearchKey(String key) {
         List<Livro> livrosPesquisados = new ArrayList<>();
-        for (Livro livro : this.lista){
-            if (livro.getChavePesquisa().contains(key)){
+        for (Livro livro : this.lista) {
+            if (livro.getChavePesquisa().contains(key)) {
                 livrosPesquisados.add(livro);
-                livro.aumentarPesquisa();
             }
         }
-        Comparator<Livro> sortByTimesSearched = Comparator.comparingInt(Livro::getVezesPesquisado);
-        livrosPesquisados.sort(sortByTimesSearched);
         return livrosPesquisados;
     }
 

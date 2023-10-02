@@ -1,6 +1,9 @@
 package main.java.libraria.dao.Emprestimo;
 
 import main.java.libraria.model.Emprestimo;
+import main.java.libraria.model.Leitor;
+import main.java.libraria.model.Livro;
+import main.java.libraria.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +12,7 @@ import static java.lang.String.valueOf;
 
 public class EmprestimoListDAO implements EmprestimoDAO {
 
-    private List<Emprestimo> lista;
+    private final List<Emprestimo> lista;
     private int nextId = 1;
 
     public EmprestimoListDAO() {
@@ -48,6 +51,39 @@ public class EmprestimoListDAO implements EmprestimoDAO {
         }
 
         return null;
+    }
+
+    @Override
+    public List<Emprestimo> findLivro(Livro livro) {
+        ArrayList<Emprestimo> emprestimoArrayList = new ArrayList<Emprestimo>();
+        for (Emprestimo emprestimo : this.lista) {
+            if (emprestimo.getLivro().equals(livro)) {
+                emprestimoArrayList.add(emprestimo);
+            }
+        }
+        return emprestimoArrayList;
+    }
+
+    @Override
+    public List<Emprestimo> findUsuario(Usuario usuario) {
+        ArrayList<Emprestimo> emprestimoArrayList = new ArrayList<Emprestimo>();
+        for (Emprestimo emprestimo : this.lista) {
+            if (emprestimo.getUsuario().equals(usuario)) {
+                emprestimoArrayList.add(emprestimo);
+            }
+        }
+        return emprestimoArrayList;
+    }
+
+    @Override
+    public List<Emprestimo> findLeitor(Leitor leitor) {
+        ArrayList<Emprestimo> emprestimoArrayList = new ArrayList<Emprestimo>();
+        for (Emprestimo emprestimo : this.lista) {
+            if (emprestimo.getLeitor().equals(leitor)) {
+                emprestimoArrayList.add(emprestimo);
+            }
+        }
+        return emprestimoArrayList;
     }
 
     @Override
