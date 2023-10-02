@@ -14,8 +14,7 @@ public class Reserva {
 
     private LocalDateTime dataLimite;
 
-    public Reserva(String id, Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado) {
-        this.id = id;
+    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado) {
         this.leitor = leitor;
         this.livro = livro;
         this.status = status;
@@ -23,8 +22,7 @@ public class Reserva {
         this.dataLimite = null;
     }
 
-    public Reserva(String id, Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
-        this.id = id;
+    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
         this.leitor = leitor;
         this.livro = livro;
         this.status = status;

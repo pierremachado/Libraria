@@ -4,8 +4,9 @@ import main.java.libraria.dao.DAO;
 import main.java.libraria.model.enums.UserPermissao;
 
 import java.util.List;
+import java.util.Objects;
 
-abstract class Usuario {
+public abstract class Usuario {
     private String nome;
     private String sobrenome;
     private String id;
@@ -22,10 +23,13 @@ abstract class Usuario {
         this.permissao = permissao;
     }
 
-    public List<Livro> pesquisarLivroChave(String key){
+    public List<Livro> pesquisarLivroChave(String key) {
         return DAO.getLivroDAO().findBySearchKey(key);
     }
-    public Livro pesquisarLivroIsbn(String isbn) { return DAO.getLivroDAO().findID(isbn); }
+
+    public Livro pesquisarLivroIsbn(String isbn) {
+        return DAO.getLivroDAO().findID(isbn);
+    }
 
     public String getNome() {
         return nome;
@@ -73,5 +77,18 @@ abstract class Usuario {
 
     public void setPermissao(UserPermissao permissao) {
         this.permissao = permissao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && permissao == usuario.permissao;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, permissao);
     }
 }

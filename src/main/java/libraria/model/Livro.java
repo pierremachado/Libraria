@@ -1,53 +1,41 @@
 package main.java.libraria.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Year;
+import java.util.Objects;
 
 public class Livro {
-
     private String titulo;
-
     private String autor;
-
     private String editora;
-
     private String isbn;
-
-    private String anoPublicacao;
+    private Year anoPublicacao;
     private String chavePesquisa;
-
-    private List<Categoria> categoria;
-
+    private String categoria;
     private int quantidadeDisponiveis;
-
     private int vezesPesquisado;
 
-    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, List<Categoria> categoria, int quantidadeDisponiveis, int vezesPesquisado) {
+    public Livro(String titulo, String autor, String editora, String isbn, Year anoPublicacao, String categoria, int quantidadeDisponiveis, int vezesPesquisado) {
         this.titulo = titulo;
         this.autor = autor;
         this.editora = editora;
         this.isbn = isbn;
         this.anoPublicacao = anoPublicacao;
+        this.quantidadeDisponiveis = quantidadeDisponiveis;
+        this.vezesPesquisado = vezesPesquisado;
         this.categoria = categoria;
-        this.quantidadeDisponiveis = quantidadeDisponiveis;
-        this.vezesPesquisado = vezesPesquisado;
-        this.chavePesquisa = (titulo + " " + autor + " " + editora + " " + isbn).replace(" ", "").toLowerCase();
+        this.chavePesquisa = (titulo + autor + categoria + editora + isbn).replace(" ", "").toLowerCase();
     }
 
-    public Livro(String titulo, String autor, String editora, String isbn, String anoPublicacao, int quantidadeDisponiveis, int vezesPesquisado) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editora = editora;
-        this.isbn = isbn;
-        this.anoPublicacao = anoPublicacao;
-        this.quantidadeDisponiveis = quantidadeDisponiveis;
-        this.vezesPesquisado = vezesPesquisado;
-        this.categoria = new ArrayList<>();
-        this.chavePesquisa = (titulo + " " + autor + " " + editora + " " + isbn).replace(" ", "").toLowerCase();
-    }
-
-    public void aumentarPesquisa(){
+    public void aumentarPesquisa() {
         this.vezesPesquisado++;
+    }
+
+    public void aumentarQuantidade(int quantidade) {
+        this.quantidadeDisponiveis += quantidade;
+    }
+
+    public void reduzirQuantidade(int quantidade) {
+        this.quantidadeDisponiveis -= quantidade;
     }
 
     public String getTitulo() {
@@ -82,11 +70,11 @@ public class Livro {
         this.isbn = isbn;
     }
 
-    public String getAnoPublicacao() {
+    public Year getAnoPublicacao() {
         return anoPublicacao;
     }
 
-    public void setAnoPublicacao(String anoPublicacao) {
+    public void setAnoPublicacao(Year anoPublicacao) {
         this.anoPublicacao = anoPublicacao;
     }
 
@@ -98,11 +86,11 @@ public class Livro {
         this.quantidadeDisponiveis = quantidadeDisponiveis;
     }
 
-    public List<Categoria> getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(List<Categoria> categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
@@ -118,8 +106,21 @@ public class Livro {
         return chavePesquisa;
     }
 
-    public void updateChavePesquisa() {
-        this.chavePesquisa = (this.titulo + this.autor + this.isbn).replace(" ", "").toLowerCase();
+    public void setChavePesquisa() {
+        this.chavePesquisa = (titulo + autor + categoria + editora + isbn).replace(" ", "").toLowerCase();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return Objects.equals(isbn, livro.isbn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(isbn);
     }
 
     @Override

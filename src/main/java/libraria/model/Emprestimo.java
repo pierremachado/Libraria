@@ -6,24 +6,25 @@ import java.time.LocalDateTime;
 
 public class Emprestimo {
     private String id;
-    private Bibliotecario bibliotecario;
+    private Usuario usuario;
     private Leitor leitor;
     private Livro livro;
     private Reserva reserva;
     private LocalDateTime dataEmprestimo;
+    private LocalDateTime dataLimite;
     private LocalDateTime dataDeRetorno;
     private int vezesRenovado;
     private EmprestimoStatus status;
 
-    public Emprestimo(String id, Bibliotecario bibliotecario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataDeRetorno, int vezesRenovado, EmprestimoStatus status, Reserva reserva) {
-        this.id = id;
-        this.bibliotecario = bibliotecario;
+    public Emprestimo(Usuario usuario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataLimite, Reserva reserva) {
+        this.usuario = usuario;
         this.leitor = leitor;
         this.livro = livro;
         this.dataEmprestimo = dataEmprestimo;
-        this.dataDeRetorno = dataDeRetorno;
-        this.vezesRenovado = vezesRenovado;
-        this.status = status;
+        this.dataLimite = dataLimite;
+        this.dataDeRetorno = null;
+        this.vezesRenovado = 0;
+        this.status = EmprestimoStatus.PENDENTE;
         this.reserva = reserva;
     }
 
@@ -35,23 +36,12 @@ public class Emprestimo {
         this.id = id;
     }
 
-    public Emprestimo(Bibliotecario bibliotecario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataDeRetorno, int vezesRenovado, EmprestimoStatus status) {
-        this.bibliotecario = bibliotecario;
-        this.leitor = leitor;
-        this.livro = livro;
-        this.dataEmprestimo = dataEmprestimo;
-        this.dataDeRetorno = dataDeRetorno;
-        this.vezesRenovado = vezesRenovado;
-        this.status = status;
-        this.reserva = null;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public Bibliotecario getBibliotecario() {
-        return bibliotecario;
-    }
-
-    public void setBibliotecario(Bibliotecario bibliotecario) {
-        this.bibliotecario = bibliotecario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Leitor getLeitor() {
@@ -76,6 +66,14 @@ public class Emprestimo {
 
     public void setDataEmprestimo(LocalDateTime dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDateTime getDataLimite() {
+        return dataLimite;
+    }
+
+    public void setDataLimite(LocalDateTime dataLimite) {
+        this.dataLimite = dataLimite;
     }
 
     public LocalDateTime getDataDeRetorno() {
@@ -114,7 +112,7 @@ public class Emprestimo {
     public String toString() {
         return "Emprestimo{" +
                 "id=" + id +
-                "bibliotecario=" + bibliotecario +
+                "usuario=" + usuario +
                 ", leitor=" + leitor +
                 ", livro=" + livro +
                 ", dataEmprestimo=" + dataEmprestimo +
