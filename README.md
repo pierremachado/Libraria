@@ -3,11 +3,5 @@ Sistema de gerenciamento de biblioteca desenvolvido em Java por alunos do curso 
 
 ## Fase 1 - Diagramas, implementação e testes
 
-## Diagramas
-
-### Casos de Uso
-
-### Classes
-
 
 
