@@ -7,6 +7,10 @@ import main.java.libraria.model.Reserva;
 
 import java.util.List;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public interface ReservaDAO extends CRUD<Reserva> {
     List<Reserva> findLivro(Livro livro);
 

@@ -8,6 +8,10 @@ import main.java.libraria.model.Usuario;
 
 import java.util.List;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public interface EmprestimoDAO extends CRUD<Emprestimo> {
     List<Emprestimo> findLivro(Livro livro);
 

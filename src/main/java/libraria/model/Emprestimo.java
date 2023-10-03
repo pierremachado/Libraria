@@ -4,6 +4,10 @@ import main.java.libraria.model.enums.EmprestimoStatus;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class Emprestimo {
     private String id;
     private Usuario usuario;

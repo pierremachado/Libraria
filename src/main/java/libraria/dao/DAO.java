@@ -13,6 +13,10 @@ import main.java.libraria.dao.Livro.LivroListDAO;
 import main.java.libraria.dao.Reserva.ReservaDAO;
 import main.java.libraria.dao.Reserva.ReservaListDAO;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class DAO {
 
     private static AdministradorDAO administradorDAO;
@@ -65,5 +69,14 @@ public class DAO {
             reservaDAO = new ReservaListDAO();
         }
         return reservaDAO;
+    }
+
+    public static void limparDadosDAO(){
+        administradorDAO = null;
+        bibliotecarioDAO = null;
+        emprestimoDAO = null;
+        leitorDAO = null;
+        livroDAO = null;
+        reservaDAO = null;
     }
 }

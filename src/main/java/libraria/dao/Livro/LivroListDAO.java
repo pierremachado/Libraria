@@ -5,6 +5,10 @@ import main.java.libraria.model.Livro;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class LivroListDAO implements LivroDAO {
 
     private final List<Livro> lista;
@@ -49,7 +53,7 @@ public class LivroListDAO implements LivroDAO {
     public List<Livro> findBySearchKey(String key) {
         List<Livro> livrosPesquisados = new ArrayList<>();
         for (Livro livro : this.lista) {
-            if (livro.getChavePesquisa().contains(key)) {
+            if (livro.getChavePesquisa().contains(key.toLowerCase().replace(" ", ""))) {
                 livrosPesquisados.add(livro);
             }
         }

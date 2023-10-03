@@ -10,6 +10,11 @@ import java.time.Year;
 import java.util.Comparator;
 import java.util.List;
 
+
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class LivroController {
     /**
      * Cria um livro e o adiciona no acervo da biblioteca, lançando uma exceção.
@@ -72,9 +77,19 @@ public class LivroController {
             Livro livroUpdate = DAO.getLivroDAO().update(livro);
             livroUpdate.aumentarPesquisa();
         }
+        return ordenarPorVezesPesquisado(livrosPesquisados);
+    }
+
+    /**
+     * Método que ordena os livros em ordem decrescente de vezes pesquisado.
+     *
+     * @param livroList A lista de livros a ser ordenada.
+     * @return Uma lista de livros encontrados e ordenados em ordem decrescente de quantidade de vezes pesquisado.
+     */
+    public static List<Livro> ordenarPorVezesPesquisado(List<Livro> livroList){
         Comparator<Livro> sortByTimesSearched = Comparator.comparingInt(Livro::getVezesPesquisado);
-        livrosPesquisados.sort(sortByTimesSearched);
-        return livrosPesquisados;
+        livroList.sort(sortByTimesSearched.reversed());
+        return livroList;
     }
 
     /**
@@ -85,11 +100,20 @@ public class LivroController {
      */
     public static Livro pesquisarLivroPorIsbn(String isbn) {
         Livro livroPesquisado = DAO.getLivroDAO().findID(isbn);
-        Livro livroUpdate = DAO.getLivroDAO().update(livroPesquisado);
-        livroUpdate.aumentarPesquisa();
+        if(livroPesquisado != null){
+            Livro livroUpdate = DAO.getLivroDAO().update(livroPesquisado);
+            livroUpdate.aumentarPesquisa();
+        }
         return livroPesquisado;
     }
 
+    /**
+     * Método que aumenta a quantidade de exemplares de um livro.
+     *
+     * @param livro O livro a ter a sua quantidade aumentada.
+     * @param quantidade A quantidade de exemplares a ser incrementada.
+     * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
+     */
     public static void livroAumentarQuantidade(Livro livro, int quantidade) throws NotEnoughPermissionException {
         if (!LoginController.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
@@ -98,6 +122,14 @@ public class LivroController {
         livro.aumentarQuantidade(quantidade);
     }
 
+    /**
+     * Método que reduz a quantidade de exemplares de um livro.
+     *
+     * @param livro O livro a ter a sua quantidade reduzida.
+     * @param quantidade A quantidade de exemplares a ser subtraída.
+     * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
+     * @throws BookAmountUnderZeroException Caso a quantidade passe a ser negativa.
+     */
     public static void livroReduzirQuantidade(Livro livro, int quantidade) throws NotEnoughPermissionException, BookAmountUnderZeroException {
         if (!LoginController.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
@@ -110,6 +142,12 @@ public class LivroController {
         livro.aumentarQuantidade(quantidade);
     }
 
+    /**
+     * Método que atualiza um livro.
+     *
+     * @param livro O livro a ter as suas informações atualizadas.
+     * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
+     */
     public static Livro updateLivro(Livro livro) throws NotEnoughPermissionException {
         if (!LoginController.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");

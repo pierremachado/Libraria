@@ -4,12 +4,12 @@ package main.java.libraria.errors;
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class IncorrectCredentialsException extends Exception {
-    public IncorrectCredentialsException() {
+public class MustLogoutException extends Exception {
+    public MustLogoutException() {
         super();
     }
 
-    public IncorrectCredentialsException(String mensagem) {
+    public MustLogoutException(String mensagem) {
         super(mensagem);
     }
 }

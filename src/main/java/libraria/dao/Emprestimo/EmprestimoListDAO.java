@@ -10,6 +10,10 @@ import java.util.List;
 
 import static java.lang.String.valueOf;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class EmprestimoListDAO implements EmprestimoDAO {
 
     private final List<Emprestimo> lista;

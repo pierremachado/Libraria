@@ -5,6 +5,10 @@ import main.java.libraria.model.enums.UserPermissao;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class Leitor extends Usuario {
     private String endereco;
     private String telefone;
@@ -15,6 +19,7 @@ public class Leitor extends Usuario {
         super(nome, sobrenome, id, "Leitor", senha, UserPermissao.LEITOR);
         this.endereco = endereco;
         this.telefone = telefone;
+        this.status = LeitorStatus.LIBERADO;
         this.dataLimiteMulta = null;
     }
 

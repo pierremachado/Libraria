@@ -6,6 +6,10 @@ import main.java.libraria.model.enums.UserPermissao;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public abstract class Usuario {
     private String nome;
     private String sobrenome;
