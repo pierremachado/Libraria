@@ -53,7 +53,7 @@ public class EmprestimoController {
         for (Reserva reserva : reservaList) {
             if (reserva.getLivro().equals(livro) && reserva.getStatus() == ReservaStatus.LIBERADO) {
                 reserva.setStatus(ReservaStatus.EMPRESTADO);
-                return DAO.getEmprestimoDAO().create(new Emprestimo(LoginController.getCurrentLoggedUser(), leitor, livro, TimeController.getCurrentLocalDateTime(), TimeController.getCurrentLocalDateTime().plusDays(7).with(TimeController.getHorarioFechamento()), reserva));
+                return DAO.getEmprestimoDAO().create(new Emprestimo(LoginController.getCurrentLoggedUser(), leitor, livro, TimeController.getCurrentLocalDateTime(), TimeController.getCurrentLocalDateTime().plusDays(7), reserva));
             }
         }
 
@@ -111,7 +111,7 @@ public class EmprestimoController {
         }
 
         Emprestimo emprestimoUpdate = DAO.getEmprestimoDAO().update(emprestimo);
-        emprestimoUpdate.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(7).with(TimeController.getHorarioFechamento()));
+        emprestimoUpdate.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(7));
         emprestimoUpdate.setVezesRenovado(emprestimoUpdate.getVezesRenovado() + 1);
         return emprestimoUpdate;
     }
