@@ -4,7 +4,7 @@ Sistema de gerenciamento de biblioteca desenvolvido em Java por alunos do curso 
 
 ## Fase 1 - Diagramas, implementação e testes
 
-<b>Recursos: <\b>
+<b>Recursos</b>
 
 👤 Contas de usuários com as informações fornecidas, incluindo convidados
 
@@ -18,7 +18,7 @@ Sistema de gerenciamento de biblioteca desenvolvido em Java por alunos do curso 
 
 ## Fase 2 - Permanência de dados
 
-<b>Recursos: <\b>
+<b>Recursos:</b>
 
 💾 Armazenamento intercambiável entre a memória volátil e o disco rígido
 
