@@ -21,11 +21,10 @@ import main.java.libraria.dao.Reserva.ReservaListDAO;
 import main.java.libraria.model.enums.DAOStatus;
 
 import java.io.File;
-import java.util.Objects;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class DAO {
 
@@ -35,7 +34,7 @@ public class DAO {
     private static LeitorDAO leitorDAO;
     private static LivroDAO livroDAO;
     private static ReservaDAO reservaDAO;
-    private static DAOStatus statusDAO = DAOStatus.FILE;
+    private static final DAOStatus statusDAO = DAOStatus.FILE;
 
     public static AdministradorDAO getAdministradorDAO() {
         if (administradorDAO == null) {
@@ -112,7 +111,7 @@ public class DAO {
     }
 
 
-    public static void limparDadosDAO(){
+    public static void limparDadosDAO() {
         administradorDAO = null;
         bibliotecarioDAO = null;
         emprestimoDAO = null;
@@ -120,7 +119,7 @@ public class DAO {
         livroDAO = null;
         reservaDAO = null;
 
-        if (statusDAO.equals(DAOStatus.FILE)){
+        if (statusDAO.equals(DAOStatus.FILE)) {
             File pasta = new File("storage" + File.separator + "test");
             deleteDir(pasta);
         }

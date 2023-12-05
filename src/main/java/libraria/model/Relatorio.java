@@ -1,14 +1,12 @@
 package main.java.libraria.model;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class Relatorio implements Serializable {
 

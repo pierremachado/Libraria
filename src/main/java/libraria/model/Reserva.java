@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class Reserva implements Serializable {
     private String idReserva;

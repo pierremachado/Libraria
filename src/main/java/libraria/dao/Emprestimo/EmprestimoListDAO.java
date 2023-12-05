@@ -1,9 +1,6 @@
 package main.java.libraria.dao.Emprestimo;
 
 import main.java.libraria.model.Emprestimo;
-import main.java.libraria.model.Leitor;
-import main.java.libraria.model.Livro;
-import main.java.libraria.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +8,8 @@ import java.util.List;
 import static java.lang.String.valueOf;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class EmprestimoListDAO implements EmprestimoDAO {
 

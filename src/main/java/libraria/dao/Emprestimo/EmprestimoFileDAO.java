@@ -1,7 +1,5 @@
 package main.java.libraria.dao.Emprestimo;
 
-import main.java.libraria.dao.Bibliotecario.BibliotecarioDAO;
-import main.java.libraria.model.Bibliotecario;
 import main.java.libraria.model.Emprestimo;
 import main.java.libraria.util.FileStorage;
 

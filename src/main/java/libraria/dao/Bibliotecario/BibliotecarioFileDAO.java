@@ -1,6 +1,5 @@
 package main.java.libraria.dao.Bibliotecario;
 
-import main.java.libraria.dao.Bibliotecario.BibliotecarioDAO;
 import main.java.libraria.model.Bibliotecario;
 import main.java.libraria.util.FileStorage;
 

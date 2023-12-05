@@ -1,16 +1,13 @@
 package main.java.libraria.model;
 
-import main.java.libraria.dao.DAO;
 import main.java.libraria.model.enums.UserPermissao;
 
-import java.io.Serial;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public abstract class Usuario implements Serializable {
     private String nome;

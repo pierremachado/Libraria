@@ -12,8 +12,8 @@ import java.util.List;
 
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class LivroController {
     /**
@@ -86,7 +86,7 @@ public class LivroController {
      * @param livroList A lista de livros a ser ordenada.
      * @return Uma lista de livros encontrados e ordenados em ordem decrescente de quantidade de vezes pesquisado.
      */
-    public static List<Livro> ordenarPorVezesPesquisado(List<Livro> livroList){
+    public static List<Livro> ordenarPorVezesPesquisado(List<Livro> livroList) {
         Comparator<Livro> sortByTimesSearched = Comparator.comparingInt(Livro::getVezesPesquisado);
         livroList.sort(sortByTimesSearched.reversed());
         return livroList;
@@ -100,7 +100,7 @@ public class LivroController {
      */
     public static Livro pesquisarLivroPorIsbn(String isbn) {
         Livro livroPesquisado = DAO.getLivroDAO().findID(isbn);
-        if(livroPesquisado != null){
+        if (livroPesquisado != null) {
             Livro livroUpdate = DAO.getLivroDAO().update(livroPesquisado);
             livroUpdate.aumentarPesquisa();
         }
@@ -110,7 +110,7 @@ public class LivroController {
     /**
      * Método que aumenta a quantidade de exemplares de um livro.
      *
-     * @param livro O livro a ter a sua quantidade aumentada.
+     * @param livro      O livro a ter a sua quantidade aumentada.
      * @param quantidade A quantidade de exemplares a ser incrementada.
      * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
      */
@@ -125,7 +125,7 @@ public class LivroController {
     /**
      * Método que reduz a quantidade de exemplares de um livro.
      *
-     * @param livro O livro a ter a sua quantidade reduzida.
+     * @param livro      O livro a ter a sua quantidade reduzida.
      * @param quantidade A quantidade de exemplares a ser subtraída.
      * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
      * @throws BookAmountUnderZeroException Caso a quantidade passe a ser negativa.

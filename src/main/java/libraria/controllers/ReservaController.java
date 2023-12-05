@@ -11,21 +11,22 @@ import main.java.libraria.model.Reserva;
 import main.java.libraria.model.enums.LeitorStatus;
 import main.java.libraria.model.enums.ReservaStatus;
 
-import java.sql.Time;
 import java.util.List;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class ReservaController {
-    /** Método que cria uma reserva e adiciona a reserva no DAO. Apenas leitores podem fazer reservas
+    /**
+     * Método que cria uma reserva e adiciona a reserva no DAO. Apenas leitores podem fazer reservas
+     *
      * @param livro O livro a ser reservado
      * @return A reserva criada
      * @throws NotEnoughPermissionException Caso o usuário logado não seja um leitor
-     * @throws BookException Caso haja unidades disponíveis do exemplar
-     * @throws ReservaException Caso o leitor já tenha ultrapassado o limite de reservas em seu nome
-     * @throws UserIsBlockedException Caso o leitor esteja bloqueado ou multado
+     * @throws BookException                Caso haja unidades disponíveis do exemplar
+     * @throws ReservaException             Caso o leitor já tenha ultrapassado o limite de reservas em seu nome
+     * @throws UserIsBlockedException       Caso o leitor esteja bloqueado ou multado
      */
     public static Reserva criarReserva(Livro livro) throws NotEnoughPermissionException, BookException, ReservaException, UserIsBlockedException {
         if (!LoginController.verificarLeitor()) {
@@ -57,10 +58,12 @@ public class ReservaController {
         return DAO.getReservaDAO().create(new Reserva(null, leitor.getId(), livro.getIsbn(), ReservaStatus.ESPERA, TimeController.getCurrentLocalDateTime(), null));
     }
 
-    /** Método para cancelar a reserva de um livro
+    /**
+     * Método para cancelar a reserva de um livro
+     *
      * @param reserva A reserva a ser cancelada
      * @throws NotEnoughPermissionException Caso o usuário logado seja um convidado. Convidados não podem fazer ou cancelar reservas
-     * @throws ReservaException Caso a reserva já tenha sido cancelada ou emprestada
+     * @throws ReservaException             Caso a reserva já tenha sido cancelada ou emprestada
      */
     public static void cancelarReserva(Reserva reserva) throws NotEnoughPermissionException, ReservaException {
         if (LoginController.verificarConvidado()) {
@@ -76,7 +79,7 @@ public class ReservaController {
             }
         }
 
-        if(reserva.getStatus() == ReservaStatus.LIBERADO){
+        if (reserva.getStatus() == ReservaStatus.LIBERADO) {
             Livro livro = DAO.getLivroDAO().findID(reserva.getIdLivro());
             livro.aumentarQuantidade(1);
             DAO.getLivroDAO().update(livro);
@@ -85,27 +88,27 @@ public class ReservaController {
         DAO.getReservaDAO().update(reserva);
     }
 
-    public static Reserva pesquisarReservaPorId(String id) throws NotEnoughPermissionException{
-        if(!LoginController.verificarOperador()){
+    public static Reserva pesquisarReservaPorId(String id) throws NotEnoughPermissionException {
+        if (!LoginController.verificarOperador()) {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
         return DAO.getReservaDAO().findID(id);
     }
 
-    public static List<Reserva> pesquisarReservaPorLeitor(Leitor leitor){
+    public static List<Reserva> pesquisarReservaPorLeitor(Leitor leitor) {
         return DAO.getReservaDAO().findLeitor(leitor.getId());
     }
 
-    public static List<Reserva> pesquisarReservaPorLivro(Livro livro) throws NotEnoughPermissionException{
-        if(!LoginController.verificarOperador()){
+    public static List<Reserva> pesquisarReservaPorLivro(Livro livro) throws NotEnoughPermissionException {
+        if (!LoginController.verificarOperador()) {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
         return DAO.getReservaDAO().findLivro(livro.getIsbn());
     }
 
-    public static List<Reserva> pesquisarReservasAtuaisPorLeitor(Leitor leitor){
+    public static List<Reserva> pesquisarReservasAtuaisPorLeitor(Leitor leitor) {
         return DAO.getReservaDAO().findCurrentLeitor(leitor.getId());
     }
 

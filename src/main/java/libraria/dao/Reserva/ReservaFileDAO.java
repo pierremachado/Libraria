@@ -1,7 +1,5 @@
 package main.java.libraria.dao.Reserva;
 
-import main.java.libraria.dao.Emprestimo.EmprestimoDAO;
-import main.java.libraria.model.Emprestimo;
 import main.java.libraria.model.Reserva;
 import main.java.libraria.model.enums.ReservaStatus;
 import main.java.libraria.util.FileStorage;

@@ -9,8 +9,8 @@ import main.java.libraria.model.enums.UserPermissao;
 import main.java.libraria.util.UserPermissionValidator;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class LoginController {
     private static Usuario currentLoggedUser;
@@ -19,15 +19,17 @@ public class LoginController {
         return currentLoggedUser;
     }
 
-    /** Método de realizar login no sistema, tanto como operador, como leitor ou como convidado
-     * @param id ID do usuário que irá realizar o login
-     * @param senha A senha do usuário
+    /**
+     * Método de realizar login no sistema, tanto como operador, como leitor ou como convidado
+     *
+     * @param id        ID do usuário que irá realizar o login
+     * @param senha     A senha do usuário
      * @param permissao O nível de acesso do usuário
-     * @throws MustLogoutException Caso já tenha um usuário logado
+     * @throws MustLogoutException           Caso já tenha um usuário logado
      * @throws IncorrectCredentialsException Caso o usuário ou a senha informados estejam errados
      */
     public static void login(String id, String senha, UserPermissao permissao) throws MustLogoutException, IncorrectCredentialsException {
-        if(currentLoggedUser != null){
+        if (currentLoggedUser != null) {
             throw new MustLogoutException("Necessário fazer logout");
         }
 
@@ -59,7 +61,9 @@ public class LoginController {
     }
 
 
-    /** Método de verificar a permissão do usuário logado atualmente.
+    /**
+     * Método de verificar a permissão do usuário logado atualmente.
+     *
      * @param expected A permissão esperada
      * @return Um valor verdadeiro ou falso caso a permissão seja a esperada ou não, respectivamente
      */
@@ -68,35 +72,45 @@ public class LoginController {
     }
 
 
-    /** Método para verificar se o usuário atual está logado ou não
+    /**
+     * Método para verificar se o usuário atual está logado ou não
+     *
      * @return Um valor booleano que diz se o usuário está logado ou não
      */
     public static boolean verificarLogin() {
         return currentLoggedUser != null;
     }
 
-    /** Verificação se o usuário atual é um administrador
+    /**
+     * Verificação se o usuário atual é um administrador
+     *
      * @return Verdadeiro ou falso
      */
     public static boolean verificarAdministrador() {
         return verificarLogin() && validatePermissao(UserPermissao.ADMINISTRADOR);
     }
 
-    /** Verificação se o usuário atual é um administrador ou um bibliotecário
+    /**
+     * Verificação se o usuário atual é um administrador ou um bibliotecário
+     *
      * @return Verdadeiro ou falso
      */
     public static boolean verificarOperador() {
         return verificarLogin() && (validatePermissao(UserPermissao.ADMINISTRADOR) || validatePermissao(UserPermissao.BIBLIOTECARIO));
     }
 
-    /** Verificação se o usuário atual é um leitor
+    /**
+     * Verificação se o usuário atual é um leitor
+     *
      * @return Verdadeiro ou falso
      */
     public static boolean verificarLeitor() {
         return verificarLogin() && validatePermissao(UserPermissao.LEITOR);
     }
 
-    /** Verificação se o usuário atual é um convidado
+    /**
+     * Verificação se o usuário atual é um convidado
+     *
      * @return Verdadeiro ou falso
      */
     public static boolean verificarConvidado() {

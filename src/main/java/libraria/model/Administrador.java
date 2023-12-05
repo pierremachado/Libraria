@@ -5,8 +5,8 @@ import main.java.libraria.model.enums.UserPermissao;
 import java.io.Serializable;
 
 /**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
+ * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version 1.0
  */
 public class Administrador extends Usuario implements Serializable {
     public Administrador(String nome, String sobrenome, String id, String senha) {

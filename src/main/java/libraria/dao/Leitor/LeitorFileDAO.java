@@ -1,6 +1,5 @@
 package main.java.libraria.dao.Leitor;
 
-import main.java.libraria.dao.Leitor.LeitorDAO;
 import main.java.libraria.model.Leitor;
 import main.java.libraria.util.FileStorage;
 

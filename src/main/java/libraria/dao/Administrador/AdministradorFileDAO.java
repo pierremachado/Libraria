@@ -3,11 +3,9 @@ package main.java.libraria.dao.Administrador;
 import main.java.libraria.model.Administrador;
 import main.java.libraria.util.FileStorage;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class AdministradorFileDAO implements AdministradorDAO{
+public class AdministradorFileDAO implements AdministradorDAO {
     private final List<Administrador> administradorList;
     private final FileStorage fs;
 
