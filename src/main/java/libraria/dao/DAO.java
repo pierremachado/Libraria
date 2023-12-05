@@ -100,6 +100,13 @@ public class DAO {
         return reservaDAO;
     }
 
+    /**
+     * Função que deleta todos os arquivos de um diretório para fins de teste.
+     * Trecho de código adaptado de Jeff Learman encontrado em <a href="https://stackoverflow.com/questions/20281835/how-to-delete-a-folder-with-files-using-java">...</a>
+     * Fonte: <a href="https://stackoverflow.com/questions/20281835/how-to-delete-a-folder-with-files-using-java">...</a>
+     *
+     * @author Jeff Learman
+     */
     public static void deleteDir(File file) {
         File[] contents = file.listFiles();
         if (contents != null) {
@@ -119,7 +126,7 @@ public class DAO {
         livroDAO = null;
         reservaDAO = null;
 
-        if (statusDAO.equals(DAOStatus.FILE)) {
+        if (statusDAO.equals(DAOStatus.FILE)) { // para fins de teste
             File pasta = new File("storage" + File.separator + "test");
             deleteDir(pasta);
         }
