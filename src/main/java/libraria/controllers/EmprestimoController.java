@@ -37,23 +37,23 @@ public class EmprestimoController {
             throw new UserIsBlockedException("Leitor está multado ou banido");
         }
 
-        List<Emprestimo> emprestimoList = DAO.getEmprestimoDAO().findLeitor(leitor);
+        List<Emprestimo> emprestimoList = DAO.getEmprestimoDAO().findIdLeitor(leitor.getId());
 
         if (emprestimoList.size() == 3) {
             throw new EmprestimoException("Leitor possui empréstimos demais");
         }
 
         for (Emprestimo emprestimo : emprestimoList) {
-            if (emprestimo.getLivro().equals(livro)) {
+            if (emprestimo.getIdLivro().equals(livro.getIsbn())) {
                 throw new EmprestimoException("Leitor já está com um exemplar do livro");
             }
         }
 
-        List<Reserva> reservaList = DAO.getReservaDAO().findCurrentLeitor(leitor);
+        List<Reserva> reservaList = DAO.getReservaDAO().findCurrentLeitor(leitor.getId());
         for (Reserva reserva : reservaList) {
-            if (reserva.getLivro().equals(livro) && reserva.getStatus() == ReservaStatus.LIBERADO) {
+            if (reserva.getIdLivro().equals(livro.getIsbn()) && reserva.getStatus() == ReservaStatus.LIBERADO) {
                 reserva.setStatus(ReservaStatus.EMPRESTADO);
-                return DAO.getEmprestimoDAO().create(new Emprestimo(LoginController.getCurrentLoggedUser(), leitor, livro, TimeController.getCurrentLocalDateTime(), TimeController.getCurrentLocalDateTime().plusDays(7), reserva));
+                return DAO.getEmprestimoDAO().create(new Emprestimo(LoginController.getCurrentLoggedUser().getId(), LoginController.getCurrentLoggedUser().getPermissao(), leitor.getId(), livro.getIsbn(), reserva.getIdReserva(), TimeController.getCurrentLocalDateTime(), TimeController.getCurrentLocalDateTime().plusDays(7), null, 0, EmprestimoStatus.PENDENTE));
             }
         }
 
@@ -61,7 +61,9 @@ public class EmprestimoController {
             throw new EmprestimoException("Não há exemplares disponíveis para empréstimo");
         }
 
-        return DAO.getEmprestimoDAO().create(new Emprestimo(LoginController.getCurrentLoggedUser(), leitor, livro, TimeController.getCurrentLocalDateTime(), TimeController.getCurrentLocalDateTime().plusDays(7), null));
+        livro.reduzirQuantidade(1);
+        DAO.getLivroDAO().update(livro);
+        return DAO.getEmprestimoDAO().create(new Emprestimo(LoginController.getCurrentLoggedUser().getId(), LoginController.getCurrentLoggedUser().getPermissao(), leitor.getId(), livro.getIsbn(), null, TimeController.getCurrentLocalDateTime(), TimeController.getCurrentLocalDateTime().plusDays(7), null, 0, EmprestimoStatus.PENDENTE));
     }
 
     /**
@@ -79,9 +81,10 @@ public class EmprestimoController {
 
         switch (emprestimo.getStatus()) {
             case ATRASADO -> {
-                Leitor leitorUpdate = DAO.getLeitorDAO().update(emprestimo.getLeitor());
+                Leitor leitor = DAO.getLeitorDAO().findID(emprestimo.getIdLeitor());
                 long diasDeMulta = ChronoUnit.DAYS.between(emprestimo.getDataLimite(), TimeController.getCurrentLocalDateTime());
-                leitorUpdate.setDataLimiteMulta(TimeController.getCurrentLocalDateTime().plusDays(diasDeMulta * 2));
+                leitor.setDataLimiteMulta(TimeController.getCurrentLocalDateTime().plusDays(diasDeMulta * 2));
+                DAO.getLeitorDAO().update(leitor);
             }
             case CANCELADO, CONCLUIDO -> {
                 throw new EmprestimoException("Empréstimo já cancelado ou concluído");
@@ -90,8 +93,9 @@ public class EmprestimoController {
 
         emprestimo.setDataDeRetorno(TimeController.getCurrentLocalDateTime());
         emprestimo.setStatus(EmprestimoStatus.CONCLUIDO);
-        Livro livroUpdate = DAO.getLivroDAO().update(emprestimo.getLivro());
-        livroUpdate.aumentarQuantidade(1);
+        Livro livro = DAO.getLivroDAO().findID(emprestimo.getIdLivro());
+        livro.aumentarQuantidade(1);
+        DAO.getLivroDAO().update(livro);
         return emprestimo;
     }
 
@@ -106,14 +110,13 @@ public class EmprestimoController {
             throw new NotEnoughPermissionException("Apenas leitores podem renovar o empréstimo");
         }
 
-        if(emprestimo.getLivro().getQuantidadeDisponiveis() == 0 || emprestimo.getVezesRenovado() > 0){
+        if(DAO.getLivroDAO().findID(emprestimo.getIdLivro()).getQuantidadeDisponiveis() == 0 || emprestimo.getVezesRenovado() > 0){
             throw new EmprestimoException("Não há disponibilidade de renovação");
         }
 
-        Emprestimo emprestimoUpdate = DAO.getEmprestimoDAO().update(emprestimo);
-        emprestimoUpdate.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(7));
-        emprestimoUpdate.setVezesRenovado(emprestimoUpdate.getVezesRenovado() + 1);
-        return emprestimoUpdate;
+        emprestimo.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(7));
+        emprestimo.setVezesRenovado(emprestimo.getVezesRenovado() + 1);
+        return DAO.getEmprestimoDAO().update(emprestimo);
     }
 
 
@@ -134,7 +137,7 @@ public class EmprestimoController {
      * @return Os empréstimos de um leitor
      */
     public static List<Emprestimo> pesquisarEmprestimoPorLeitor(Leitor leitor){
-        return DAO.getEmprestimoDAO().findLeitor(leitor);
+        return DAO.getEmprestimoDAO().findIdLeitor(leitor.getId());
     }
 
     /** Pesquisar os empréstimos associados a um Livro
@@ -147,7 +150,7 @@ public class EmprestimoController {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
-        return DAO.getEmprestimoDAO().findLivro(livro);
+        return DAO.getEmprestimoDAO().findIdLivro(livro.getIsbn());
     }
 
     /** Pesquisar os empréstimos associados a um operador
@@ -160,20 +163,30 @@ public class EmprestimoController {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
-        return DAO.getEmprestimoDAO().findUsuario(usuario);
+        return DAO.getEmprestimoDAO().findIdOperador(usuario.getId());
     }
 
     /** Método que cancela um empréstimo
      * @param emprestimo O empréstimo a ser cancelado
      * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador do sistema
+     * @throws EmprestimoException Caso o empréstimo já tenha sido cancelado ou concluído
      */
-    public static void cancelarEmprestimo(Emprestimo emprestimo) throws NotEnoughPermissionException {
+    public static void cancelarEmprestimo(Emprestimo emprestimo, boolean devolvido) throws NotEnoughPermissionException, EmprestimoException {
         if (!LoginController.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
         }
 
+        if (emprestimo.getStatus().equals(EmprestimoStatus.CANCELADO) || emprestimo.getStatus().equals(EmprestimoStatus.CONCLUIDO)){
+            throw new EmprestimoException("Empréstimo já cancelado ou concluído");
+        }
+
         emprestimo.setStatus(EmprestimoStatus.CANCELADO);
-        Livro livroUpdate = DAO.getLivroDAO().update(emprestimo.getLivro());
-        livroUpdate.aumentarQuantidade(1);
+        DAO.getEmprestimoDAO().update(emprestimo);
+
+        if(devolvido){
+            Livro livro = DAO.getLivroDAO().findID(emprestimo.getIdLivro());
+            livro.aumentarQuantidade(1);
+            DAO.getLivroDAO().update(livro);
+        }
     }
 }

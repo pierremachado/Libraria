@@ -1,5 +1,7 @@
 package main.java.libraria.model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,29 +10,31 @@ import java.util.List;
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class Relatorio {
-    private Administrador administrador;
+public class Relatorio implements Serializable {
+
+
+    private String idAdministrador;
     private LocalDateTime dataGerado;
     private int nLivrosEmprestados;
     private int nLivrosAtrasados;
     private int nLivrosReservados;
     private List<Livro> livrosPopulares;
 
-    public Relatorio(Administrador administrador, LocalDateTime dataGerado) {
-        this.administrador = administrador;
+    public Relatorio(String idAdministrador, LocalDateTime dataGerado, int nLivrosEmprestados, int nLivrosAtrasados, int nLivrosReservados, List<Livro> livrosPopulares) {
+        this.idAdministrador = idAdministrador;
         this.dataGerado = dataGerado;
-        this.nLivrosAtrasados = 0;
-        this.nLivrosEmprestados = 0;
-        this.nLivrosReservados = 0;
-        this.livrosPopulares = new ArrayList<>();
+        this.nLivrosEmprestados = nLivrosEmprestados;
+        this.nLivrosAtrasados = nLivrosAtrasados;
+        this.nLivrosReservados = nLivrosReservados;
+        this.livrosPopulares = livrosPopulares;
     }
 
-    public Administrador getAdministrador() {
-        return administrador;
+    public String getIdAdministrador() {
+        return idAdministrador;
     }
 
-    public void setAdministrador(Administrador administrador) {
-        this.administrador = administrador;
+    public void setIdAdministrador(String idAdministrador) {
+        this.idAdministrador = idAdministrador;
     }
 
     public LocalDateTime getDataGerado() {
@@ -71,17 +75,5 @@ public class Relatorio {
 
     public void setLivrosPopulares(List<Livro> livrosPopulares) {
         this.livrosPopulares = livrosPopulares;
-    }
-
-    @Override
-    public String toString() {
-        return "Relatorio{" +
-                "administrador=" + administrador +
-                ", dataGerado=" + dataGerado +
-                ", nLivrosEmprestados=" + nLivrosEmprestados +
-                ", nLivrosAtrasados=" + nLivrosAtrasados +
-                ", nLivrosReservados=" + nLivrosReservados +
-                ", livrosPopulares=" + livrosPopulares +
-                '}';
     }
 }

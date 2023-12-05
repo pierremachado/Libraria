@@ -42,19 +42,19 @@ public class ReservaController {
             throw new BookException("Há unidades disponíveis do exemplar");
         }
 
-        List<Reserva> reservasAtuais = DAO.getReservaDAO().findCurrentLeitor(leitor);
+        List<Reserva> reservasAtuais = DAO.getReservaDAO().findCurrentLeitor(leitor.getId());
 
         if (reservasAtuais.size() == 3) {
             throw new ReservaException("Leitor possui reservas demais");
         }
 
         for (Reserva reserva : reservasAtuais) {
-            if (reserva.getLivro().equals(livro)) {
+            if (reserva.getIdLivro().equals(livro.getIsbn())) {
                 throw new ReservaException("Livro já reservado");
             }
         }
 
-        return DAO.getReservaDAO().create(new Reserva(leitor, livro, ReservaStatus.ESPERA, TimeController.getCurrentLocalDateTime()));
+        return DAO.getReservaDAO().create(new Reserva(null, leitor.getId(), livro.getIsbn(), ReservaStatus.ESPERA, TimeController.getCurrentLocalDateTime(), null));
     }
 
     /** Método para cancelar a reserva de um livro
@@ -67,8 +67,6 @@ public class ReservaController {
             throw new NotEnoughPermissionException("Convidados não podem cancelar reservas");
         }
 
-        Reserva reservaUpdate = DAO.getReservaDAO().update(reserva);
-
         switch (reserva.getStatus()) {
             case CANCELADO -> {
                 throw new ReservaException("Reserva já cancelada");
@@ -78,11 +76,13 @@ public class ReservaController {
             }
         }
 
-        Livro livroUpdate = DAO.getLivroDAO().update(reservaUpdate.getLivro());
-        if(reservaUpdate.getStatus() == ReservaStatus.LIBERADO){
-            livroUpdate.aumentarQuantidade(1);
+        if(reserva.getStatus() == ReservaStatus.LIBERADO){
+            Livro livro = DAO.getLivroDAO().findID(reserva.getIdLivro());
+            livro.aumentarQuantidade(1);
+            DAO.getLivroDAO().update(livro);
         }
-        reservaUpdate.setStatus(ReservaStatus.CANCELADO);
+        reserva.setStatus(ReservaStatus.CANCELADO);
+        DAO.getReservaDAO().update(reserva);
     }
 
     public static Reserva pesquisarReservaPorId(String id) throws NotEnoughPermissionException{
@@ -94,7 +94,7 @@ public class ReservaController {
     }
 
     public static List<Reserva> pesquisarReservaPorLeitor(Leitor leitor){
-        return DAO.getReservaDAO().findLeitor(leitor);
+        return DAO.getReservaDAO().findLeitor(leitor.getId());
     }
 
     public static List<Reserva> pesquisarReservaPorLivro(Livro livro) throws NotEnoughPermissionException{
@@ -102,29 +102,34 @@ public class ReservaController {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
-        return DAO.getReservaDAO().findLivro(livro);
+        return DAO.getReservaDAO().findLivro(livro.getIsbn());
     }
 
     public static List<Reserva> pesquisarReservasAtuaisPorLeitor(Leitor leitor){
-        return DAO.getReservaDAO().findCurrentLeitor(leitor);
+        return DAO.getReservaDAO().findCurrentLeitor(leitor.getId());
     }
 
     public static void atualizarReservas() {
         for (Reserva reserva : DAO.getReservaDAO().findAll()) {
-            Reserva reservaUpdate = DAO.getReservaDAO().update(reserva);
-            Livro livroUpdate = DAO.getLivroDAO().update(reservaUpdate.getLivro());
+            Livro livro = DAO.getLivroDAO().findID(reserva.getIdLivro());
             switch (reserva.getStatus()) {
                 case ESPERA -> {
-                    if (reserva.getLivro().getQuantidadeDisponiveis() > 0) {
-                        reservaUpdate.setStatus(ReservaStatus.LIBERADO);
-                        reservaUpdate.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(2));
-                        livroUpdate.reduzirQuantidade(1);
+                    if (livro.getQuantidadeDisponiveis() > 0) {
+                        reserva.setStatus(ReservaStatus.LIBERADO);
+                        reserva.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(2));
+                        livro.reduzirQuantidade(1);
+
+                        DAO.getReservaDAO().update(reserva);
+                        DAO.getLivroDAO().update(livro);
                     }
                 }
                 case LIBERADO -> {
                     if (reserva.getDataLimite().isBefore(TimeController.getCurrentLocalDateTime())) {
-                        reservaUpdate.setStatus(ReservaStatus.CANCELADO);
-                        livroUpdate.aumentarQuantidade(1);
+                        reserva.setStatus(ReservaStatus.CANCELADO);
+                        livro.aumentarQuantidade(1);
+
+                        DAO.getReservaDAO().update(reserva);
+                        DAO.getLivroDAO().update(livro);
                     }
                 }
             }

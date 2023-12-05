@@ -55,12 +55,12 @@ public class GerenciadorUsuarioController {
 
         switch (usuario.getPermissao()) {
             case LEITOR -> {
-                for (Emprestimo emprestimo : DAO.getEmprestimoDAO().findLeitor((Leitor) usuario)) {
+                for (Emprestimo emprestimo : DAO.getEmprestimoDAO().findIdLeitor(usuario.getId())) {
                     if (emprestimo.getStatus() == EmprestimoStatus.PENDENTE) {
                         throw new OngoingReaderLoansException("Leitor ainda possui empréstimos pendentes");
                     }
                 }
-                DAO.getReservaDAO().deleteAllByLeitor((Leitor) usuario);
+                DAO.getReservaDAO().deleteAllByLeitor(usuario.getId());
                 DAO.getLeitorDAO().deleteID(usuario.getId());
             }
             case BIBLIOTECARIO -> {
@@ -137,7 +137,7 @@ public class GerenciadorUsuarioController {
             throw new UserIsBlockedException("Leitor já está bloqueado");
         }
 
-        for (Reserva reserva : DAO.getReservaDAO().findLeitor(leitor)) {
+        for (Reserva reserva : DAO.getReservaDAO().findLeitor(leitor.getId())) {
             Reserva reservaUpdate = DAO.getReservaDAO().update(reserva);
             reservaUpdate.setStatus(ReservaStatus.CANCELADO);
         }

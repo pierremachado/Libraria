@@ -1,30 +1,31 @@
 package main.java.libraria.dao.Reserva;
 
+import main.java.libraria.dao.Emprestimo.EmprestimoDAO;
+import main.java.libraria.model.Emprestimo;
 import main.java.libraria.model.Reserva;
 import main.java.libraria.model.enums.ReservaStatus;
+import main.java.libraria.util.FileStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.valueOf;
 
-/**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
- */
-public class ReservaListDAO implements ReservaDAO {
-
+public class ReservaFileDAO implements ReservaDAO {
     private final List<Reserva> reservaList;
+    private final FileStorage fs;
     private int nextId = 1;
 
-    public ReservaListDAO() {
-        this.reservaList = new ArrayList<>();
+    public ReservaFileDAO() {
+        this.fs = new FileStorage("Reserva", "Reserva");
+        this.reservaList = fs.ler();
     }
 
     @Override
     public Reserva update(Reserva obj) {
         int index = this.reservaList.indexOf(obj);
         this.reservaList.set(index, obj);
+        fs.salvar(reservaList);
         return obj;
     }
 
@@ -33,6 +34,7 @@ public class ReservaListDAO implements ReservaDAO {
         for (Reserva reserva : this.reservaList) {
             if (reserva.getIdReserva().equals(id)) {
                 this.reservaList.remove(reserva);
+                fs.salvar(reservaList);
                 return;
             }
         }
@@ -42,6 +44,7 @@ public class ReservaListDAO implements ReservaDAO {
     public Reserva create(Reserva obj) {
         obj.setIdReserva(valueOf(nextId++));
         this.reservaList.add(obj);
+        fs.salvar(reservaList);
         return obj;
     }
 
@@ -89,14 +92,17 @@ public class ReservaListDAO implements ReservaDAO {
 
     public void delete(Reserva reserva) {
         this.reservaList.remove(reserva);
+        fs.salvar(reservaList);
     }
 
     public void deleteAllByBook(String idLivro) {
         this.reservaList.removeIf(reserva -> reserva.getIdLivro().equals(idLivro));
+        fs.salvar(reservaList);
     }
 
     public void deleteAllByLeitor(String idLeitor) {
         this.reservaList.removeIf(reserva -> reserva.getIdLeitor().equals(idLeitor));
+        fs.salvar(reservaList);
     }
 
     @Override

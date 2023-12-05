@@ -13,9 +13,9 @@ import java.util.List;
  * @version     1.0
  */
 public interface EmprestimoDAO extends CRUD<Emprestimo> {
-    List<Emprestimo> findLivro(Livro livro);
+    List<Emprestimo> findIdLivro(String idLivro);
 
-    List<Emprestimo> findUsuario(Usuario usuario);
+    List<Emprestimo> findIdOperador(String idOperador);
 
-    List<Emprestimo> findLeitor(Leitor leitor);
+    List<Emprestimo> findIdLeitor(String idLeitor);
 }

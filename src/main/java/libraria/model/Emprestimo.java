@@ -1,67 +1,89 @@
 package main.java.libraria.model;
 
 import main.java.libraria.model.enums.EmprestimoStatus;
+import main.java.libraria.model.enums.UserPermissao;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class Emprestimo {
-    private String id;
-    private Usuario usuario;
-    private Leitor leitor;
-    private Livro livro;
-    private Reserva reserva;
+public class Emprestimo implements Serializable {
+    private String idEmprestimo;
+    private String idOperador;
+    private UserPermissao permissaoOperador; // pesquisar no DAO de administrador ou de bibliotecário
+    private String idLeitor;
+    private String idLivro;
+    private String idReserva;
     private LocalDateTime dataEmprestimo;
     private LocalDateTime dataLimite;
     private LocalDateTime dataDeRetorno;
     private int vezesRenovado;
     private EmprestimoStatus status;
 
-    public Emprestimo(Usuario usuario, Leitor leitor, Livro livro, LocalDateTime dataEmprestimo, LocalDateTime dataLimite, Reserva reserva) {
-        this.usuario = usuario;
-        this.leitor = leitor;
-        this.livro = livro;
+    public Emprestimo(String idOperador, UserPermissao permissaoOperador, String idLeitor, String idLivro, String idReserva, LocalDateTime dataEmprestimo, LocalDateTime dataLimite, LocalDateTime dataDeRetorno, int vezesRenovado, EmprestimoStatus status) {
+        this.idEmprestimo = null;
+        this.idOperador = idOperador;
+        this.permissaoOperador = permissaoOperador;
+        this.idLeitor = idLeitor;
+        this.idLivro = idLivro;
+        this.idReserva = idReserva;
         this.dataEmprestimo = dataEmprestimo;
         this.dataLimite = dataLimite;
-        this.dataDeRetorno = null;
-        this.vezesRenovado = 0;
-        this.status = EmprestimoStatus.PENDENTE;
-        this.reserva = reserva;
+        this.dataDeRetorno = dataDeRetorno;
+        this.vezesRenovado = vezesRenovado;
+        this.status = status;
     }
 
-    public String getId() {
-        return id;
+    public String getIdEmprestimo() {
+        return idEmprestimo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdEmprestimo(String idEmprestimo) {
+        this.idEmprestimo = idEmprestimo;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getIdOperador() {
+        return idOperador;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setIdOperador(String idOperador) {
+        this.idOperador = idOperador;
     }
 
-    public Leitor getLeitor() {
-        return leitor;
+    public UserPermissao getPermissaoOperador() {
+        return permissaoOperador;
     }
 
-    public void setLeitor(Leitor leitor) {
-        this.leitor = leitor;
+    public void setPermissaoOperador(UserPermissao permissaoOperador) {
+        this.permissaoOperador = permissaoOperador;
     }
 
-    public Livro getLivro() {
-        return livro;
+    public String getIdLeitor() {
+        return idLeitor;
     }
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public void setIdLeitor(String idLeitor) {
+        this.idLeitor = idLeitor;
+    }
+
+    public String getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(String idLivro) {
+        this.idLivro = idLivro;
+    }
+
+    public String getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
     }
 
     public LocalDateTime getDataEmprestimo() {
@@ -88,20 +110,12 @@ public class Emprestimo {
         this.dataDeRetorno = dataDeRetorno;
     }
 
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
+    public int getVezesRenovado() {
+        return vezesRenovado;
     }
 
     public void setVezesRenovado(int vezesRenovado) {
         this.vezesRenovado = vezesRenovado;
-    }
-
-    public int getVezesRenovado() {
-        return vezesRenovado;
     }
 
     public EmprestimoStatus getStatus() {
@@ -113,15 +127,32 @@ public class Emprestimo {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Emprestimo that = (Emprestimo) o;
+        return Objects.equals(idEmprestimo, that.idEmprestimo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idEmprestimo);
+    }
+
+    @Override
     public String toString() {
         return "Emprestimo{" +
-                "id=" + id +
-                "usuario=" + usuario +
-                ", leitor=" + leitor +
-                ", livro=" + livro +
+                "idEmprestimo='" + idEmprestimo + '\'' +
+                ", idOperador='" + idOperador + '\'' +
+                ", permissaoOperador=" + permissaoOperador +
+                ", idLeitor='" + idLeitor + '\'' +
+                ", idLivro='" + idLivro + '\'' +
+                ", idReserva='" + idReserva + '\'' +
                 ", dataEmprestimo=" + dataEmprestimo +
+                ", dataLimite=" + dataLimite +
                 ", dataDeRetorno=" + dataDeRetorno +
                 ", vezesRenovado=" + vezesRenovado +
+                ", status=" + status +
                 '}';
     }
 }

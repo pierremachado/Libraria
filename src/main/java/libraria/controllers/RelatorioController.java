@@ -23,7 +23,7 @@ public class RelatorioController {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
-        Relatorio relatorio = new Relatorio((Administrador) LoginController.getCurrentLoggedUser(), TimeController.getCurrentLocalDateTime());
+        Relatorio relatorio = new Relatorio(LoginController.getCurrentLoggedUser().getId(), TimeController.getCurrentLocalDateTime(), 0, 0, 0, null);
 
         for(Emprestimo emprestimo : DAO.getEmprestimoDAO().findAll()){
             if(emprestimo.getStatus() != EmprestimoStatus.CONCLUIDO && emprestimo.getStatus() != EmprestimoStatus.CANCELADO){

@@ -1,40 +1,39 @@
 package main.java.libraria.dao.Emprestimo;
 
+import main.java.libraria.dao.Bibliotecario.BibliotecarioDAO;
+import main.java.libraria.model.Bibliotecario;
 import main.java.libraria.model.Emprestimo;
-import main.java.libraria.model.Leitor;
-import main.java.libraria.model.Livro;
-import main.java.libraria.model.Usuario;
+import main.java.libraria.util.FileStorage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.String.valueOf;
 
-/**
- * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
- * @version     1.0
- */
-public class EmprestimoListDAO implements EmprestimoDAO {
-
-    private final List<Emprestimo> lista;
+public class EmprestimoFileDAO implements EmprestimoDAO {
+    private final List<Emprestimo> emprestimoList;
+    private final FileStorage fs;
     private int nextId = 1;
 
-    public EmprestimoListDAO() {
-        this.lista = new ArrayList<>();
+    public EmprestimoFileDAO() {
+        this.fs = new FileStorage("Emprestimo", "Emprestimo");
+        this.emprestimoList = fs.ler();
     }
 
     @Override
     public Emprestimo update(Emprestimo obj) {
-        int index = this.lista.indexOf(obj);
-        this.lista.set(index, obj);
+        int index = this.emprestimoList.indexOf(obj);
+        this.emprestimoList.set(index, obj);
+        fs.salvar(emprestimoList);
         return obj;
     }
 
     @Override
     public void deleteID(String id) {
-        for (Emprestimo emprestimo : this.lista) {
+        for (Emprestimo emprestimo : this.emprestimoList) {
             if (emprestimo.getIdEmprestimo().equals(id)) {
-                this.lista.remove(emprestimo);
+                this.emprestimoList.remove(emprestimo);
+                fs.salvar(emprestimoList);
                 return;
             }
         }
@@ -43,13 +42,14 @@ public class EmprestimoListDAO implements EmprestimoDAO {
     @Override
     public Emprestimo create(Emprestimo obj) {
         obj.setIdEmprestimo(valueOf(nextId++));
-        this.lista.add(obj);
+        this.emprestimoList.add(obj);
+        fs.salvar(emprestimoList);
         return obj;
     }
 
     @Override
     public Emprestimo findID(String id) {
-        for (Emprestimo emprestimo : this.lista) {
+        for (Emprestimo emprestimo : this.emprestimoList) {
             if (emprestimo.getIdEmprestimo().equals(id))
                 return emprestimo;
         }
@@ -60,7 +60,7 @@ public class EmprestimoListDAO implements EmprestimoDAO {
     @Override
     public List<Emprestimo> findIdLivro(String idLivro) {
         ArrayList<Emprestimo> emprestimoArrayList = new ArrayList<Emprestimo>();
-        for (Emprestimo emprestimo : this.lista) {
+        for (Emprestimo emprestimo : this.emprestimoList) {
             if (emprestimo.getIdLivro().equals(idLivro)) {
                 emprestimoArrayList.add(emprestimo);
             }
@@ -71,7 +71,7 @@ public class EmprestimoListDAO implements EmprestimoDAO {
     @Override
     public List<Emprestimo> findIdOperador(String idOperador) {
         ArrayList<Emprestimo> emprestimoArrayList = new ArrayList<Emprestimo>();
-        for (Emprestimo emprestimo : this.lista) {
+        for (Emprestimo emprestimo : this.emprestimoList) {
             if (emprestimo.getIdOperador().equals(idOperador)) {
                 emprestimoArrayList.add(emprestimo);
             }
@@ -82,7 +82,7 @@ public class EmprestimoListDAO implements EmprestimoDAO {
     @Override
     public List<Emprestimo> findIdLeitor(String idLeitor) {
         ArrayList<Emprestimo> emprestimoArrayList = new ArrayList<Emprestimo>();
-        for (Emprestimo emprestimo : this.lista) {
+        for (Emprestimo emprestimo : this.emprestimoList) {
             if (emprestimo.getIdLeitor().equals(idLeitor)) {
                 emprestimoArrayList.add(emprestimo);
             }
@@ -92,6 +92,6 @@ public class EmprestimoListDAO implements EmprestimoDAO {
 
     @Override
     public List<Emprestimo> findAll() {
-        return this.lista;
+        return this.emprestimoList;
     }
 }

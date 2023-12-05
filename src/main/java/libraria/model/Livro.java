@@ -1,5 +1,6 @@
 package main.java.libraria.model;
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.Objects;
 
@@ -7,7 +8,7 @@ import java.util.Objects;
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class Livro {
+public class Livro implements Serializable {
     private String titulo;
     private String autor;
     private String editora;

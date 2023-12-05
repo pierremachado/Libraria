@@ -64,8 +64,8 @@ public class EmprestimoManagementTest {
         }
 
         assertNotNull(emprestimo);
-        assertEquals(emprestimo.getLeitor(), leitor);
-        assertEquals(emprestimo.getLivro(), livro);
+        assertEquals(emprestimo.getIdLeitor(), leitor.getId());
+        assertEquals(emprestimo.getIdLivro(), livro.getIsbn());
         assertEquals(emprestimo.getStatus(), EmprestimoStatus.PENDENTE);
 
         try {
@@ -78,7 +78,7 @@ public class EmprestimoManagementTest {
         MultaController.desbloquearMultas();
 
         assertEquals(emprestimo.getStatus(), EmprestimoStatus.CONCLUIDO);
-        assertEquals(emprestimo.getLeitor().getStatus(), LeitorStatus.LIBERADO);
+        assertEquals(DAO.getLeitorDAO().findID(emprestimo.getIdLeitor()).getStatus(), LeitorStatus.LIBERADO);
     }
 
     @Test
@@ -99,8 +99,8 @@ public class EmprestimoManagementTest {
         }
 
         try {
-            EmprestimoController.cancelarEmprestimo(emprestimo);
-        } catch (NotEnoughPermissionException e) {
+            EmprestimoController.cancelarEmprestimo(emprestimo, true);
+        } catch (NotEnoughPermissionException | EmprestimoException e) {
             e.printStackTrace();
         }
 
@@ -139,13 +139,13 @@ public class EmprestimoManagementTest {
         MultaController.desbloquearMultas();
 
         assertEquals(emprestimo.getStatus(), EmprestimoStatus.CONCLUIDO);
-        assertEquals(emprestimo.getLeitor().getStatus(), LeitorStatus.MULTADO);
+        assertEquals(DAO.getLeitorDAO().findID(emprestimo.getIdLeitor()).getStatus(), LeitorStatus.MULTADO);
 
         TimeController.setCurrentLocalDateTime(LocalDateTime.now().plusDays(300));
 
         MultaController.aplicarMultas();
         MultaController.desbloquearMultas();
 
-        assertEquals(emprestimo.getLeitor().getStatus(), LeitorStatus.LIBERADO);
+        assertEquals(DAO.getLeitorDAO().findID(emprestimo.getIdLeitor()).getStatus(), LeitorStatus.LIBERADO);
     }
 }

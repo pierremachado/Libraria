@@ -3,6 +3,8 @@ package main.java.libraria.model;
 import main.java.libraria.dao.DAO;
 import main.java.libraria.model.enums.UserPermissao;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ import java.util.Objects;
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public abstract class Usuario {
+public abstract class Usuario implements Serializable {
     private String nome;
     private String sobrenome;
     private String id;
@@ -25,14 +27,6 @@ public abstract class Usuario {
         this.cargo = cargo;
         this.senha = senha;
         this.permissao = permissao;
-    }
-
-    public List<Livro> pesquisarLivroChave(String key) {
-        return DAO.getLivroDAO().findBySearchKey(key);
-    }
-
-    public Livro pesquisarLivroIsbn(String isbn) {
-        return DAO.getLivroDAO().findID(isbn);
     }
 
     public String getNome() {

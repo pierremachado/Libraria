@@ -2,60 +2,55 @@ package main.java.libraria.model;
 
 import main.java.libraria.model.enums.ReservaStatus;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class Reserva {
-    private String id;
-    private Leitor leitor;
-    private Livro livro;
+public class Reserva implements Serializable {
+    private String idReserva;
+    private String idLeitor;
+    private String idLivro;
     private ReservaStatus status;
 
     private LocalDateTime dataReservado;
 
     private LocalDateTime dataLimite;
 
-    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado) {
-        this.leitor = leitor;
-        this.livro = livro;
-        this.status = status;
-        this.dataReservado = dataReservado;
-        this.dataLimite = null;
-    }
-
-    public Reserva(Leitor leitor, Livro livro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
-        this.leitor = leitor;
-        this.livro = livro;
+    public Reserva(String idReserva, String idLeitor, String idLivro, ReservaStatus status, LocalDateTime dataReservado, LocalDateTime dataLimite) {
+        this.idReserva = idReserva;
+        this.idLeitor = idLeitor;
+        this.idLivro = idLivro;
         this.status = status;
         this.dataReservado = dataReservado;
         this.dataLimite = dataLimite;
     }
 
-    public String getId() {
-        return id;
+    public String getIdReserva() {
+        return idReserva;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
     }
 
-    public Leitor getLeitor() {
-        return leitor;
+    public String getIdLeitor() {
+        return idLeitor;
     }
 
-    public void setLeitor(Leitor leitor) {
-        this.leitor = leitor;
+    public void setIdLeitor(String idLeitor) {
+        this.idLeitor = idLeitor;
     }
 
-    public Livro getLivro() {
-        return livro;
+    public String getIdLivro() {
+        return idLivro;
     }
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public void setIdLivro(String idLivro) {
+        this.idLivro = idLivro;
     }
 
     public ReservaStatus getStatus() {
@@ -83,11 +78,24 @@ public class Reserva {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reserva reserva = (Reserva) o;
+        return Objects.equals(idReserva, reserva.idReserva);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idReserva);
+    }
+
+    @Override
     public String toString() {
         return "Reserva{" +
-                "id=" + id +
-                "leitor=" + leitor +
-                ", livro=" + livro +
+                "idReserva='" + idReserva + '\'' +
+                ", idLeitor='" + idLeitor + '\'' +
+                ", idLivro='" + idLivro + '\'' +
                 ", status=" + status +
                 ", dataReservado=" + dataReservado +
                 ", dataLimite=" + dataLimite +

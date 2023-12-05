@@ -19,8 +19,9 @@ public class MultaController {
         for(Emprestimo emprestimo : DAO.getEmprestimoDAO().findAll()){
             if(emprestimo.getStatus() == EmprestimoStatus.PENDENTE && emprestimo.getDataLimite().isBefore(TimeController.getCurrentLocalDateTime())){
                 emprestimo.setStatus(EmprestimoStatus.ATRASADO);
-                Leitor leitorUpdate = DAO.getLeitorDAO().update(emprestimo.getLeitor());
-                leitorUpdate.setStatus(LeitorStatus.MULTADO);
+                Leitor leitor = DAO.getLeitorDAO().findID(emprestimo.getIdLeitor());
+                leitor.setStatus(LeitorStatus.MULTADO);
+                DAO.getLeitorDAO().update(leitor);
             }
         }
     }
@@ -34,6 +35,7 @@ public class MultaController {
             if(leitor.getStatus() == LeitorStatus.MULTADO && leitor.getDataLimiteMulta() != null && leitor.getDataLimiteMulta().isBefore(TimeController.getCurrentLocalDateTime())){
                 leitor.setStatus(LeitorStatus.LIBERADO);
                 leitor.setDataLimiteMulta(null);
+                DAO.getLeitorDAO().update(leitor);
             }
         }
     }

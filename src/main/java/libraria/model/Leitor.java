@@ -3,13 +3,14 @@ package main.java.libraria.model;
 import main.java.libraria.model.enums.LeitorStatus;
 import main.java.libraria.model.enums.UserPermissao;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class Leitor extends Usuario {
+public class Leitor extends Usuario implements Serializable {
     private String endereco;
     private String telefone;
     private LeitorStatus status;

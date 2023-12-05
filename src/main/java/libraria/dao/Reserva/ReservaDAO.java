@@ -12,15 +12,15 @@ import java.util.List;
  * @version     1.0
  */
 public interface ReservaDAO extends CRUD<Reserva> {
-    List<Reserva> findLivro(Livro livro);
+    List<Reserva> findLivro(String idLivro);
 
-    List<Reserva> findLeitor(Leitor leitor);
+    List<Reserva> findLeitor(String idLeitor);
 
-    List<Reserva> findCurrentLeitor(Leitor leitor);
+    List<Reserva> findCurrentLeitor(String idLeitor);
 
     void delete(Reserva reserva);
 
-    void deleteAllByBook(Livro livro);
+    void deleteAllByBook(String idLivro);
 
-    void deleteAllByLeitor(Leitor leitor);
+    void deleteAllByLeitor(String idLeitor);
 }

@@ -61,7 +61,7 @@ public class LivroController {
             throw new NotEnoughPermissionException("Permissão insuficiente");
         }
 
-        DAO.getReservaDAO().deleteAllByBook(livro);
+        DAO.getReservaDAO().deleteAllByBook(livro.getIsbn());
         DAO.getLivroDAO().deleteID(livro.getIsbn());
     }
 

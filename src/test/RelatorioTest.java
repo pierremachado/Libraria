@@ -9,6 +9,7 @@ import main.java.libraria.errors.IncorrectCredentialsException;
 import main.java.libraria.errors.MustLogoutException;
 import main.java.libraria.errors.NotEnoughPermissionException;
 import main.java.libraria.model.*;
+import main.java.libraria.model.enums.EmprestimoStatus;
 import main.java.libraria.model.enums.UserPermissao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ public class RelatorioTest {
         bib = new Bibliotecario("sérgio", "sérgio", "sergiosergio", "senha");
         leitor = new Leitor("amanda", "amanda", "amandaamanda", "ahnes", "", "");
         livro = new Livro("Você é lindo", "Fulano de Tal", "Editora", "123456", Year.of(2013), "Auto-ajuda", 5, 0);
-        emprestimo = new Emprestimo(adm, leitor, livro, LocalDateTime.now(), LocalDateTime.now().plusDays(7), null);
+        emprestimo = new Emprestimo(adm.getId(), adm.getPermissao(), leitor.getId(), livro.getIsbn(), null, LocalDateTime.now(), LocalDateTime.now().plusDays(7), null, 0, EmprestimoStatus.PENDENTE);
 
         DAO.getAdministradorDAO().create(adm);
         DAO.getBibliotecarioDAO().create(bib);
@@ -70,7 +71,7 @@ public class RelatorioTest {
         assertEquals(relatorio.getnLivrosReservados(), 0);
         assertEquals(relatorio.getnLivrosEmprestados(), 1);
         assertEquals(relatorio.getnLivrosAtrasados(), 0);
-        assertEquals(relatorio.getAdministrador(), adm);
+        assertEquals(relatorio.getIdAdministrador(), adm.getId());
         assertEquals(relatorio.getLivrosPopulares().get(0), livro);
 
         TimeController.setCurrentLocalDateTime(LocalDateTime.now().plusDays(10));
