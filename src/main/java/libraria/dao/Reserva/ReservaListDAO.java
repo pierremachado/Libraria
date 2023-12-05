@@ -80,7 +80,7 @@ public class ReservaListDAO implements ReservaDAO {
     public List<Reserva> findCurrentLeitor(String idLeitor) {
         ArrayList<Reserva> reservaArrayList = new ArrayList<Reserva>();
         for (Reserva reserva : this.reservaList) {
-            if (reserva.getIdLeitor().equals(idLeitor) && (reserva.getStatus() == ReservaStatus.ESPERA || reserva.getStatus() == ReservaStatus.LIBERADO)) {
+            if (reserva.getIdLeitor().equals(idLeitor) && (reserva.getStatus() == ReservaStatus.RESERVADO || reserva.getStatus() == ReservaStatus.LIBERADO)) {
                 reservaArrayList.add(reserva);
             }
         }

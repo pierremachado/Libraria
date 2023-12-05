@@ -1,4 +1,4 @@
-package test;
+package test.businesslogic;
 
 import main.java.libraria.controllers.LoginController;
 import main.java.libraria.controllers.MultaController;

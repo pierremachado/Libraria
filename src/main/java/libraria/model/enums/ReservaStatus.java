@@ -5,5 +5,5 @@ package main.java.libraria.model.enums;
  * @version 1.0
  */
 public enum ReservaStatus {
-    ESPERA, LIBERADO, EMPRESTADO, CANCELADO
+    RESERVADO, LIBERADO, EMPRESTADO, CANCELADO
 }

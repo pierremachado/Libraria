@@ -1,4 +1,4 @@
-package test;
+package test.businesslogic;
 
 import main.java.libraria.controllers.LivroController;
 import main.java.libraria.controllers.LoginController;
@@ -13,9 +13,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.Year;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,7 +71,7 @@ public class ReservaManagementTest {
         }
 
         assertNotNull(reserva);
-        assertEquals(reserva.getStatus(), ReservaStatus.ESPERA);
+        assertEquals(reserva.getStatus(), ReservaStatus.RESERVADO);
 
         LoginController.logoff();
 

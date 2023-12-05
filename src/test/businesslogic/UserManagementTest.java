@@ -1,4 +1,4 @@
-package test;
+package test.businesslogic;
 
 import main.java.libraria.controllers.GerenciadorUsuarioController;
 import main.java.libraria.controllers.LoginController;

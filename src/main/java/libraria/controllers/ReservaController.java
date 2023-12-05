@@ -55,7 +55,7 @@ public class ReservaController {
             }
         }
 
-        return DAO.getReservaDAO().create(new Reserva(null, leitor.getId(), livro.getIsbn(), ReservaStatus.ESPERA, TimeController.getCurrentLocalDateTime(), null));
+        return DAO.getReservaDAO().create(new Reserva(null, leitor.getId(), livro.getIsbn(), ReservaStatus.RESERVADO, TimeController.getCurrentLocalDateTime(), null));
     }
 
     /**
@@ -116,7 +116,7 @@ public class ReservaController {
         for (Reserva reserva : DAO.getReservaDAO().findAll()) {
             Livro livro = DAO.getLivroDAO().findID(reserva.getIdLivro());
             switch (reserva.getStatus()) {
-                case ESPERA -> {
+                case RESERVADO -> {
                     if (livro.getQuantidadeDisponiveis() > 0) {
                         reserva.setStatus(ReservaStatus.LIBERADO);
                         reserva.setDataLimite(TimeController.getCurrentLocalDateTime().plusDays(2));

@@ -40,7 +40,7 @@ public class RelatorioController {
         }
 
         for (Reserva reserva : DAO.getReservaDAO().findAll()) {
-            if (reserva.getStatus() == ReservaStatus.ESPERA || reserva.getStatus() == ReservaStatus.LIBERADO) {
+            if (reserva.getStatus() == ReservaStatus.RESERVADO || reserva.getStatus() == ReservaStatus.LIBERADO) {
                 relatorio.setnLivrosReservados(relatorio.getnLivrosReservados() + 1);
             }
         }

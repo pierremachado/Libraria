@@ -36,8 +36,8 @@ public class FileStorage {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo))) {
             lista = (List<T>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException | ClassNotFoundException ignored) {
+
         }
 
         return lista;
