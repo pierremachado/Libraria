@@ -1,0 +1,181 @@
+Fictitious information for testing only. None of the people described below actually exist.
+
+name: João
+surname: Silva
+type: Administrador
+user: 001
+password: senha123
+
+name: Maria
+surname: Santos
+type: Administrador
+user: 002
+password: adminPass
+
+name: Pedro
+surname: Souza
+type: Administrador
+user: 003
+password: securePwd
+
+name: Ana
+surname: Carvalho
+type: Administrador
+user: 004
+password: ana123
+
+name: Carlos
+surname: Oliveira
+type: Administrador
+user: 005
+password: carlosPass
+
+name: Mariana
+surname: Costa
+type: Administrador
+user: 006
+password: marianaPwd
+
+name: Rafael
+surname: Pereira
+type: Administrador
+user: 007
+password: rafaelPass
+
+name: Fernanda
+surname: Rodrigues
+type: Administrador
+user: 008
+password: fer123
+
+name: Lucas
+surname: Ferreira
+type: Administrador
+user: 009
+password: lucasPass
+
+name: Larissa
+surname: Almeida
+type: Administrador
+user: 010
+password: larissaPwd
+
+name: Carlos
+surname: Silva
+type: Bibliotecário
+user: bib001
+password: senha123
+
+name: Ana
+surname: Santos
+type: Bibliotecário
+user: bib002
+password: adminPass
+
+name: Mariana
+surname: Oliveira
+type: Bibliotecário
+user: bib003
+password: securePwd
+
+name: Pedro
+surname: Costa
+type: Bibliotecário
+user: bib004
+password: biblio123
+
+name: Rafael
+surname: Pereira
+type: Bibliotecário
+user: bib005
+password: biblioPass
+
+name: Fernanda
+surname: Rodrigues
+type: Bibliotecário
+user: bib006
+password: fer321
+
+name: Lucas
+surname: Ferreira
+type: Bibliotecário
+user: bib007
+password: lucasPass
+
+name: Larissa
+surname: Almeida
+type: Bibliotecário
+user: bib008
+password: larissaPwd
+
+name: João
+surname: Carvalho
+type: Bibliotecário
+user: bib009
+password: joao123
+
+name: Maria
+surname: Mendes
+type: Bibliotecário
+user: bib010
+password: mariaPass
+
+name: Ana
+surname: Silva
+type: Leitor
+user: leitor001
+password: senha123
+
+name: Carlos
+surname: Santos
+type: Leitor
+user: leitor002
+password: leitorPass
+
+name: Mariana
+surname: Oliveira
+type: Leitor
+user: leitor003
+password: marianaPwd
+
+name: Pedro
+surname: Costa
+type: Leitor
+user: leitor004
+password: senha456
+
+name: Rafael
+surname: Pereira
+type: Leitor
+user: leitor005
+password: rafael123
+
+name: Fernanda
+surname: Rodrigues
+type: Leitor
+user: leitor006
+password: fer456
+
+name: Lucas
+surname: Ferreira
+type: Leitor
+user: leitor007
+password: lucasPwd
+
+name: Larissa
+surname: Almeida
+type: Leitor
+user: leitor008
+password: larissaPass
+
+name: João
+surname: Carvalho
+type: Leitor
+user: leitor009
+password: joao789
+
+name: Maria
+surname: Mendes
+type: Leitor
+user: leitor010
+password: maria123

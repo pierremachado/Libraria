@@ -2,6 +2,10 @@ package test.java.com.uefs.libraria.datapersistence;
 
 import main.java.com.uefs.libraria.dao.DAO;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class ReadTest {
     public static void main(String[] args) {
         System.out.println("Administradores:");

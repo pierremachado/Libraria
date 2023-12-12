@@ -9,6 +9,10 @@ import main.java.com.uefs.libraria.model.enums.UserPermission;
 import java.time.LocalDateTime;
 import java.time.Year;
 
+/**
+ * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
+ * @version     1.0
+ */
 public class SaveTest {
     public static void main(String[] args) {
         Administrator admin1 = new Administrator("João", "Silva", "001", "senha123");
