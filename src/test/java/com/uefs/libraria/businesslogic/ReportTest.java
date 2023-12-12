@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version     1.0
  */
-public class RelatorioTest {
+public class ReportTest {
     private Administrator adm;
     private Librarian bib;
     private Reader reader;
@@ -60,35 +60,35 @@ public class RelatorioTest {
 
         TimeService.setCurrentLocalDateTime(LocalDateTime.now());
 
-        Relatorio relatorio = null;
+        Report report = null;
         try {
-            relatorio = ReportService.gerarRelatorio();
+            report = ReportService.gerarRelatorio();
         } catch (NotEnoughPermissionException e) {
             e.printStackTrace();
         }
 
-        assertNotNull(relatorio);
-        assertEquals(relatorio.getnLivrosReservados(), 0);
-        assertEquals(relatorio.getnLivrosEmprestados(), 1);
-        assertEquals(relatorio.getnLivrosAtrasados(), 0);
-        assertEquals(relatorio.getIdAdministrador(), adm.getId());
-        assertEquals(relatorio.getLivrosPopulares().get(0), book);
+        assertNotNull(report);
+        assertEquals(report.getnLivrosReservados(), 0);
+        assertEquals(report.getnLivrosEmprestados(), 1);
+        assertEquals(report.getnLivrosAtrasados(), 0);
+        assertEquals(report.getIdAdministrador(), adm.getId());
+        assertEquals(report.getLivrosPopulares().get(0), book);
 
         TimeService.setCurrentLocalDateTime(LocalDateTime.now().plusDays(10));
 
         FinesService.aplicarMultas();
         FinesService.desbloquearMultas();
 
-        relatorio = null;
+        report = null;
         try {
-            relatorio = ReportService.gerarRelatorio();
+            report = ReportService.gerarRelatorio();
         } catch (NotEnoughPermissionException e) {
             e.printStackTrace();
         }
 
-        assertNotNull(relatorio);
-        assertEquals(relatorio.getnLivrosReservados(), 0);
-        assertEquals(relatorio.getnLivrosEmprestados(), 1);
-        assertEquals(relatorio.getnLivrosAtrasados(), 1);
+        assertNotNull(report);
+        assertEquals(report.getnLivrosReservados(), 0);
+        assertEquals(report.getnLivrosEmprestados(), 1);
+        assertEquals(report.getnLivrosAtrasados(), 1);
     }
 }

@@ -60,6 +60,7 @@ public class Reader extends User implements Serializable {
     public String toString() {
         return "Leitor{" +
                 ", nome='" + getNome() + '\'' +
+                ", sobrenome=" + getSobrenome() + '\'' +
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
                 ", senha='" + getSenha() + '\'' +

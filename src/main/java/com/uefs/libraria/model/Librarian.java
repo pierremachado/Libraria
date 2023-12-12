@@ -17,6 +17,7 @@ public class Librarian extends User implements Serializable {
     public String toString() {
         return "Bibliotecario{" +
                 ", nome='" + getNome() + '\'' +
+                ", sobrenome=" + getSobrenome() + '\'' +
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
                 ", senha='" + getSenha() + '\'' +

@@ -8,7 +8,7 @@ import java.util.List;
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version 1.0
  */
-public class Relatorio implements Serializable {
+public class Report implements Serializable {
 
 
     private String idAdministrador;
@@ -18,7 +18,7 @@ public class Relatorio implements Serializable {
     private int nLivrosReservados;
     private List<Book> livrosPopulares;
 
-    public Relatorio(String idAdministrador, LocalDateTime dataGerado, int nLivrosEmprestados, int nLivrosAtrasados, int nLivrosReservados, List<Book> livrosPopulares) {
+    public Report(String idAdministrador, LocalDateTime dataGerado, int nLivrosEmprestados, int nLivrosAtrasados, int nLivrosReservados, List<Book> livrosPopulares) {
         this.idAdministrador = idAdministrador;
         this.dataGerado = dataGerado;
         this.nLivrosEmprestados = nLivrosEmprestados;

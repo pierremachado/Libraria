@@ -17,6 +17,7 @@ public class Administrator extends User implements Serializable {
     public String toString() {
         return "Administrador{" +
                 ", nome='" + getNome() + '\'' +
+                ", sobrenome=" + getSobrenome() + '\'' +
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
                 ", senha='" + getSenha() + '\'' +
