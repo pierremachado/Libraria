@@ -1,4 +1,4 @@
-package main.java.com.uefs.libraria.dao;
+package com.uefs.libraria.dao;
 
 import java.util.List;
 

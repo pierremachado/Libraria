@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Reader;
+package com.uefs.libraria.dao.Reader;
 
-import main.java.com.uefs.libraria.dao.CRUD;
-import main.java.com.uefs.libraria.model.Reader;
+import com.uefs.libraria.dao.CRUD;
+import com.uefs.libraria.model.Reader;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

@@ -1,6 +1,6 @@
-package main.java.com.uefs.libraria.dao.Loan;
+package com.uefs.libraria.dao.Loan;
 
-import main.java.com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.Loan;
 
 import java.util.ArrayList;
 import java.util.List;

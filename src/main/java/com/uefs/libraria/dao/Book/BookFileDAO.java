@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Book;
+package com.uefs.libraria.dao.Book;
 
-import main.java.com.uefs.libraria.model.Book;
-import main.java.com.uefs.libraria.util.FileStorage;
+import com.uefs.libraria.model.Book;
+import com.uefs.libraria.util.FileStorage;
 
 import java.util.ArrayList;
 import java.util.List;

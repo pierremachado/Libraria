@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Reader;
+package com.uefs.libraria.dao.Reader;
 
-import main.java.com.uefs.libraria.model.Reader;
-import main.java.com.uefs.libraria.util.FileStorage;
+import com.uefs.libraria.model.Reader;
+import com.uefs.libraria.util.FileStorage;
 
 import java.util.List;
 

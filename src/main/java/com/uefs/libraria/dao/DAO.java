@@ -1,24 +1,24 @@
-package main.java.com.uefs.libraria.dao;
+package com.uefs.libraria.dao;
 
-import main.java.com.uefs.libraria.dao.Administrator.AdministratorDAO;
-import main.java.com.uefs.libraria.dao.Administrator.AdministratorFileDAO;
-import main.java.com.uefs.libraria.dao.Administrator.AdministratorListDAO;
-import main.java.com.uefs.libraria.dao.Librarian.LibrarianDAO;
-import main.java.com.uefs.libraria.dao.Librarian.LibrarianFileDAO;
-import main.java.com.uefs.libraria.dao.Librarian.LibrarianListDAO;
-import main.java.com.uefs.libraria.dao.Loan.LoanDAO;
-import main.java.com.uefs.libraria.dao.Loan.LoanFileDAO;
-import main.java.com.uefs.libraria.dao.Loan.LoanListDAO;
-import main.java.com.uefs.libraria.dao.Reader.ReaderDAO;
-import main.java.com.uefs.libraria.dao.Reader.ReaderFileDAO;
-import main.java.com.uefs.libraria.dao.Reader.ReaderListDAO;
-import main.java.com.uefs.libraria.dao.Book.BookDAO;
-import main.java.com.uefs.libraria.dao.Book.BookFileDAO;
-import main.java.com.uefs.libraria.dao.Book.BookListDAO;
-import main.java.com.uefs.libraria.dao.Reservation.ReservationDAO;
-import main.java.com.uefs.libraria.dao.Reservation.ReservationFileDAO;
-import main.java.com.uefs.libraria.dao.Reservation.ReservationListDAO;
-import main.java.com.uefs.libraria.model.enums.DAOStatus;
+import com.uefs.libraria.dao.Administrator.AdministratorDAO;
+import com.uefs.libraria.dao.Administrator.AdministratorFileDAO;
+import com.uefs.libraria.dao.Administrator.AdministratorListDAO;
+import com.uefs.libraria.dao.Librarian.LibrarianDAO;
+import com.uefs.libraria.dao.Librarian.LibrarianFileDAO;
+import com.uefs.libraria.dao.Librarian.LibrarianListDAO;
+import com.uefs.libraria.dao.Loan.LoanDAO;
+import com.uefs.libraria.dao.Loan.LoanFileDAO;
+import com.uefs.libraria.dao.Loan.LoanListDAO;
+import com.uefs.libraria.dao.Reader.ReaderDAO;
+import com.uefs.libraria.dao.Reader.ReaderFileDAO;
+import com.uefs.libraria.dao.Reader.ReaderListDAO;
+import com.uefs.libraria.dao.Book.BookDAO;
+import com.uefs.libraria.dao.Book.BookFileDAO;
+import com.uefs.libraria.dao.Book.BookListDAO;
+import com.uefs.libraria.dao.Reservation.ReservationDAO;
+import com.uefs.libraria.dao.Reservation.ReservationFileDAO;
+import com.uefs.libraria.dao.Reservation.ReservationListDAO;
+import com.uefs.libraria.model.enums.DAOStatus;
 
 import java.io.File;
 

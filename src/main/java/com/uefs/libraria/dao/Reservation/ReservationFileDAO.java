@@ -1,8 +1,8 @@
-package main.java.com.uefs.libraria.dao.Reservation;
+package com.uefs.libraria.dao.Reservation;
 
-import main.java.com.uefs.libraria.model.Reservation;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
-import main.java.com.uefs.libraria.util.FileStorage;
+import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.util.FileStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +81,7 @@ public class ReservationFileDAO implements ReservationDAO {
     public List<Reservation> findCurrentLeitor(String idLeitor) {
         ArrayList<Reservation> reservationArrayList = new ArrayList<Reservation>();
         for (Reservation reservation : this.reservationList) {
-            if (reservation.getIdLeitor().equals(idLeitor) && (reservation.getStatus() == ReservationStatus.RESERVADO || reservation.getStatus() == ReservationStatus.LIBERADO)) {
+            if (reservation.getIdLeitor().equals(idLeitor) && ((reservation.getStatus() == ReservationStatus.RESERVADO) || (reservation.getStatus() == ReservationStatus.LIBERADO))) {
                 reservationArrayList.add(reservation);
             }
         }

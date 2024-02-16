@@ -1,4 +1,4 @@
-package main.java.com.uefs.libraria.model;
+package com.uefs.libraria.model;
 
 import java.io.Serializable;
 import java.time.Year;

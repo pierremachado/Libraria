@@ -1,10 +1,10 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.model.Loan;
-import main.java.com.uefs.libraria.model.Reader;
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.ReaderStatus;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.Reader;
+import com.uefs.libraria.model.enums.LoanStatus;
+import com.uefs.libraria.model.enums.ReaderStatus;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

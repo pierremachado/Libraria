@@ -1,6 +1,6 @@
-package main.java.com.uefs.libraria.dao.Librarian;
+package com.uefs.libraria.dao.Librarian;
 
-import main.java.com.uefs.libraria.model.Librarian;
+import com.uefs.libraria.model.Librarian;
 
 import java.util.ArrayList;
 import java.util.List;

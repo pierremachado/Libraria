@@ -1,6 +1,6 @@
-package main.java.com.uefs.libraria.model;
+package com.uefs.libraria.model;
 
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.model.enums.UserPermission;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

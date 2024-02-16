@@ -1,10 +1,10 @@
-package test.java.com.uefs.libraria.datapersistence;
+package com.uefs.libraria.datapersistence;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.model.*;
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.model.*;
+import com.uefs.libraria.model.enums.LoanStatus;
+import com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.model.enums.UserPermission;
 
 import java.time.LocalDateTime;
 import java.time.Year;

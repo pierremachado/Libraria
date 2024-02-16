@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Book;
+package com.uefs.libraria.dao.Book;
 
-import main.java.com.uefs.libraria.dao.CRUD;
-import main.java.com.uefs.libraria.model.Book;
+import com.uefs.libraria.dao.CRUD;
+import com.uefs.libraria.model.Book;
 
 import java.util.List;
 

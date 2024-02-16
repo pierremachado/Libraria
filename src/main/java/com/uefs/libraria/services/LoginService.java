@@ -1,12 +1,12 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.IncorrectCredentialsException;
-import main.java.com.uefs.libraria.exceptions.MustLogoutException;
-import main.java.com.uefs.libraria.model.Guest;
-import main.java.com.uefs.libraria.model.User;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
-import main.java.com.uefs.libraria.util.UserPermissionValidator;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.exceptions.IncorrectCredentialsException;
+import com.uefs.libraria.exceptions.MustLogoutException;
+import com.uefs.libraria.model.Guest;
+import com.uefs.libraria.model.User;
+import com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.util.UserPermissionValidator;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

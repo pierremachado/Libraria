@@ -1,6 +1,6 @@
-package main.java.com.uefs.libraria.model;
+package com.uefs.libraria.model;
 
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.model.enums.ReservationStatus;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

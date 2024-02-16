@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Reservation;
+package com.uefs.libraria.dao.Reservation;
 
-import main.java.com.uefs.libraria.model.Reservation;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.enums.ReservationStatus;
 
 import java.util.ArrayList;
 import java.util.List;

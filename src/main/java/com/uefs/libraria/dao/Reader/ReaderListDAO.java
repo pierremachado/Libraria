@@ -1,6 +1,6 @@
-package main.java.com.uefs.libraria.dao.Reader;
+package com.uefs.libraria.dao.Reader;
 
-import main.java.com.uefs.libraria.model.Reader;
+import com.uefs.libraria.model.Reader;
 
 import java.util.ArrayList;
 import java.util.List;

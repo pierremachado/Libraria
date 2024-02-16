@@ -1,14 +1,11 @@
-package test.java.com.uefs.libraria.businesslogic;
+package com.uefs.libraria.businesslogic;
 
-import main.java.com.uefs.libraria.services.BookService;
-import main.java.com.uefs.libraria.services.LoginService;
-import main.java.com.uefs.libraria.services.ReservationService;
-import main.java.com.uefs.libraria.services.TimeService;
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.*;
-import main.java.com.uefs.libraria.model.*;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.model.*;
+import com.uefs.libraria.model.enums.*;
+import com.uefs.libraria.dao.*;
+import com.uefs.libraria.services.*;
+import com.uefs.libraria.exceptions.*;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.model;
+package com.uefs.libraria.model;
 
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.model.enums.LoanStatus;
+import com.uefs.libraria.model.enums.UserPermission;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

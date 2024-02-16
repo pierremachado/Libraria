@@ -1,4 +1,4 @@
-package main.java.com.uefs.libraria.util;
+package com.uefs.libraria.util;
 
 import java.io.*;
 import java.util.ArrayList;

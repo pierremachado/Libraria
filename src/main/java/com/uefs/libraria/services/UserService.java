@@ -1,12 +1,12 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.*;
-import main.java.com.uefs.libraria.model.*;
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.ReaderStatus;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.exceptions.*;
+import com.uefs.libraria.model.*;
+import com.uefs.libraria.model.enums.LoanStatus;
+import com.uefs.libraria.model.enums.ReaderStatus;
+import com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.model.enums.UserPermission;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
@@ -128,7 +128,7 @@ public class UserService {
         return null;
     }
 
-    public static User bloquearLeitor(Reader reader) throws NotEnoughPermissionException, UserIsBlockedException {
+    public static void bloquearLeitor(Reader reader) throws NotEnoughPermissionException, UserIsBlockedException {
         if (!LoginService.verificarAdministrador()) {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
@@ -143,15 +143,13 @@ public class UserService {
         }
 
         reader.setStatus(ReaderStatus.BANIDO);
-        return reader;
     }
 
-    public static User desbloquearLeitor(Reader reader) throws NotEnoughPermissionException {
+    public static void desbloquearLeitor(Reader reader) throws NotEnoughPermissionException {
         if (!LoginService.verificarAdministrador()) {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
 
         reader.setStatus(ReaderStatus.LIBERADO);
-        return reader;
     }
 }

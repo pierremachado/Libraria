@@ -1,15 +1,15 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.BookException;
-import main.java.com.uefs.libraria.exceptions.NotEnoughPermissionException;
-import main.java.com.uefs.libraria.exceptions.ReservationException;
-import main.java.com.uefs.libraria.exceptions.UserIsBlockedException;
-import main.java.com.uefs.libraria.model.Reader;
-import main.java.com.uefs.libraria.model.Book;
-import main.java.com.uefs.libraria.model.Reservation;
-import main.java.com.uefs.libraria.model.enums.ReaderStatus;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.exceptions.BookException;
+import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.exceptions.ReservationException;
+import com.uefs.libraria.exceptions.UserIsBlockedException;
+import com.uefs.libraria.model.Reader;
+import com.uefs.libraria.model.Book;
+import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.enums.ReaderStatus;
+import com.uefs.libraria.model.enums.ReservationStatus;
 
 import java.util.List;
 

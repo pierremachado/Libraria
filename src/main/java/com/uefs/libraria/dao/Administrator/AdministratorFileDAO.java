@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Administrator;
+package com.uefs.libraria.dao.Administrator;
 
-import main.java.com.uefs.libraria.model.Administrator;
-import main.java.com.uefs.libraria.util.FileStorage;
+import com.uefs.libraria.model.Administrator;
+import com.uefs.libraria.util.FileStorage;
 
 import java.util.List;
 

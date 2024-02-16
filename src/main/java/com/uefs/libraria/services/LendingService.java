@@ -1,13 +1,13 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.LoanException;
-import main.java.com.uefs.libraria.exceptions.NotEnoughPermissionException;
-import main.java.com.uefs.libraria.exceptions.UserIsBlockedException;
-import main.java.com.uefs.libraria.model.*;
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.ReaderStatus;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.exceptions.LoanException;
+import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.exceptions.UserIsBlockedException;
+import com.uefs.libraria.model.*;
+import com.uefs.libraria.model.enums.LoanStatus;
+import com.uefs.libraria.model.enums.ReaderStatus;
+import com.uefs.libraria.model.enums.ReservationStatus;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -70,11 +70,10 @@ public class LendingService {
      * Método para confirmar o recebimento de um livro e aplicar uma multa ao usuário em caso de atraso
      *
      * @param loan O objeto empréstimo a ser confirmado
-     * @return O empréstimo atualizado
      * @throws NotEnoughPermissionException Caso o usuário logado não possua permissão
-     * @throws LoanException          Caso o empréstimo já tenha sido cancelado ou concluído
+     * @throws LoanException                Caso o empréstimo já tenha sido cancelado ou concluído
      */
-    public static Loan confirmarRecebimentoEmprestimo(Loan loan) throws NotEnoughPermissionException, LoanException {
+    public static void confirmarRecebimentoEmprestimo(Loan loan) throws NotEnoughPermissionException, LoanException {
         if (!LoginService.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
         }
@@ -96,7 +95,6 @@ public class LendingService {
         Book book = DAO.getLivroDAO().findID(loan.getIdLivro());
         book.aumentarQuantidade(1);
         DAO.getLivroDAO().update(book);
-        return loan;
     }
 
     /**

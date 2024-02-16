@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Administrator;
+package com.uefs.libraria.dao.Administrator;
 
-import main.java.com.uefs.libraria.dao.CRUD;
-import main.java.com.uefs.libraria.model.Administrator;
+import com.uefs.libraria.dao.CRUD;
+import com.uefs.libraria.model.Administrator;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

@@ -1,8 +1,8 @@
-package main.java.com.uefs.libraria.model;
-
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+package com.uefs.libraria.model;
 
 import java.io.Serializable;
+
+import static com.uefs.libraria.model.enums.UserPermission.*;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Administrator extends User implements Serializable {
     public Administrator(String nome, String sobrenome, String id, String senha) {
-        super(nome, sobrenome, id, "Administrador", senha, UserPermission.ADMINISTRADOR);
+        super(nome, sobrenome, id, "Administrador", senha, ADMINISTRADOR);
     }
 
     @Override

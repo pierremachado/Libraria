@@ -1,10 +1,10 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.BookAmountUnderZeroException;
-import main.java.com.uefs.libraria.exceptions.IdAlreadyExistsException;
-import main.java.com.uefs.libraria.exceptions.NotEnoughPermissionException;
-import main.java.com.uefs.libraria.model.Book;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.exceptions.BookAmountUnderZeroException;
+import com.uefs.libraria.exceptions.IdAlreadyExistsException;
+import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.model.Book;
 
 import java.time.Year;
 import java.util.Comparator;

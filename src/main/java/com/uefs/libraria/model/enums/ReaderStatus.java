@@ -1,4 +1,4 @@
-package main.java.com.uefs.libraria.model.enums;
+package com.uefs.libraria.model.enums;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

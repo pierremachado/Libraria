@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Librarian;
+package com.uefs.libraria.dao.Librarian;
 
-import main.java.com.uefs.libraria.model.Librarian;
-import main.java.com.uefs.libraria.util.FileStorage;
+import com.uefs.libraria.model.Librarian;
+import com.uefs.libraria.util.FileStorage;
 
 import java.util.List;
 

@@ -1,15 +1,11 @@
-package test.java.com.uefs.libraria.businesslogic;
+package com.uefs.libraria.businesslogic;
 
-import main.java.com.uefs.libraria.services.LendingService;
-import main.java.com.uefs.libraria.services.LoginService;
-import main.java.com.uefs.libraria.services.FinesService;
-import main.java.com.uefs.libraria.services.TimeService;
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.*;
-import main.java.com.uefs.libraria.model.*;
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.ReaderStatus;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.model.*;
+import com.uefs.libraria.model.enums.*;
+import com.uefs.libraria.dao.*;
+import com.uefs.libraria.services.*;
+import com.uefs.libraria.exceptions.*;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +13,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.Year;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

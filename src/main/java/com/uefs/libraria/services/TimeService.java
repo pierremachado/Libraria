@@ -1,4 +1,4 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
 import java.time.LocalDateTime;
 

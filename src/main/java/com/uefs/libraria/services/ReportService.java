@@ -1,13 +1,13 @@
-package main.java.com.uefs.libraria.services;
+package com.uefs.libraria.services;
 
-import main.java.com.uefs.libraria.dao.DAO;
-import main.java.com.uefs.libraria.exceptions.NotEnoughPermissionException;
-import main.java.com.uefs.libraria.model.Loan;
-import main.java.com.uefs.libraria.model.Book;
-import main.java.com.uefs.libraria.model.Report;
-import main.java.com.uefs.libraria.model.Reservation;
-import main.java.com.uefs.libraria.model.enums.LoanStatus;
-import main.java.com.uefs.libraria.model.enums.ReservationStatus;
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.Book;
+import com.uefs.libraria.model.Report;
+import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.enums.LoanStatus;
+import com.uefs.libraria.model.enums.ReservationStatus;
 
 import java.util.List;
 

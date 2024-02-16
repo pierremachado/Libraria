@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.model;
+package com.uefs.libraria.model;
 
-import main.java.com.uefs.libraria.model.enums.ReaderStatus;
-import main.java.com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.model.enums.ReaderStatus;
+import com.uefs.libraria.model.enums.UserPermission;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

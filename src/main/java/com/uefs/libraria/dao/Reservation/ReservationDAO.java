@@ -1,7 +1,7 @@
-package main.java.com.uefs.libraria.dao.Reservation;
+package com.uefs.libraria.dao.Reservation;
 
-import main.java.com.uefs.libraria.dao.CRUD;
-import main.java.com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.dao.CRUD;
+import com.uefs.libraria.model.Reservation;
 
 import java.util.List;
 

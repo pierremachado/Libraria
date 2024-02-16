@@ -1,4 +1,4 @@
-package main.java.com.uefs.libraria.exceptions;
+package com.uefs.libraria.exceptions;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes

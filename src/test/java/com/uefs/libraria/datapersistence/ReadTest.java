@@ -1,6 +1,6 @@
-package test.java.com.uefs.libraria.datapersistence;
+package com.uefs.libraria.datapersistence;
 
-import main.java.com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.dao.DAO;
 
 /**
  * @author      José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
