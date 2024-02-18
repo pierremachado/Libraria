@@ -7,4 +7,6 @@ module com.uefs.libraria {
 
     opens com.uefs.libraria to javafx.fxml;
     exports com.uefs.libraria;
+    exports com.uefs.libraria.controllers;
+    opens com.uefs.libraria.controllers to javafx.fxml;
 }
