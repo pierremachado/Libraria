@@ -31,7 +31,9 @@ public class BookService {
      * @throws IdAlreadyExistsException     Caso o livro com ISBN especificado já exista no acervo.
      * @throws BookAmountUnderZeroException Caso o livro tenha uma quantidade negativa de exemplares.
      */
-    public static Book criarLivro(String titulo, String autor, String editora, String isbn, Year dataPublicacao, String categoria, int quantidade) throws NotEnoughPermissionException, IdAlreadyExistsException, BookAmountUnderZeroException {
+    public static Book criarLivro(String titulo, String autor, String editora, String isbn, Year dataPublicacao,
+                                  String categoria, int quantidade)
+            throws NotEnoughPermissionException, IdAlreadyExistsException, BookAmountUnderZeroException {
         if (!LoginService.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
         }
@@ -130,7 +132,8 @@ public class BookService {
      * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
      * @throws BookAmountUnderZeroException Caso a quantidade passe a ser negativa.
      */
-    public static void livroReduzirQuantidade(Book book, int quantidade) throws NotEnoughPermissionException, BookAmountUnderZeroException {
+    public static void livroReduzirQuantidade(Book book, int quantidade)
+            throws NotEnoughPermissionException, BookAmountUnderZeroException {
         if (!LoginService.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
         }

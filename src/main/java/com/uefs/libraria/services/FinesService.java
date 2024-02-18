@@ -13,11 +13,12 @@ import com.uefs.libraria.model.enums.ReaderStatus;
 public class FinesService {
 
     /**
-     * Método que automaticamente varrerá todos os empréstimos e irá aplicar multas aos empréstimos atrasados
+     * Método que automaticamente varrerá todos os empréstimos e irá aplicar multas aos empréstimos atrasados.
      */
     public static void aplicarMultas() {
         for (Loan loan : DAO.getEmprestimoDAO().findAll()) {
-            if (loan.getStatus() == LoanStatus.PENDENTE && loan.getDataLimite().isBefore(TimeService.getCurrentLocalDateTime())) {
+            if (loan.getStatus() == LoanStatus.PENDENTE &&
+                    loan.getDataLimite().isBefore(TimeService.getCurrentLocalDateTime())) {
                 loan.setStatus(LoanStatus.ATRASADO);
                 Reader reader = DAO.getLeitorDAO().findID(loan.getIdLeitor());
                 reader.setStatus(ReaderStatus.MULTADO);
@@ -28,11 +29,13 @@ public class FinesService {
 
 
     /**
-     * Método que automaticamente varrerá todos os leitores e irá desbloqueá-los caso a data atual tenha ultrapassado a data de término da multa
+     * Método que automaticamente varrerá todos os leitores e irá desbloqueá-los caso a data atual tenha
+     * ultrapassado a data de término da multa.
      */
     public static void desbloquearMultas() {
         for (Reader reader : DAO.getLeitorDAO().findAll()) {
-            if (reader.getStatus() == ReaderStatus.MULTADO && reader.getDataLimiteMulta() != null && reader.getDataLimiteMulta().isBefore(TimeService.getCurrentLocalDateTime())) {
+            if (reader.getStatus() == ReaderStatus.MULTADO && reader.getDataLimiteMulta() != null &&
+                    reader.getDataLimiteMulta().isBefore(TimeService.getCurrentLocalDateTime())) {
                 reader.setStatus(ReaderStatus.LIBERADO);
                 reader.setDataLimiteMulta(null);
                 DAO.getLeitorDAO().update(reader);

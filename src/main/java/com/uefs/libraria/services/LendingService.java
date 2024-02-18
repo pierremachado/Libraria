@@ -26,9 +26,11 @@ public class LendingService {
      * @return Objeto da classe Empréstimo com as informações acrescidas
      * @throws NotEnoughPermissionException Caso o usuário não possua permissão adequada.
      * @throws UserIsBlockedException       Caso o leitor esteja bloqueado ou multado.
-     * @throws LoanException          Caso o leitor possua empréstimos demais, já esteja com um exemplar do livro ou não tenha uma reserva associada ao livro
+     * @throws LoanException          Caso o leitor possua empréstimos demais, já esteja com um exemplar do livro ou
+     * não tenha uma reserva associada ao livro
      */
-    public static Loan criarEmprestimo(Reader reader, Book book) throws NotEnoughPermissionException, UserIsBlockedException, LoanException {
+    public static Loan criarEmprestimo(Reader reader, Book book)
+            throws NotEnoughPermissionException, UserIsBlockedException, LoanException {
         if (!LoginService.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
         }
@@ -53,7 +55,11 @@ public class LendingService {
         for (Reservation reservation : reservationList) {
             if (reservation.getIdLivro().equals(book.getIsbn()) && reservation.getStatus() == ReservationStatus.LIBERADO) {
                 reservation.setStatus(ReservationStatus.EMPRESTADO);
-                return DAO.getEmprestimoDAO().create(new Loan(LoginService.getCurrentLoggedUser().getId(), LoginService.getCurrentLoggedUser().getPermissao(), reader.getId(), book.getIsbn(), reservation.getIdReserva(), TimeService.getCurrentLocalDateTime(), TimeService.getCurrentLocalDateTime().plusDays(7), null, 0, LoanStatus.PENDENTE));
+                return DAO.getEmprestimoDAO().create(new Loan(LoginService.getCurrentLoggedUser().getId(),
+                        LoginService.getCurrentLoggedUser().getPermissao(), reader.getId(), book.getIsbn(),
+                        reservation.getIdReserva(), TimeService.getCurrentLocalDateTime(),
+                        TimeService.getCurrentLocalDateTime().plusDays(7),
+                        null, 0, LoanStatus.PENDENTE));
             }
         }
 
@@ -63,7 +69,10 @@ public class LendingService {
 
         book.reduzirQuantidade(1);
         DAO.getLivroDAO().update(book);
-        return DAO.getEmprestimoDAO().create(new Loan(LoginService.getCurrentLoggedUser().getId(), LoginService.getCurrentLoggedUser().getPermissao(), reader.getId(), book.getIsbn(), null, TimeService.getCurrentLocalDateTime(), TimeService.getCurrentLocalDateTime().plusDays(7), null, 0, LoanStatus.PENDENTE));
+        return DAO.getEmprestimoDAO().create(new Loan(LoginService.getCurrentLoggedUser().getId(),
+                LoginService.getCurrentLoggedUser().getPermissao(), reader.getId(), book.getIsbn(),
+                null, TimeService.getCurrentLocalDateTime(), TimeService.getCurrentLocalDateTime().plusDays(7),
+                null, 0, LoanStatus.PENDENTE));
     }
 
     /**

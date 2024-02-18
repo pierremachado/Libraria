@@ -36,10 +36,6 @@ public class LoginService {
         User user = null;
 
         switch (permissao) {
-            case CONVIDADO -> {
-                currentLoggedUser = new Guest();
-                return;
-            }
             case LEITOR -> user = DAO.getLeitorDAO().findID(id);
             case BIBLIOTECARIO -> user = DAO.getBibliotecarioDAO().findID(id);
             case ADMINISTRADOR -> user = DAO.getAdministradorDAO().findID(id);
@@ -52,6 +48,9 @@ public class LoginService {
         currentLoggedUser = user;
     }
 
+    public static void guestLogin(){
+        currentLoggedUser = new Guest();
+    }
 
     /**
      * Método de realizar logoff do sistema.
