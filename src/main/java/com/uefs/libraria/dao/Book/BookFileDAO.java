@@ -18,14 +18,14 @@ public class BookFileDAO implements BookDAO {
 
     public BookFileDAO() {
         this.fs = new FileStorage("book", "book");
-        this.bookList = fs.ler();
+        this.bookList = fs.read();
     }
 
     @Override
     public Book update(Book obj) {
         int index = this.bookList.indexOf(obj);
         this.bookList.set(index, obj);
-        this.fs.salvar(bookList);
+        this.fs.save(bookList);
         return obj;
     }
 
@@ -34,7 +34,7 @@ public class BookFileDAO implements BookDAO {
         for (Book book : this.bookList) {
             if (book.getIsbn().equals(isbn)) {
                 this.bookList.remove(book);
-                this.fs.salvar(bookList);
+                this.fs.save(bookList);
                 return;
             }
         }
@@ -43,7 +43,7 @@ public class BookFileDAO implements BookDAO {
     @Override
     public Book create(Book obj) {
         this.bookList.add(obj);
-        this.fs.salvar(bookList);
+        this.fs.save(bookList);
         return obj;
     }
 

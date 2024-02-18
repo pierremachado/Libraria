@@ -15,14 +15,14 @@ public class LoanFileDAO implements LoanDAO {
 
     public LoanFileDAO() {
         this.fs = new FileStorage("loan", "loan");
-        this.loanList = fs.ler();
+        this.loanList = fs.read();
     }
 
     @Override
     public Loan update(Loan obj) {
         int index = this.loanList.indexOf(obj);
         this.loanList.set(index, obj);
-        fs.salvar(loanList);
+        fs.save(loanList);
         return obj;
     }
 
@@ -31,7 +31,7 @@ public class LoanFileDAO implements LoanDAO {
         for (Loan loan : this.loanList) {
             if (loan.getIdEmprestimo().equals(id)) {
                 this.loanList.remove(loan);
-                fs.salvar(loanList);
+                fs.save(loanList);
                 return;
             }
         }
@@ -41,7 +41,7 @@ public class LoanFileDAO implements LoanDAO {
     public Loan create(Loan obj) {
         obj.setIdEmprestimo(valueOf(nextId++));
         this.loanList.add(obj);
-        fs.salvar(loanList);
+        fs.save(loanList);
         return obj;
     }
 

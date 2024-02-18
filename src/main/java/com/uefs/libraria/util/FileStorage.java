@@ -6,7 +6,9 @@ import java.util.List;
 
 public class FileStorage {
     private static final String fileType = ".dat";
-    private static final String mainDir = "storage" + File.separator + "test";
+    private static final String mainDir = "src" + File.separator +
+            "test" + File.separator + // transformar em comentário para versão final
+            "resources" + File.separator + "data";
     private final String fileName;
     private final String directoryName;
 
@@ -15,7 +17,15 @@ public class FileStorage {
         this.directoryName = directoryName;
     }
 
-    public <T> void salvar(List<T> lista) {
+    public static String getMainDir(){
+        return mainDir;
+    }
+
+    public static String getFileType(){
+        return fileType;
+    }
+
+    public <T> void save(List<T> lista) {
         File pasta = new File(mainDir + File.separator + directoryName);
         pasta.mkdirs();
 
@@ -28,7 +38,7 @@ public class FileStorage {
         }
     }
 
-    public <T> List<T> ler() {
+    public <T> List<T> read() {
         File pasta = new File(mainDir + File.separator + directoryName);
         File arquivo = new File(pasta.getPath() + File.separator + fileName + fileType);
 

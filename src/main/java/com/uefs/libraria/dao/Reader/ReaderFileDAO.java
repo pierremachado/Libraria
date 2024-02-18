@@ -11,14 +11,14 @@ public class ReaderFileDAO implements ReaderDAO {
 
     public ReaderFileDAO() {
         this.fs = new FileStorage("reader", "reader");
-        this.readerList = fs.ler();
+        this.readerList = fs.read();
     }
 
     @Override
     public Reader update(Reader obj) {
         int index = this.readerList.indexOf(obj);
         this.readerList.set(index, obj);
-        this.fs.salvar(readerList);
+        this.fs.save(readerList);
         return obj;
     }
 
@@ -27,7 +27,7 @@ public class ReaderFileDAO implements ReaderDAO {
         for (Reader reader : this.readerList) {
             if (reader.getId().equals(id)) {
                 this.readerList.remove(reader);
-                this.fs.salvar(readerList);
+                this.fs.save(readerList);
                 return;
             }
         }
@@ -36,7 +36,7 @@ public class ReaderFileDAO implements ReaderDAO {
     @Override
     public Reader create(Reader obj) {
         this.readerList.add(obj);
-        this.fs.salvar(readerList);
+        this.fs.save(readerList);
         return obj;
     }
 

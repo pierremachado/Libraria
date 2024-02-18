@@ -11,14 +11,14 @@ public class LibrarianFileDAO implements LibrarianDAO {
 
     public LibrarianFileDAO() {
         this.fs = new FileStorage("librarian", "librarian");
-        this.librarianList = fs.ler();
+        this.librarianList = fs.read();
     }
 
     @Override
     public Librarian update(Librarian obj) {
         int index = this.librarianList.indexOf(obj);
         this.librarianList.set(index, obj);
-        this.fs.salvar(librarianList);
+        this.fs.save(librarianList);
         return obj;
     }
 
@@ -27,7 +27,7 @@ public class LibrarianFileDAO implements LibrarianDAO {
         for (Librarian bib : this.librarianList) {
             if (bib.getId().equals(id)) {
                 this.librarianList.remove(bib);
-                this.fs.salvar(librarianList);
+                this.fs.save(librarianList);
                 return;
             }
         }
@@ -36,7 +36,7 @@ public class LibrarianFileDAO implements LibrarianDAO {
     @Override
     public Librarian create(Librarian obj) {
         this.librarianList.add(obj);
-        this.fs.salvar(librarianList);
+        this.fs.save(librarianList);
         return obj;
     }
 

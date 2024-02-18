@@ -16,14 +16,14 @@ public class ReservationFileDAO implements ReservationDAO {
 
     public ReservationFileDAO() {
         this.fs = new FileStorage("reservation", "reservation");
-        this.reservationList = fs.ler();
+        this.reservationList = fs.read();
     }
 
     @Override
     public Reservation update(Reservation obj) {
         int index = this.reservationList.indexOf(obj);
         this.reservationList.set(index, obj);
-        fs.salvar(reservationList);
+        fs.save(reservationList);
         return obj;
     }
 
@@ -32,7 +32,7 @@ public class ReservationFileDAO implements ReservationDAO {
         for (Reservation reservation : this.reservationList) {
             if (reservation.getIdReserva().equals(id)) {
                 this.reservationList.remove(reservation);
-                fs.salvar(reservationList);
+                fs.save(reservationList);
                 return;
             }
         }
@@ -42,7 +42,7 @@ public class ReservationFileDAO implements ReservationDAO {
     public Reservation create(Reservation obj) {
         obj.setIdReserva(valueOf(nextId++));
         this.reservationList.add(obj);
-        fs.salvar(reservationList);
+        fs.save(reservationList);
         return obj;
     }
 
@@ -90,17 +90,17 @@ public class ReservationFileDAO implements ReservationDAO {
 
     public void delete(Reservation reservation) {
         this.reservationList.remove(reservation);
-        fs.salvar(reservationList);
+        fs.save(reservationList);
     }
 
     public void deleteAllByBook(String idLivro) {
         this.reservationList.removeIf(reserva -> reserva.getIdLivro().equals(idLivro));
-        fs.salvar(reservationList);
+        fs.save(reservationList);
     }
 
     public void deleteAllByLeitor(String idLeitor) {
         this.reservationList.removeIf(reserva -> reserva.getIdLeitor().equals(idLeitor));
-        fs.salvar(reservationList);
+        fs.save(reservationList);
     }
 
     @Override

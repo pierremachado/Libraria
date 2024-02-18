@@ -19,6 +19,7 @@ import com.uefs.libraria.dao.Reservation.ReservationDAO;
 import com.uefs.libraria.dao.Reservation.ReservationFileDAO;
 import com.uefs.libraria.dao.Reservation.ReservationListDAO;
 import com.uefs.libraria.model.enums.DAOStatus;
+import com.uefs.libraria.util.FileStorage;
 
 import java.io.File;
 
@@ -127,7 +128,7 @@ public class DAO {
         reservationDAO = null;
 
         if (statusDAO.equals(DAOStatus.FILE)) { // para fins de teste
-            File pasta = new File("storage" + File.separator + "test");
+            File pasta = new File(FileStorage.getMainDir());
             deleteDir(pasta);
         }
     }

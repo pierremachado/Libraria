@@ -11,14 +11,14 @@ public class AdministratorFileDAO implements AdministratorDAO {
 
     public AdministratorFileDAO() {
         this.fs = new FileStorage("administrator", "administrator");
-        this.administratorList = fs.ler();
+        this.administratorList = fs.read();
     }
 
     @Override
     public Administrator update(Administrator obj) {
         int index = this.administratorList.indexOf(obj);
         this.administratorList.set(index, obj);
-        this.fs.salvar(administratorList);
+        this.fs.save(administratorList);
         return obj;
     }
 
@@ -27,7 +27,7 @@ public class AdministratorFileDAO implements AdministratorDAO {
         for (Administrator adm : this.administratorList) {
             if (adm.getId().equals(id)) {
                 this.administratorList.remove(adm);
-                this.fs.salvar(administratorList);
+                this.fs.save(administratorList);
                 return;
             }
         }
@@ -36,7 +36,7 @@ public class AdministratorFileDAO implements AdministratorDAO {
     @Override
     public Administrator create(Administrator obj) {
         this.administratorList.add(obj);
-        this.fs.salvar(administratorList);
+        this.fs.save(administratorList);
         return obj;
     }
 
