@@ -42,6 +42,10 @@ public abstract class User implements Serializable {
         this.sobrenome = sobrenome;
     }
 
+    public String getNomeCompleto(){
+        return nome + " " + sobrenome;
+    }
+
     public String getId() {
         return id;
     }

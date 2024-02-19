@@ -57,22 +57,22 @@ public class UserRegisterController {
 
     @FXML
     void cancelRegister(ActionEvent event) {
-        administratorHomeController.cancelAddOperation();
+        administratorHomeController.cancelRightPaneOperation();
     }
 
     @FXML
     void initialize() {
-        assert accountTypeSelect != null : "fx:id=\"accountTypeSelect\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert addButton != null : "fx:id=\"addButton\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert addressField != null : "fx:id=\"addressField\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert dddField != null : "fx:id=\"dddField\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert errorWarningLabel != null : "fx:id=\"errorWarningLabel\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert nameField != null : "fx:id=\"nameField\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert phoneNumberField != null : "fx:id=\"phoneNumberField\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert surnameField != null : "fx:id=\"surnameField\" was not injected: check your FXML file 'userRegister.fxml'.";
-        assert usernameField != null : "fx:id=\"usernameField\" was not injected: check your FXML file 'userRegister.fxml'.";
+        assert accountTypeSelect != null : "fx:id=\"accountTypeSelect\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert addButton != null : "fx:id=\"addButton\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert addressField != null : "fx:id=\"addressField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert dddField != null : "fx:id=\"dddField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert errorWarningLabel != null : "fx:id=\"errorWarningLabel\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert nameField != null : "fx:id=\"nameField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert phoneNumberField != null : "fx:id=\"phoneNumberField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert surnameField != null : "fx:id=\"surnameField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+        assert usernameField != null : "fx:id=\"usernameField\" was not injected: check your FXML file 'UserRegister.fxml'.";
 
     }
 

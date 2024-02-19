@@ -50,7 +50,7 @@
                   </TextField>
                </children>
             </VBox>
-            <Button fx:id="searchButton" mnemonicParsing="false" style="-fx-background-color: #131415; -fx-background-radius: 20px;" text="Pesquisar" textFill="#d9d9d9">
+            <Button fx:id="searchButton" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #131415; -fx-background-radius: 20px;" text="Pesquisar" textFill="#d9d9d9">
                <font>
                   <Font name="Open Sans Regular" size="12.0" />
                </font>
@@ -82,6 +82,14 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="300.0" prefWidth="185.0" spacing="20.0" style="-fx-background-color: #e3e3e3; -fx-background-radius: 30;">
                <children>
+                  <Button fx:id="selfProfileCheckButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #131415; -fx-background-radius: 20px;" text="Meu perfil" textFill="#d9d9d9">
+                     <font>
+                        <Font name="Open Sans Regular" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                   <Button fx:id="generateReportButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefWidth="120.0" style="-fx-background-color: #131415; -fx-background-radius: 20px;" text="Gerar relatório" textFill="#d9d9d9">
                      <font>
                         <Font name="Open Sans Regular" size="12.0" />

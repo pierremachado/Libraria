@@ -5,6 +5,7 @@ module com.uefs.libraria {
     requires org.junit.jupiter.api;
 
 
+    opens com.uefs.libraria.model to javafx.base;
     opens com.uefs.libraria to javafx.fxml;
     exports com.uefs.libraria;
     exports com.uefs.libraria.controllers;

@@ -64,7 +64,7 @@ public class LoginController{
                 default -> throw new IllegalStateException("Unexpected value: " + accountType);
             }
         }
-        catch(MustLogoutException | IncorrectCredentialsException | IllegalStateException e){
+        catch(IncorrectCredentialsException e){
             loginStatus.setText("Usuário ou senha incorretos.");
             passwordField.clear();
         } catch (Exception e) {

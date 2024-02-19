@@ -37,6 +37,9 @@ public class AdministratorHomeController implements Initializable {
     private Button searchButton;
 
     @FXML
+    private Button selfProfileCheckButton;
+
+    @FXML
     private Button addUserButton;
 
     @FXML
@@ -59,11 +62,15 @@ public class AdministratorHomeController implements Initializable {
 
     @FXML
     void setScreen() {
+        borderPane.setCenter(openPage("/com/uefs/libraria/UserAndBookTable.fxml"));
+
         greetingLabel.setText("Boas vindas," +
                 " " +
                 LoginService.getCurrentLoggedUser().getNome());
 
         usernameLabel.setText("@" + LoginService.getCurrentLoggedUser().getId());
+
+        selfProfileCheckButton.setOnAction(actionEvent -> selfProfileCheck());
 
         addUserButton.setOnAction(actionEvent -> {addUser();});
 
@@ -71,10 +78,14 @@ public class AdministratorHomeController implements Initializable {
     }
 
     private void addUser(){
-        borderPane.setRight(openPage("/com/uefs/libraria/userRegister.fxml"));
+        borderPane.setRight(openPage("/com/uefs/libraria/UserRegister.fxml"));
     }
 
-    public void cancelAddOperation(){
+    private void selfProfileCheck(){
+        borderPane.setRight(openPage("/com/uefs/libraria/OperatorProfileCheck.fxml"));
+    }
+
+    public void cancelRightPaneOperation(){
         borderPane.setRight(null);
     }
 
