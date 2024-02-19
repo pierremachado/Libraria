@@ -6,8 +6,11 @@ import com.uefs.libraria.model.enums.UserPermission;
 import com.uefs.libraria.services.LoginService;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 
-public class LoginController {
+public class LoginController{
+
+    private MainWindowController mainWindowController;
 
     @FXML
     private TextField usernameField;
@@ -28,6 +31,9 @@ public class LoginController {
     private Label loginStatus;
 
     @FXML
+    private BorderPane borderPane;
+
+    @FXML
     public void initialize() {
         choiceBox.getItems().addAll("Administrador", "Bibliotecário", "Leitor");
         choiceBox.setValue("Administrador");
@@ -45,6 +51,26 @@ public class LoginController {
     private void handleLogin() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        UserPermission accountType = getUserPermission();
+
+        try {
+            LoginService.login(username, password, accountType);
+            loginStatus.setText(null);
+
+            switch(accountType) {
+                case ADMINISTRADOR -> {} // replace Login.fxml with AdministratorHome.fxml in MainWindow
+                case BIBLIOTECARIO -> {} // replace Login.fxml with LibrarianHome.fxml in MainWindow
+                case LEITOR -> {} // replace Login.fxml with ReaderHome.fxml in MainWindow
+                default -> throw new IllegalStateException("Unexpected value: " + accountType);
+            }
+        }
+        catch(MustLogoutException | IncorrectCredentialsException | IllegalStateException e){
+            loginStatus.setText("Usuário ou senha incorretos.");
+            passwordField.clear();
+        }
+    }
+
+    private UserPermission getUserPermission() {
         String selectedOption = choiceBox.getValue();
 
         UserPermission accountType = null;
@@ -61,30 +87,12 @@ public class LoginController {
                 accountType = UserPermission.LEITOR;
             }
         }
-
-        try {
-            LoginService.login(username, password, accountType);
-
-            System.out.println(LoginService.getCurrentLoggedUser().getNome());
-            System.out.println(LoginService.getCurrentLoggedUser().getCargo());
-            System.out.println("@" + LoginService.getCurrentLoggedUser().getId());
-            System.out.println(LoginService.getCurrentLoggedUser().getSenha());
-            System.out.println(LoginService.getCurrentLoggedUser().getPermissao());
-
-            LoginService.logoff(); // transformar em comentário após terminar os testes
-        }
-        catch(MustLogoutException | IncorrectCredentialsException e){
-            loginStatus.setText("Usuário ou senha incorretos.");
-        }
+        return accountType;
     }
 
     private void handleGuestLogin() {
         LoginService.guestLogin();
-
-        System.out.println(LoginService.getCurrentLoggedUser().getId());
-        System.out.println(LoginService.getCurrentLoggedUser().getSenha());
-        System.out.println(LoginService.getCurrentLoggedUser().getPermissao());
-
-        LoginService.logoff(); // transformar em comentário após terminar os testes
+        // replace Login.fxml with GuestHome.fxml in MainWindow
     }
 }
+
