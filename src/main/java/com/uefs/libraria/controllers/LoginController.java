@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
-public class LoginController{
+import static com.uefs.libraria.controllers.MainWindowController.mainWindowController;
 
-    private MainWindowController mainWindowController;
+public class LoginController{
 
     @FXML
     private TextField usernameField;
@@ -58,7 +58,7 @@ public class LoginController{
             loginStatus.setText(null);
 
             switch(accountType) {
-                case ADMINISTRADOR -> {} // replace Login.fxml with AdministratorHome.fxml in MainWindow
+                case ADMINISTRADOR -> {mainWindowController.callAdministratorHomeScreen();} // replace Login.fxml with AdministratorHome.fxml in MainWindow
                 case BIBLIOTECARIO -> {} // replace Login.fxml with LibrarianHome.fxml in MainWindow
                 case LEITOR -> {} // replace Login.fxml with ReaderHome.fxml in MainWindow
                 default -> throw new IllegalStateException("Unexpected value: " + accountType);
@@ -67,6 +67,8 @@ public class LoginController{
         catch(MustLogoutException | IncorrectCredentialsException | IllegalStateException e){
             loginStatus.setText("Usuário ou senha incorretos.");
             passwordField.clear();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

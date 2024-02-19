@@ -17,7 +17,7 @@ public class Main extends Application {
                 (Main.class.getResourceAsStream("/assets/icon.png"))));
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainWindow.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         primaryStage.centerOnScreen();
         primaryStage.setMaximized(true);
