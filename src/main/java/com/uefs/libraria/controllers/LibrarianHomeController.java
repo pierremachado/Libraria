@@ -19,9 +19,11 @@ import java.util.ResourceBundle;
 import static com.uefs.libraria.controllers.MainWindowController.mainWindowController;
 import static com.uefs.libraria.controllers.MainWindowController.openPage;
 
-static AdministratorHomeController administratorHomeController;
 
-public class LibrarianHomeController {
+
+public class LibrarianHomeController implements Initializable {
+
+    static LibrarianHomeController librarianHomeController;
     private static User currentSelectedUser;
     private static Book currentSelectedBook;
     private static String search;
@@ -70,7 +72,7 @@ public class LibrarianHomeController {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        administratorHomeController = this;
+        librarianHomeController = this;
         this.setScreen();
     }
 
@@ -86,7 +88,7 @@ public class LibrarianHomeController {
     }
 
     public static void setCurrentSelectedUser(User currentSelectedUser) {
-        AdministratorHomeController.currentSelectedUser = currentSelectedUser;
+        LibrarianHomeController.currentSelectedUser = currentSelectedUser;
     }
 
     public static String getSearch(){
@@ -94,7 +96,7 @@ public class LibrarianHomeController {
     }
 
     public static void setSearch(String key){
-        AdministratorHomeController.search = key;
+        LibrarianHomeController.search = key;
     }
 
     @FXML
@@ -120,7 +122,7 @@ public class LibrarianHomeController {
     }
 
     private void handleSearch(){
-        AdministratorHomeController.setSearch(searchTextField.getText());
+        LibrarianHomeController.setSearch(searchTextField.getText());
         try {
             switch(bookReaderChoiceBox.getValue()){
                 case "Livro" -> {borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));}
