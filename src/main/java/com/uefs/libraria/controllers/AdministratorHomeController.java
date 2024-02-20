@@ -3,6 +3,7 @@ package com.uefs.libraria.controllers;
 import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.User;
 import com.uefs.libraria.services.LoginService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -119,6 +120,8 @@ public class AdministratorHomeController implements Initializable {
         logoutButton.setOnAction(event -> handleLogout());
 
         searchButton.setOnAction(ActionEvent -> handleSearch());
+
+        generateReportButton.setOnAction(ActionEvent -> handleReport());
     }
 
     private void handleSearch(){
@@ -134,6 +137,10 @@ public class AdministratorHomeController implements Initializable {
         }
     }
 
+    private void handleReport(){
+        borderPane.setRight(openPage("/com/uefs/libraria/Report.fxml"));
+    }
+
     private void addUser(){
         borderPane.setRight(openPage("/com/uefs/libraria/UserRegister.fxml"));
     }
@@ -143,6 +150,10 @@ public class AdministratorHomeController implements Initializable {
     private void selfProfileCheck(){
         currentSelectedUser = LoginService.getCurrentLoggedUser();
         borderPane.setRight(openPage("/com/uefs/libraria/OperatorProfileCheck.fxml"));
+    }
+
+    public void openRightPanel(String url){
+        borderPane.setRight(openPage(url));
     }
 
     public void closeRightPaneOperation(){

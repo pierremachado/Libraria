@@ -1,6 +1,9 @@
 package com.uefs.libraria.controllers;
 
 import com.uefs.libraria.Main;
+import com.uefs.libraria.services.FinesService;
+import com.uefs.libraria.services.ReservationService;
+import com.uefs.libraria.services.TimeService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -21,6 +25,11 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainWindowController = this;
+
+        TimeService.setCurrentLocalDateTime(LocalDateTime.now());
+        FinesService.aplicarMultas();
+        FinesService.desbloquearMultas();
+        ReservationService.atualizarReservas();
 
         try {
             callLoginScreen();

@@ -26,16 +26,12 @@ public class UserAndBookTableController implements Initializable {
     @FXML
     private TableView<Book> bookTable;
 
-    private static ObservableList<Book> bookData;
-
     @FXML
     private TableView<User> userTable;
 
-    private static ObservableList<User> userData;
-
     @FXML
     void setBookTable() {
-        bookData = FXCollections.observableArrayList(DAO.getLivroDAO().findAll());
+        ObservableList<Book> bookData = FXCollections.observableArrayList(DAO.getLivroDAO().findAll());
 
         BookTableController.createBookTable(this.bookTable, bookData);
     }
@@ -44,7 +40,7 @@ public class UserAndBookTableController implements Initializable {
     void setUserTable() {
         List<User> allUsers = new ArrayList<>(UserService.getAllUsers());
 
-        userData = FXCollections.observableArrayList(allUsers);
+        ObservableList<User> userData = FXCollections.observableArrayList(allUsers);
 
         UserTableController.createUserTable(this.userTable, userData);
     }
