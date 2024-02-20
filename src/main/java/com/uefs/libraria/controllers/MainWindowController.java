@@ -39,6 +39,12 @@ public class MainWindowController implements Initializable {
         this.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
     }
 
+    @FXML
+    public void callLibrarianHomeScreen() {this.refreshMainWindow("/com/uefs/libraria/LibrarianHome.fxml");}
+
+    @FXML
+    public void callReaderHomeScreen() {this.refreshMainWindow("/com/uefs/libraria/ReaderHome.fxml");}
+
     public void refreshMainWindow(String url){
         this.mainBorderPane.setCenter(openPage(url));
     }
