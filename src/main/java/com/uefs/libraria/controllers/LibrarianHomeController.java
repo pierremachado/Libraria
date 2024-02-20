@@ -56,9 +56,6 @@ public class LibrarianHomeController implements Initializable {
     private Button addBookButton;
 
     @FXML
-    private Button generateReportButton;
-
-    @FXML
     private Button logoutButton;
 
     @FXML
@@ -114,7 +111,7 @@ public class LibrarianHomeController implements Initializable {
 
         selfProfileCheckButton.setOnAction(actionEvent -> selfProfileCheck());
 
-        addLoanButton.setOnAction(actionEvent -> {addUser();});
+        addLoanButton.setOnAction(actionEvent -> {addLoan();});
 
         logoutButton.setOnAction(event -> handleLogout());
 
