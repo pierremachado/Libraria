@@ -114,6 +114,8 @@ public class AdministratorHomeController implements Initializable {
 
         addUserButton.setOnAction(actionEvent -> {addUser();});
 
+        addBookButton.setOnAction(actionEvent -> addBook());
+
         logoutButton.setOnAction(event -> handleLogout());
 
         searchButton.setOnAction(ActionEvent -> handleSearch());
@@ -128,13 +130,15 @@ public class AdministratorHomeController implements Initializable {
             }
 
         } catch (Exception e){
-            // todo
+            e.printStackTrace();
         }
     }
 
     private void addUser(){
         borderPane.setRight(openPage("/com/uefs/libraria/UserRegister.fxml"));
     }
+
+    private void addBook() { borderPane.setRight(openPage("/com/uefs/libraria/BookRegister.fxml")); }
 
     private void selfProfileCheck(){
         currentSelectedUser = LoginService.getCurrentLoggedUser();
