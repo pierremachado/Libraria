@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="borderPane" minHeight="400.0" minWidth="600.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: d9d9d9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uefs.libraria.controllers.AdministratorHomeController">
+<BorderPane fx:id="borderPane" minHeight="400.0" minWidth="600.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: d9d9d9;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uefs.libraria.controllers.LibrarianHomeController">
     <top>
         <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
             <children>

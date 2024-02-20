@@ -114,7 +114,7 @@ public class LibrarianHomeController implements Initializable {
 
         selfProfileCheckButton.setOnAction(actionEvent -> selfProfileCheck());
 
-        addLoanButton.setOnAction(actionEvent -> {addUser();});
+        addLoanButton.setOnAction(actionEvent -> {addLoan();});
 
         logoutButton.setOnAction(event -> handleLogout());
 

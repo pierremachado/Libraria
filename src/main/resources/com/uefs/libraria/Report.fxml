@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uefs.libraria.controllers.ReportController">
+   <children>
+      <VBox spacing="20.0" style="-fx-background-color: #E3e3e3; -fx-background-radius: 20px;">
+         <children>
+            <Label text="Relatório de Livros">
+               <font>
+                  <Font name="Malgun Gothic Bold" size="24.0" />
+               </font>
+            </Label>
+            <HBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;">
+               <children>
+                  <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #d9d9d9;">
+                     <children>
+                        <Label text=" Livros Emprestados">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="relatEmprestados" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;" text="2">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;">
+                     <children>
+                        <Label text="Livros Atrasados">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="relatAtrasados" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;" text="6000">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;">
+                     <children>
+                        <Label text="Livros Reservados">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="relatReservados" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;" text="15">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+            <VBox alignment="TOP_CENTER" style="-fx-background-color: #d9d9d9; -fx-background-radius: 20px;">
+               <children>
+                  <Label text="Livros mais Populares">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="relatPopulares" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20px; -fx-background-color: #d9d9d9;">
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="BOTTOM_RIGHT">
+               <children>
+                  <Button fx:id="closeButton" mnemonicParsing="false" onAction="#closeWindow" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: #131415; -fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #131415;" text="Fechar" textFill="#e3e3e3" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

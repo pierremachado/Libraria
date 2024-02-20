@@ -53,7 +53,7 @@ public class OperatorProfileCheckController implements Initializable {
 
     @FXML
     void editOperatorProfile(ActionEvent event) {
-
+        AdministratorHomeController.administratorHomeController.openRightPanel("/com/uefs/libraria/OperatorProfileEdit.fxml");
     }
 
     @FXML
