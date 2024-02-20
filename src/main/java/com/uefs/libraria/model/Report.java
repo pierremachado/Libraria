@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class Report implements Serializable {
 
-
     private String idAdministrador;
     private LocalDateTime dataGerado;
     private int nLivrosEmprestados;

@@ -1,7 +1,12 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.exceptions.IdAlreadyExistsException;
+import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.model.enums.UserPermission;
+import com.uefs.libraria.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
@@ -9,7 +14,7 @@ import java.util.ResourceBundle;
 
 import static com.uefs.libraria.controllers.AdministratorHomeController.administratorHomeController;
 
-public class UserRegisterController {
+public class UserRegisterController implements Initializable {
 
     @FXML
     private ResourceBundle resources;
@@ -18,7 +23,7 @@ public class UserRegisterController {
     private URL location;
 
     @FXML
-    private ChoiceBox<?> accountTypeSelect;
+    private ChoiceBox<UserPermission> accountTypeSelect;
 
     @FXML
     private Button addButton;
@@ -52,28 +57,46 @@ public class UserRegisterController {
 
     @FXML
     void addUser(ActionEvent event) {
-
+        try {
+            handleAddUser();
+            administratorHomeController.refreshCenterTable();
+            administratorHomeController.closeRightPaneOperation();
+        } catch (NotEnoughPermissionException e) {
+            errorWarningLabel.setText("Sem permissão suficiente.");
+        } catch (IdAlreadyExistsException e) {
+            errorWarningLabel.setText("Nome de usuário já cadastrado com o cargo selecionado.");
+        }
     }
 
     @FXML
     void cancelRegister(ActionEvent event) {
-        administratorHomeController.cancelRightPaneOperation();
+        administratorHomeController.closeRightPaneOperation();
     }
 
     @FXML
-    void initialize() {
-        assert accountTypeSelect != null : "fx:id=\"accountTypeSelect\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert addButton != null : "fx:id=\"addButton\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert addressField != null : "fx:id=\"addressField\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert dddField != null : "fx:id=\"dddField\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert errorWarningLabel != null : "fx:id=\"errorWarningLabel\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert nameField != null : "fx:id=\"nameField\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert passwordField != null : "fx:id=\"passwordField\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert phoneNumberField != null : "fx:id=\"phoneNumberField\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert surnameField != null : "fx:id=\"surnameField\" was not injected: check your FXML file 'UserRegister.fxml'.";
-        assert usernameField != null : "fx:id=\"usernameField\" was not injected: check your FXML file 'UserRegister.fxml'.";
+    void setScreenAction() {
+        accountTypeSelect.getItems().addAll(UserPermission.values());
+        accountTypeSelect.setValue(UserPermission.ADMINISTRADOR);
 
+        errorWarningLabel.setText(null);
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setScreenAction();
+    }
+
+    private void handleAddUser() throws NotEnoughPermissionException, IdAlreadyExistsException {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
+        String name = nameField.getText();
+        String surname = surnameField.getText();
+        String address = addressField.getText();
+        String phone = phoneNumberField.getText();
+        String ddd = dddField.getText();
+
+        UserService.criarUsuario(name, surname, username, password, address,
+                "(" + ddd + ")" + " " + phone,
+                accountTypeSelect.getValue());
+    }
 }

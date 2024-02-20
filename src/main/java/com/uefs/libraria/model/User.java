@@ -15,6 +15,8 @@ public abstract class User implements Serializable {
     private String id;
     private String cargo;
     private String senha;
+    private String endereco;
+    private String telefone;
     private UserPermission permissao;
 
     public User(String nome, String sobrenome, String id, String cargo, String senha, UserPermission permissao) {
@@ -24,6 +26,20 @@ public abstract class User implements Serializable {
         this.cargo = cargo;
         this.senha = senha;
         this.permissao = permissao;
+        this.endereco = null;
+        this.telefone = null;
+    }
+
+    public User(String nome, String sobrenome, String id, String cargo, String senha, UserPermission permissao,
+                String endereco, String telefone) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.id = id;
+        this.cargo = cargo;
+        this.senha = senha;
+        this.permissao = permissao;
+        this.endereco = endereco;
+        this.telefone = telefone;
     }
 
     public String getNome() {
@@ -76,6 +92,22 @@ public abstract class User implements Serializable {
 
     public void setPermissao(UserPermission permissao) {
         this.permissao = permissao;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override

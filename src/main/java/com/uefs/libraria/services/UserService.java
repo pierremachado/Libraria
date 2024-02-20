@@ -8,6 +8,9 @@ import com.uefs.libraria.model.enums.ReaderStatus;
 import com.uefs.libraria.model.enums.ReservationStatus;
 import com.uefs.libraria.model.enums.UserPermission;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version 1.0
@@ -31,7 +34,7 @@ public class UserService {
                 if (DAO.getBibliotecarioDAO().findID(id) != null) {
                     throw new IdAlreadyExistsException("Bibliotecário já cadastrado");
                 }
-                Librarian librarian = new Librarian(nome, sobrenome, id, senha);
+                Librarian librarian = new Librarian(nome, sobrenome, id, senha, endereco, telefone);
                 DAO.getBibliotecarioDAO().create(librarian);
                 return librarian;
             }
@@ -39,7 +42,7 @@ public class UserService {
                 if (DAO.getAdministradorDAO().findID(id) != null) {
                     throw new IdAlreadyExistsException("Administrador já cadastrado");
                 }
-                Administrator admin = new Administrator(nome, sobrenome, id, senha);
+                Administrator admin = new Administrator(nome, sobrenome, id, senha, endereco, telefone);
                 DAO.getAdministradorDAO().create(admin);
                 return admin;
             }
@@ -151,5 +154,35 @@ public class UserService {
         }
 
         reader.setStatus(ReaderStatus.LIBERADO);
+    }
+
+    public static List<User> getAllUsers(){
+        List<User> allUsers = new ArrayList<>(DAO.getAdministradorDAO().findAll());
+        allUsers.addAll(DAO.getBibliotecarioDAO().findAll());
+        allUsers.addAll(DAO.getLeitorDAO().findAll());
+
+        return allUsers;
+    }
+
+    public static List<User> pesquisarUsuarioPorKey(String key){
+        List<User> allUsers = getAllUsers();
+        List<User> userListById = new ArrayList<>();
+
+        for (User user : allUsers) {
+            String userKey =
+                    user.getNome() +
+                            " " +
+                            user.getSobrenome() +
+                            " " +
+                            user.getId() +
+                            " " +
+                            user.getCargo();
+
+            if (userKey.toLowerCase().strip().contains(key.toLowerCase().strip())){
+                userListById.add(user);
+            }
+        }
+
+        return userListById;
     }
 }

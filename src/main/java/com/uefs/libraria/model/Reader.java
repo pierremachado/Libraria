@@ -11,33 +11,19 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 public class Reader extends User implements Serializable {
-    private String endereco;
-    private String telefone;
     private ReaderStatus status;
     private LocalDateTime dataLimiteMulta;
 
-    public Reader(String nome, String sobrenome, String id, String senha, String endereco, String telefone) {
+    public Reader(String nome, String sobrenome, String id, String senha) {
         super(nome, sobrenome, id, "Leitor", senha, UserPermission.LEITOR);
-        this.endereco = endereco;
-        this.telefone = telefone;
         this.status = ReaderStatus.LIBERADO;
         this.dataLimiteMulta = null;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public Reader(String nome, String sobrenome, String id, String senha, String endereco, String telefone) {
+        super(nome, sobrenome, id, "Leitor", senha, UserPermission.LEITOR, endereco, telefone);
+        this.status = ReaderStatus.LIBERADO;
+        this.dataLimiteMulta = null;
     }
 
     public ReaderStatus getStatus() {
@@ -64,8 +50,8 @@ public class Reader extends User implements Serializable {
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
                 ", senha='" + getSenha() + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", telefone='" + telefone + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
+                ", telefone='" + getTelefone() + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }

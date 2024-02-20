@@ -9,6 +9,10 @@ import java.io.Serializable;
  * @version 1.0
  */
 public class Librarian extends User implements Serializable {
+    public Librarian(String nome, String sobrenome, String id, String senha, String endereco, String telefone) {
+        super(nome, sobrenome, id, "Bibliotecário", senha, UserPermission.BIBLIOTECARIO, endereco, telefone);
+    }
+
     public Librarian(String nome, String sobrenome, String id, String senha) {
         super(nome, sobrenome, id, "Bibliotecário", senha, UserPermission.BIBLIOTECARIO);
     }
@@ -21,6 +25,8 @@ public class Librarian extends User implements Serializable {
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
                 ", senha='" + getSenha() + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
+                ", telefone='" + getTelefone() + '\'' +
                 '}';
     }
 }

@@ -9,6 +9,10 @@ import static com.uefs.libraria.model.enums.UserPermission.*;
  * @version 1.0
  */
 public class Administrator extends User implements Serializable {
+    public Administrator(String nome, String sobrenome, String id, String senha, String endereco, String telefone) {
+        super(nome, sobrenome, id, "Administrador", senha, ADMINISTRADOR, endereco, telefone);
+    }
+
     public Administrator(String nome, String sobrenome, String id, String senha) {
         super(nome, sobrenome, id, "Administrador", senha, ADMINISTRADOR);
     }
@@ -21,6 +25,8 @@ public class Administrator extends User implements Serializable {
                 ", id=" + getId() +
                 ", cargo='" + getCargo() + '\'' +
                 ", senha='" + getSenha() + '\'' +
+                ", endereco='" + getEndereco() + '\'' +
+                ", telefone='" + getTelefone() + '\'' +
                 '}';
     }
 }

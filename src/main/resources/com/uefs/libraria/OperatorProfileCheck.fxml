@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -33,7 +34,7 @@
                      <children>
                         <Label text="Nome">
                            <font>
-                              <Font name="Open Sans Regular" size="12.0" />
+                              <Font name="Open Sans Bold" size="12.0" />
                            </font>
                         </Label>
                         <Label fx:id="nameLabel" text="Nomemuitolongo">
@@ -47,7 +48,7 @@
                      <children>
                         <Label text="Sobrenome">
                            <font>
-                              <Font name="Open Sans Regular" size="12.0" />
+                              <Font name="Open Sans Bold" size="12.0" />
                            </font>
                         </Label>
                         <Label fx:id="surnameLabel" text="Sobrenomelongotambem">
@@ -63,7 +64,10 @@
                <children>
                   <VBox>
                      <children>
-                        <Label text="Nome de usuário" />
+                        <Label text="Nome de usuário">
+                           <font>
+                              <Font name="Open Sans Bold" size="12.0" />
+                           </font></Label>
                         <HBox alignment="CENTER_LEFT" spacing="20.0" />
                         <Label fx:id="usernameLabel" text="Nome">
                            <font>
@@ -75,14 +79,46 @@
                   <VBox />
                </children>
             </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Tipo de conta">
+                           <font>
+                              <Font name="Open Sans Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="accountTypeLabel" text="Nome">
+                           <font>
+                              <Font name="Open Sans Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Telefone">
+                           <font>
+                              <Font name="Open Sans Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="phoneLabel" text="Nome">
+                           <font>
+                              <Font name="Open Sans Regular" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
             <VBox>
                <children>
-                  <Label text="Tipo de conta">
+                  <Label text="Endereço">
                      <font>
-                        <Font name="Open Sans Regular" size="12.0" />
+                        <Font name="Open Sans Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="accountTypeLabel" text="Nome">
+                  <Label fx:id="addressLabel" text="Nome">
                      <font>
                         <Font name="Open Sans Regular" size="12.0" />
                      </font>
@@ -91,8 +127,14 @@
             </VBox>
             <HBox alignment="CENTER" spacing="30.0">
                <children>
-                  <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#editOperatorProfile" prefWidth="85.0" style="-fx-background-color: #131415; -fx-background-radius: 20px;" text="Editar" textFill="#d9d9d9" />
-                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelProfileCheck" prefWidth="85.0" style="-fx-border-color: #ff2626; -fx-border-radius: 20px; -fx-background-color: rgba(0,0,0,0);" text="Cancelar" textFill="#ff2626" />
+                  <Button fx:id="editButton" defaultButton="true" mnemonicParsing="false" onAction="#editOperatorProfile" prefWidth="85.0" style="-fx-background-color: #131415; -fx-background-radius: 20px;" text="Editar" textFill="#d9d9d9">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelProfileCheck" prefWidth="85.0" style="-fx-border-color: #ff2626; -fx-border-radius: 20px; -fx-background-color: rgba(0,0,0,0);" text="Cancelar" textFill="#ff2626">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                </children>
             </HBox>
          </children>

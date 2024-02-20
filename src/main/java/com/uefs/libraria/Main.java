@@ -20,7 +20,6 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
         primaryStage.centerOnScreen();
-        primaryStage.setMaximized(true);
 
         primaryStage.setTitle("Libraria");
 

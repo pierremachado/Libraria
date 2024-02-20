@@ -1,14 +1,16 @@
 package com.uefs.libraria.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 
-public class OperatorProfileCheckController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class OperatorProfileCheckController implements Initializable {
 
     @FXML
     private ResourceBundle resources;
@@ -38,8 +40,15 @@ public class OperatorProfileCheckController {
     private Label usernameLabel;
 
     @FXML
+    private Label addressLabel;
+
+    @FXML
+    private Label phoneLabel;
+
+    @FXML
     void cancelProfileCheck(ActionEvent event) {
-        AdministratorHomeController.administratorHomeController.cancelRightPaneOperation();
+        AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
+        AdministratorHomeController.setCurrentSelectedUser(null);
     }
 
     @FXML
@@ -48,15 +57,31 @@ public class OperatorProfileCheckController {
     }
 
     @FXML
-    void initialize() {
-        assert accountIcon != null : "fx:id=\"accountIcon\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
-        assert accountTypeLabel != null : "fx:id=\"accountTypeLabel\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
-        assert editButton != null : "fx:id=\"editButton\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
-        assert nameLabel != null : "fx:id=\"nameLabel\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
-        assert surnameLabel != null : "fx:id=\"surnameLabel\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
-        assert usernameLabel != null : "fx:id=\"usernameLabel\" was not injected: check your FXML file 'OperatorProfileCheck.fxml'.";
+    void setOnProfile() {
+        nameLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getNome());
+        surnameLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getSobrenome());
+        usernameLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getId());
+        accountTypeLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getCargo());
 
+        if (AdministratorHomeController.getCurrentSelectedUser().getEndereco() == null ||
+                AdministratorHomeController.getCurrentSelectedUser().getEndereco().isEmpty()) {
+            addressLabel.setText("Nada informado.");
+        }
+        else {
+            addressLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getEndereco());
+        }
+
+        if (AdministratorHomeController.getCurrentSelectedUser().getTelefone() == null ||
+                AdministratorHomeController.getCurrentSelectedUser().getTelefone().isEmpty()) {
+            phoneLabel.setText("Nada informado.");
+        }
+        else {
+            phoneLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getTelefone());
+        }
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setOnProfile();
+    }
 }
