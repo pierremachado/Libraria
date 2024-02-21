@@ -1,7 +1,6 @@
 package com.uefs.libraria.controllers;
 
 import com.uefs.libraria.exceptions.IncorrectCredentialsException;
-import com.uefs.libraria.exceptions.MustLogoutException;
 import com.uefs.libraria.model.enums.UserPermission;
 import com.uefs.libraria.services.LoginService;
 import javafx.fxml.FXML;
@@ -59,8 +58,8 @@ public class LoginController{
 
             switch(accountType) {
                 case ADMINISTRADOR -> {mainWindowController.callAdministratorHomeScreen();} // replace Login.fxml with AdministratorHome.fxml in MainWindow
-                case BIBLIOTECARIO -> {} // replace Login.fxml with LibrarianHome.fxml in MainWindow
-                case LEITOR -> {} // replace Login.fxml with ReaderHome.fxml in MainWindow
+                case BIBLIOTECARIO -> {mainWindowController.callLibrarianHomeScreen();} // replace Login.fxml with LibrarianHome.fxml in MainWindow
+                case LEITOR -> {mainWindowController.callReaderHomeScreen();} // replace Login.fxml with ReaderHome.fxml in MainWindow
                 default -> throw new IllegalStateException("Unexpected value: " + accountType);
             }
         }
@@ -94,7 +93,7 @@ public class LoginController{
 
     private void handleGuestLogin() {
         LoginService.guestLogin();
-        // replace Login.fxml with GuestHome.fxml in MainWindow
+        mainWindowController.callGuestHomeScreen(); // replace Login.fxml with GuestHome.fxml in MainWindow
     }
 }
 

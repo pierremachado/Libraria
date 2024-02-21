@@ -1,10 +1,5 @@
 package com.uefs.libraria.controllers;
 
-import java.net.URL;
-import java.time.Year;
-import java.time.format.DateTimeParseException;
-import java.util.ResourceBundle;
-
 import com.uefs.libraria.exceptions.BookAmountUnderZeroException;
 import com.uefs.libraria.exceptions.IdAlreadyExistsException;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
@@ -13,6 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.net.URL;
+import java.time.Year;
+import java.time.format.DateTimeParseException;
+import java.util.ResourceBundle;
 
 import static com.uefs.libraria.controllers.AdministratorHomeController.administratorHomeController;
 
@@ -84,6 +84,7 @@ public class BookRegisterController {
             amount = Integer.parseInt(amountAvailable);
         } catch (NumberFormatException e) {
             errorWarningLabel.setText("Quantidade disponível inválida.");
+            return;
         }
 
         try {

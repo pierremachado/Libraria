@@ -131,6 +131,11 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
+                  <Button fx:id="removeButton" defaultButton="true" mnemonicParsing="false" onAction="#removeUser" prefWidth="85.0" style="-fx-background-color: #ff2626; -fx-background-radius: 20px;" text="Remover" textFill="#d9d9d9">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
                   <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelProfileCheck" prefWidth="85.0" style="-fx-border-color: #ff2626; -fx-border-radius: 20px; -fx-background-color: rgba(0,0,0,0);" text="Cancelar" textFill="#ff2626">
                      <cursor>
                         <Cursor fx:constant="HAND" />

@@ -1,8 +1,5 @@
 package com.uefs.libraria.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
 import com.uefs.libraria.model.User;
 import com.uefs.libraria.services.UserService;
@@ -12,7 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class OperatorProfileEdit {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class OperatorProfileEditController {
 
     private static User userToEdit;
 

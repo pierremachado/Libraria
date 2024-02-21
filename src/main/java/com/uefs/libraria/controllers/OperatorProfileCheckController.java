@@ -1,5 +1,10 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.exceptions.OngoingReaderLoansException;
+import com.uefs.libraria.exceptions.RemoveSelfAttemptException;
+import com.uefs.libraria.services.LoginService;
+import com.uefs.libraria.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,6 +51,24 @@ public class OperatorProfileCheckController implements Initializable {
     private Label phoneLabel;
 
     @FXML
+    private Button removeButton;
+
+    @FXML
+    private void removeUser(ActionEvent event){
+        try {
+            UserService.removerUsuario(AdministratorHomeController.getCurrentSelectedUser());
+            AdministratorHomeController.setCurrentSelectedUser(null);
+            MainWindowController.mainWindowController.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
+        } catch (NotEnoughPermissionException e) {
+            throw new RuntimeException(e);
+        } catch (RemoveSelfAttemptException e) {
+            throw new RuntimeException(e);
+        } catch (OngoingReaderLoansException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
     void cancelProfileCheck(ActionEvent event) {
         AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
         AdministratorHomeController.setCurrentSelectedUser(null);
@@ -77,6 +100,10 @@ public class OperatorProfileCheckController implements Initializable {
         }
         else {
             phoneLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getTelefone());
+        }
+
+        if(LoginService.getCurrentLoggedUser() == AdministratorHomeController.getCurrentSelectedUser()){
+            removeButton.setDisable(true);
         }
     }
 

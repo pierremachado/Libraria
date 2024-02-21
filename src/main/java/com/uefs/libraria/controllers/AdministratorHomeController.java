@@ -3,7 +3,6 @@ package com.uefs.libraria.controllers;
 import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.User;
 import com.uefs.libraria.services.LoginService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -83,11 +82,19 @@ public class AdministratorHomeController implements Initializable {
     }
 
     public static User getCurrentSelectedUser() {
-        return currentSelectedUser;
+        return AdministratorHomeController.currentSelectedUser;
     }
 
     public static void setCurrentSelectedUser(User currentSelectedUser) {
         AdministratorHomeController.currentSelectedUser = currentSelectedUser;
+    }
+
+    public static Book getCurrentSelectedBook() {
+        return AdministratorHomeController.currentSelectedBook;
+    }
+
+    public static void setCurrentSelectedBook(Book currentSelectedBook) {
+        AdministratorHomeController.currentSelectedBook = currentSelectedBook;
     }
 
     public static String getSearch(){
@@ -111,7 +118,10 @@ public class AdministratorHomeController implements Initializable {
 
         usernameLabel.setText("@" + LoginService.getCurrentLoggedUser().getId());
 
-        selfProfileCheckButton.setOnAction(actionEvent -> selfProfileCheck());
+        selfProfileCheckButton.setOnAction(actionEvent -> {
+            setCurrentSelectedUser(LoginService.getCurrentLoggedUser());
+            profileCheck();
+        });
 
         addUserButton.setOnAction(actionEvent -> {addUser();});
 
@@ -147,9 +157,12 @@ public class AdministratorHomeController implements Initializable {
 
     private void addBook() { borderPane.setRight(openPage("/com/uefs/libraria/BookRegister.fxml")); }
 
-    private void selfProfileCheck(){
-        currentSelectedUser = LoginService.getCurrentLoggedUser();
+    public void profileCheck(){
         borderPane.setRight(openPage("/com/uefs/libraria/OperatorProfileCheck.fxml"));
+    }
+
+    public void bookCheck() {
+        borderPane.setRight(openPage("/com/uefs/libraria/BookProfile.fxml"));
     }
 
     public void openRightPanel(String url){
@@ -160,6 +173,10 @@ public class AdministratorHomeController implements Initializable {
         currentSelectedUser = null;
         currentSelectedBook = null;
         borderPane.setRight(null);
+    }
+
+    public void setRightBorderPane(String url){
+        this.borderPane.setRight(openPage(url));
     }
 
     public void refreshCenterTable() {

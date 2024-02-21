@@ -19,6 +19,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
 
+        primaryStage.setMaximized(true);
         primaryStage.centerOnScreen();
 
         primaryStage.setTitle("Libraria");

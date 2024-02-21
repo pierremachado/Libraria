@@ -30,6 +30,11 @@ public class BookTableController {
 
         createBookTable(this.bookTable, bookData);
 
+        bookTable.setOnMouseClicked(MouseEvent -> {
+            AdministratorHomeController.setCurrentSelectedBook(bookTable.getSelectionModel().getSelectedItem());
+            AdministratorHomeController.administratorHomeController.bookCheck();
+        });
+
         AdministratorHomeController.setSearch(null);
     }
 

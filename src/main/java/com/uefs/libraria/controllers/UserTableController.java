@@ -40,6 +40,11 @@ public class UserTableController {
 
         createUserTable(this.userTable, userData);
 
+        userTable.setOnMouseClicked(MouseEvent -> {
+            AdministratorHomeController.setCurrentSelectedUser(userTable.getSelectionModel().getSelectedItem());
+            AdministratorHomeController.administratorHomeController.profileCheck();
+        });
+
         AdministratorHomeController.setSearch(null);
     }
 
