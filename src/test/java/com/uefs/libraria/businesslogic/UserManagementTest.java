@@ -163,7 +163,7 @@ public class UserManagementTest {
 
         try {
             UserService.removerUsuario(user1);
-        } catch (NotEnoughPermissionException | OngoingReaderLoansException | RemoveSelfAttemptException e) {
+        } catch (NotEnoughPermissionException | OngoingLoansException | RemoveSelfAttemptException e) {
             e.printStackTrace();
         }
 

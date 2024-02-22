@@ -1,7 +1,7 @@
 package com.uefs.libraria.controllers;
 
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
-import com.uefs.libraria.exceptions.OngoingReaderLoansException;
+import com.uefs.libraria.exceptions.OngoingLoansException;
 import com.uefs.libraria.exceptions.RemoveSelfAttemptException;
 import com.uefs.libraria.services.LoginService;
 import com.uefs.libraria.services.UserService;
@@ -54,6 +54,9 @@ public class OperatorProfileCheckController implements Initializable {
     private Button removeButton;
 
     @FXML
+    private Label errorWarningLabel;
+
+    @FXML
     private void removeUser(ActionEvent event){
         try {
             UserService.removerUsuario(UserService.getSelectedUser());
@@ -63,8 +66,8 @@ public class OperatorProfileCheckController implements Initializable {
             throw new RuntimeException(e);
         } catch (RemoveSelfAttemptException e) {
             throw new RuntimeException(e);
-        } catch (OngoingReaderLoansException e) {
-            throw new RuntimeException(e);
+        } catch (OngoingLoansException e) {
+            errorWarningLabel.setText("Usuário ainda possui empréstimos pendentes.");
         }
     }
 
@@ -81,6 +84,7 @@ public class OperatorProfileCheckController implements Initializable {
 
     @FXML
     void setOnProfile() {
+        errorWarningLabel.setText(null);
         nameLabel.setText(UserService.getSelectedUser().getNome());
         surnameLabel.setText(UserService.getSelectedUser().getSobrenome());
         usernameLabel.setText(UserService.getSelectedUser().getId());

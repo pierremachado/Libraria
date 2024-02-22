@@ -4,12 +4,12 @@ package com.uefs.libraria.exceptions;
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
  * @version 1.0
  */
-public class OngoingReaderLoansException extends Exception {
-    public OngoingReaderLoansException() {
+public class OngoingLoansException extends Exception {
+    public OngoingLoansException() {
         super();
     }
 
-    public OngoingReaderLoansException(String mensagem) {
+    public OngoingLoansException(String mensagem) {
         super(mensagem);
     }
 }

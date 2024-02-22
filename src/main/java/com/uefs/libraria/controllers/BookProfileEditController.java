@@ -1,8 +1,10 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.exceptions.EditIdWithOngoingLoansException;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
 import com.uefs.libraria.model.Book;
 import com.uefs.libraria.services.BookService;
+import com.uefs.libraria.services.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -60,7 +62,11 @@ public class BookProfileEditController {
 
     @FXML
     void cancelAction(ActionEvent event) {
-        AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
+        switch (LoginService.getCurrentLoggedUser().getPermissao()){
+            case ADMINISTRADOR -> AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
+            case BIBLIOTECARIO -> LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
+        }
+
         BookService.setSelectedBook(null);
     }
 
@@ -99,28 +105,36 @@ public class BookProfileEditController {
         bookToEdit.setQuantidadeDisponiveis(amount);
         bookToEdit.setAnoPublicacao(year);
 
-
-        MainWindowController.mainWindowController.callAdministratorHomeScreen();
+        switch (LoginService.getCurrentLoggedUser().getPermissao()){
+            case ADMINISTRADOR -> MainWindowController.mainWindowController.callAdministratorHomeScreen();
+            case BIBLIOTECARIO -> MainWindowController.mainWindowController.callLibrarianHomeScreen();
+        }
     }
 
     @FXML
     void initialize() {
+        titleField.setText(BookService.getSelectedBook().getTitulo());
+        authorField.setText(BookService.getSelectedBook().getAutor());
+        idField.setText(BookService.getSelectedBook().getIsbn());
+        publisherField.setText(BookService.getSelectedBook().getEditora());
+        yearOfPublishingField.setText(BookService.getSelectedBook().getAnoPublicacao().toString());
+        categoryField.setText(BookService.getSelectedBook().getCategoria());
+        amountAvailableField.setText(Integer.valueOf(BookService.getSelectedBook().getQuantidadeDisponiveis()).toString());
+
         try {
             bookToEdit = BookService.updateLivro(BookService.getSelectedBook());
 
             errorWarningLabel.setText(null);
 
             assert bookToEdit != null;
-            titleField.setText(bookToEdit.getTitulo());
-            authorField.setText(bookToEdit.getAutor());
-            idField.setText(bookToEdit.getIsbn());
-            publisherField.setText(bookToEdit.getEditora());
-            yearOfPublishingField.setText(bookToEdit.getAnoPublicacao().toString());
-            categoryField.setText(bookToEdit.getCategoria());
-            amountAvailableField.setText(Integer.valueOf(bookToEdit.getQuantidadeDisponiveis()).toString());
+
+            saveEditButton.setDisable(false);
 
         } catch (NotEnoughPermissionException e) {
             throw new RuntimeException(e);
+        } catch (EditIdWithOngoingLoansException e) {
+            errorWarningLabel.setText("Há empréstimos pendentes para este livro.");
+            saveEditButton.setDisable(true);
         }
     }
 

@@ -56,6 +56,7 @@ public class MainWindowController implements Initializable {
     public void callGuestHomeScreen() {this.refreshMainWindow("/com/uefs/libraria/GuestHome.fxml");}
 
     public void refreshMainWindow(String url){
+        wipeSelections();
         this.mainBorderPane.setCenter(openPage(url));
     }
 
@@ -63,6 +64,8 @@ public class MainWindowController implements Initializable {
         UserService.setSelectedUser(null);
         UserService.setSearch(null);
         BookService.setSelectedBook(null);
+        ReservationService.setSelectedReservation(null);
+        LendingService.setSelectedLoan(null);
     }
 
     public static Parent openPage(String url){

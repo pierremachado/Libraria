@@ -96,12 +96,14 @@ public class AdministratorHomeController implements Initializable {
 
     @FXML
     private void showAllReservationsAction(ActionEvent event){
-        // todo
+        wipeSelections();
+        this.borderPane.setCenter((openPage("/com/uefs/libraria/ReservationTable.fxml")));
     }
 
     @FXML
     private void showAllLoansAction(ActionEvent event){
-        // todo
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/LoanTable.fxml"));
     }
 
     @FXML
@@ -120,7 +122,7 @@ public class AdministratorHomeController implements Initializable {
                 " " +
                 LoginService.getCurrentLoggedUser().getNome());
 
-        bookReaderChoiceBox.getItems().addAll("Livro", "Usuário");
+        bookReaderChoiceBox.getItems().addAll("Livro", "Usuário", "Reserva", "Empréstimo");
         bookReaderChoiceBox.setValue("Livro");
 
         usernameLabel.setText("@" + LoginService.getCurrentLoggedUser().getId());
@@ -178,6 +180,10 @@ public class AdministratorHomeController implements Initializable {
     public void bookCheck() {
         borderPane.setRight(openPage("/com/uefs/libraria/BookProfile.fxml"));
     }
+
+    public void reservationCheck() {borderPane.setRight(openPage("/com/uefs/libraria/ReservationProfile.fxml"));}
+
+    public void loanCheck() {borderPane.setRight(openPage("/com/uefs/libraria/LoanProfile.fxml"));}
 
     public void openRightPanel(String url){
         borderPane.setRight(openPage(url));

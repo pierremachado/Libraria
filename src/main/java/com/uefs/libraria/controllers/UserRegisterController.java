@@ -76,6 +76,7 @@ public class UserRegisterController implements Initializable {
     @FXML
     void setScreenAction() {
         accountTypeSelect.getItems().addAll(UserPermission.values());
+        accountTypeSelect.getItems().remove(3);
         accountTypeSelect.setValue(UserPermission.ADMINISTRADOR);
 
         errorWarningLabel.setText(null);

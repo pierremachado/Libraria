@@ -149,6 +149,8 @@ public class BookManagementTest {
             BookService.removerLivro(BookService.pesquisarLivroPorIsbn("12346"));
         } catch (NotEnoughPermissionException e){
             e.printStackTrace();
+        } catch (OngoingLoansException e) {
+            throw new RuntimeException(e);
         }
 
         assertNull(BookService.pesquisarLivroPorIsbn("12346"));

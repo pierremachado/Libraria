@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uefs.libraria.controllers.BookProfileController">
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uefs.libraria.controllers.LoanProfileController">
    <children>
       <VBox spacing="20.0" style="-fx-background-color: #e3e3e3; -fx-background-radius: 20px;">
          <children>
-            <Label text="Livro">
+            <Label text="Empréstimo">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -37,27 +37,48 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lvTitulo" text="Nome" />
+                        <Label fx:id="bookName" onMouseClicked="#showBookProfile" text="Nome" underline="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Label>
                      </children>
                   </VBox>
                   <VBox>
                      <children>
-                        <Label text="Autor">
+                        <Label text="Leitor">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lvAutor" text="Nome" />
+                        <Label fx:id="readerName" onMouseClicked="#showReaderProfile" text="Nome" underline="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Label>
+                     </children>
+                  </VBox>
+                  <VBox />
+               </children>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Data de empréstimo">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loanDate" text="Nome" />
                      </children>
                   </VBox>
                   <VBox>
                      <children>
-                        <Label text="Editora">
+                        <Label text="Data limite">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lvEditora" text="Nome" />
+                        <Label fx:id="loanLimit" text="Nome" />
                      </children>
                   </VBox>
                </children>
@@ -66,66 +87,48 @@
                <children>
                   <VBox>
                      <children>
-                        <Label text="Categoria">
+                        <Label text="Data de retorno">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lvCategoria" text="Nome" />
+                        <Label fx:id="loanReturnDate" text="Nome" />
                      </children>
                   </VBox>
                   <VBox>
                      <children>
-                        <Label text="ISBN">
+                        <Label text="Status">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lvISBN" text="Nome" />
+                        <Label fx:id="loanStatus" text="Nome" />
+                     </children>
+                  </VBox>
+                  <VBox />
+                  <VBox>
+                     <children>
+                        <Label text="Renovado">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="renovationLabel" text="Nome" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox spacing="20.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <Label text="Ano de Publicacão">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="lvAnoPubli" text="Nome" />
-                     </children>
-                  </VBox>
-                  <VBox>
-                     <children>
-                        <Label text="Quantidade disponível">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="amountAvailable" text="Nome" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <Label fx:id="errorWarningLabel" text="Label" textFill="#ff0d0d">
-               <font>
-                  <Font name="System Italic" size="12.0" />
-               </font>
-            </Label>
             <HBox alignment="BOTTOM_CENTER" spacing="20.0">
                <children>
-                  <Button fx:id="editBookButton" mnemonicParsing="false" onAction="#editBook" prefWidth="85.0" style="-fx-background-color: #131415; -fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #131415;" text="Editar" textFill="#e3e3e3">
+                  <Button fx:id="finishLoanButton" mnemonicParsing="false" onAction="#finishLoanAction" prefWidth="85.0" style="-fx-background-color: #131415; -fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #131415;" text="Concluir" textFill="#e3e3e3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="removeBookButton" mnemonicParsing="false" onAction="#removeBook" prefWidth="85.0" style="-fx-background-color: #ff2626; -fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #ff2626;" text="Remover" textFill="#e3e3e3">
+                  <Button fx:id="cancelLoanButton" mnemonicParsing="false" onAction="#cancelLoanAction" prefWidth="85.0" style="-fx-background-color: #ff2626; -fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #ff2626;" text="Cancelar" textFill="#e3e3e3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>
-                  <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelAction" prefWidth="85.0" style="-fx-border-color: ff2626; -fx-border-radius: 20px; -fx-background-color: rgba(0,0,0,0);" text="Cancelar" textFill="#ff2626">
+                  <Button fx:id="closeWindowButton" cancelButton="true" mnemonicParsing="false" onAction="#closeWindowAction" prefWidth="85.0" style="-fx-border-color: ff2626; -fx-border-radius: 20px; -fx-background-color: rgba(0,0,0,0);" text="Fechar" textFill="#ff2626">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></Button>

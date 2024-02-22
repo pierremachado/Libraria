@@ -18,6 +18,17 @@ import java.util.List;
  * @version 1.0
  */
 public class ReservationService {
+
+    private static Reservation selectedReservation;
+
+    public static Reservation getSelectedReservation() {
+        return selectedReservation;
+    }
+
+    public static void setSelectedReservation(Reservation selectedReservation) {
+        ReservationService.selectedReservation = selectedReservation;
+    }
+
     /**
      * Método que cria uma reserva e adiciona a reserva no DAO. Apenas leitores podem fazer reservas
      *

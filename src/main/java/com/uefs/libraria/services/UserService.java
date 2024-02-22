@@ -10,6 +10,7 @@ import com.uefs.libraria.model.enums.UserPermission;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author José Alberto da Silva Porto Júnior e Pierre Machado Mendes Novaes
@@ -72,7 +73,7 @@ public class UserService {
         return null;
     }
 
-    public static void removerUsuario(User user) throws NotEnoughPermissionException, RemoveSelfAttemptException, OngoingReaderLoansException {
+    public static void removerUsuario(User user) throws NotEnoughPermissionException, RemoveSelfAttemptException, OngoingLoansException {
         if (!LoginService.verificarAdministrador()) {
             throw new NotEnoughPermissionException("Sem permissão necessária");
         }
@@ -81,7 +82,7 @@ public class UserService {
             case LEITOR -> {
                 for (Loan loan : DAO.getEmprestimoDAO().findIdLeitor(user.getId())) {
                     if (loan.getStatus() == LoanStatus.PENDENTE) {
-                        throw new OngoingReaderLoansException("Leitor ainda possui empréstimos pendentes");
+                        throw new OngoingLoansException("Leitor ainda possui empréstimos pendentes");
                     }
                 }
                 DAO.getReservaDAO().deleteAllByLeitor(user.getId());
@@ -226,5 +227,17 @@ public class UserService {
         }
 
         return userListById;
+    }
+
+    public static User pesquisarUsuarioPorUsername(String username){
+        List<User> allUsers = getAllUsers();
+
+        for (User user : allUsers) {
+            if (Objects.equals(user.getId(), username)){
+                return user;
+            }
+        }
+
+        return null;
     }
 }

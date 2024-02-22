@@ -1,7 +1,10 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.Main;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.exceptions.OngoingLoansException;
 import com.uefs.libraria.services.BookService;
+import com.uefs.libraria.services.LoginService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +13,8 @@ import javafx.scene.image.ImageView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.uefs.libraria.controllers.MainWindowController.wipeSelections;
 
 public class BookProfileController {
 
@@ -53,14 +58,32 @@ public class BookProfileController {
     private Button removeBookButton;
 
     @FXML
+    private Label errorWarningLabel;
+
+    @FXML
     void cancelAction(ActionEvent event) {
-        AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
-        BookService.setSelectedBook(null);
+        switch(LoginService.getCurrentLoggedUser().getPermissao()){
+            case ADMINISTRADOR -> {
+                AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
+            }
+            case BIBLIOTECARIO -> {
+                LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
+            }
+        }
+
+        wipeSelections();
     }
 
     @FXML
     void editBook(ActionEvent event) {
-        AdministratorHomeController.administratorHomeController.openRightPanel("/com/uefs/libraria/BookProfileEdit.fxml");
+        switch(LoginService.getCurrentLoggedUser().getPermissao()){
+            case ADMINISTRADOR -> {
+                AdministratorHomeController.administratorHomeController.openRightPanel("/com/uefs/libraria/BookProfileEdit.fxml");
+            } case BIBLIOTECARIO -> {
+                LibrarianHomeController.librarianHomeController.openRightPanel("/com/uefs/libraria/BookProfileEdit.fxml");
+            }
+        }
+
     }
 
     @FXML
@@ -68,14 +91,22 @@ public class BookProfileController {
         try {
             BookService.removerLivro(BookService.getSelectedBook());
             BookService.setSelectedBook(null);
-            MainWindowController.mainWindowController.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
+
+            switch(LoginService.getCurrentLoggedUser().getPermissao()){
+                case ADMINISTRADOR -> MainWindowController.mainWindowController.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
+                case BIBLIOTECARIO -> MainWindowController.mainWindowController.refreshMainWindow("/com/uefs/libraria/LibrarianHome.fxml");
+            }
+
         } catch (NotEnoughPermissionException e) {
             throw new RuntimeException(e);
+        } catch (OngoingLoansException e) {
+            errorWarningLabel.setText("Ainda há empréstimos pendentes do livro.");
         }
     }
 
     @FXML
     void initialize() {
+        errorWarningLabel.setText(null);
         lvTitulo.setText(BookService.getSelectedBook().getTitulo());
         lvAutor.setText(BookService.getSelectedBook().getAutor());
         lvEditora.setText(BookService.getSelectedBook().getEditora());

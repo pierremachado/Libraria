@@ -96,23 +96,20 @@ public class LibrarianHomeController {
 
     @FXML
     private void showAllReservationsAction(ActionEvent event){
-        // todo
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/ReservationTable.fxml"));
     }
 
     @FXML
     private void showAllLoansAction(ActionEvent event){
-        // todo
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/LoanTable.fxml"));
     }
 
     @FXML
     void addBookAction(ActionEvent event) {
         closeRightPaneOperation();
         borderPane.setRight(openPage("/com/uefs/libraria/BookRegister.fxml"));
-    }
-
-    @FXML
-    void addLoanAction(ActionEvent event) {
-        //todo
     }
 
     @FXML
@@ -177,10 +174,18 @@ public class LibrarianHomeController {
     }
 
     public void bookCheck() {
-        borderPane.setRight(openPage("/com/uefs/libraria/LibrarianBookProfile.fxml"));
+        borderPane.setRight(openPage("/com/uefs/libraria/BookProfile.fxml"));
     }
 
     void profileCheck(){
         borderPane.setRight(openPage("/com/uefs/libraria/LibrarianProfileCheck.fxml"));
+    }
+
+    void reservationCheck() {borderPane.setRight(openPage("/com/uefs/libraria/ReservationProfile.fxml"));}
+
+    public void loanCheck() {borderPane.setRight(openPage("/com/uefs/libraria/LoanProfile.fxml"));}
+
+    public void openRightPanel(String url){
+        borderPane.setRight(openPage(url));
     }
 }

@@ -16,8 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class BookTableController {
 
-    private ObservableList<Book> bookData;
-
     @FXML
     private TableView<Book> bookTable;
 
@@ -30,13 +28,14 @@ public class BookTableController {
     }
 
     private void setBookTable(){
+        ObservableList<Book> bookData;
+
         if (UserService.getSearch() != null){
             bookData = FXCollections.observableArrayList(BookService.pesquisarLivroPorChave(UserService.getSearch()));
             UserService.setSearch(null);
         }
         else{
             bookData = FXCollections.observableArrayList(DAO.getLivroDAO().findAll());
-            createBookTable(this.bookTable, bookData);
         }
 
         createBookTable(this.bookTable, bookData);
@@ -76,7 +75,8 @@ public class BookTableController {
         amountAvailable.setCellValueFactory(new PropertyValueFactory<Book, String>("quantidadeDisponiveis"));
         timesSearched.setCellValueFactory(new PropertyValueFactory<Book, String>("vezesPesquisado"));
 
-        bookTable.getColumns().setAll(titleCol, authorCol, publisherCol, categoryCol, idCol, yearOfCol, timesSearched);
+        bookTable.getColumns().setAll(titleCol, authorCol, publisherCol, categoryCol, idCol, yearOfCol, amountAvailable,
+                timesSearched);
         bookTable.setItems(bookData);
     }
 

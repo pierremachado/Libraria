@@ -18,6 +18,16 @@ import java.util.List;
  */
 
 public class LendingService {
+    public static Loan selectedLoan;
+
+    public static Loan getSelectedLoan() {
+        return selectedLoan;
+    }
+
+    public static void setSelectedLoan(Loan selectedLoan) {
+        LendingService.selectedLoan = selectedLoan;
+    }
+
     /**
      * Método para criar um empréstimo e adicionaro o empréstimo ao DAO.
      *

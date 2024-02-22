@@ -1,9 +1,7 @@
 package com.uefs.libraria.services;
 
 import com.uefs.libraria.dao.DAO;
-import com.uefs.libraria.exceptions.BookAmountUnderZeroException;
-import com.uefs.libraria.exceptions.IdAlreadyExistsException;
-import com.uefs.libraria.exceptions.NotEnoughPermissionException;
+import com.uefs.libraria.exceptions.*;
 import com.uefs.libraria.model.Book;
 
 import java.time.Year;
@@ -70,9 +68,13 @@ public class BookService {
      * @throws NotEnoughPermissionException Caso o usuário não possua permissão adequada.
      */
 
-    public static void removerLivro(Book book) throws NotEnoughPermissionException {
+    public static void removerLivro(Book book) throws NotEnoughPermissionException, OngoingLoansException {
         if (!LoginService.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
+        }
+
+        if (!LendingService.pesquisarEmprestimoPorLivro(book).isEmpty()){
+            throw new OngoingLoansException("Ainda há empréstimos pendentes");
         }
 
         DAO.getReservaDAO().deleteAllByBook(book.getIsbn());
@@ -114,7 +116,7 @@ public class BookService {
      */
     public static Book pesquisarLivroPorIsbn(String isbn) {
         Book bookPesquisado = DAO.getLivroDAO().findID(isbn);
-        if (bookPesquisado != null) {
+        if (bookPesquisado != null && UserService.getSearch() != null) {
             Book bookUpdate = DAO.getLivroDAO().update(bookPesquisado);
             bookUpdate.aumentarPesquisa();
         }
@@ -163,9 +165,12 @@ public class BookService {
      * @param book O livro a ter as suas informações atualizadas.
      * @throws NotEnoughPermissionException Caso o usuário logado não seja um operador.
      */
-    public static Book updateLivro(Book book) throws NotEnoughPermissionException {
+    public static Book updateLivro(Book book) throws NotEnoughPermissionException, EditIdWithOngoingLoansException {
         if (!LoginService.verificarOperador()) {
             throw new NotEnoughPermissionException("Permissão insuficiente");
+        }
+        if (!LendingService.pesquisarEmprestimoPorLivro(book).isEmpty()) {
+            throw new EditIdWithOngoingLoansException();
         }
 
         return DAO.getLivroDAO().update(book);
