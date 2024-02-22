@@ -1,9 +1,7 @@
 package com.uefs.libraria.controllers;
 
 import com.uefs.libraria.Main;
-import com.uefs.libraria.services.FinesService;
-import com.uefs.libraria.services.ReservationService;
-import com.uefs.libraria.services.TimeService;
+import com.uefs.libraria.services.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -59,6 +57,12 @@ public class MainWindowController implements Initializable {
 
     public void refreshMainWindow(String url){
         this.mainBorderPane.setCenter(openPage(url));
+    }
+
+    public static void wipeSelections(){
+        UserService.setSelectedUser(null);
+        UserService.setSearch(null);
+        BookService.setSelectedBook(null);
     }
 
     public static Parent openPage(String url){

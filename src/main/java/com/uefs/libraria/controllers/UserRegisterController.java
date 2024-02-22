@@ -95,8 +95,10 @@ public class UserRegisterController implements Initializable {
         String phone = phoneNumberField.getText();
         String ddd = dddField.getText();
 
-        UserService.criarUsuario(name, surname, username, password, address,
-                "(" + ddd + ")" + " " + phone,
-                accountTypeSelect.getValue());
+        if (!phone.isEmpty() && !ddd.isEmpty()) {
+            phone = "(" + ddd + ")" + " " + phone;
+        }
+
+        UserService.criarUsuario(name, surname, username, password, address, phone, accountTypeSelect.getValue());
     }
 }

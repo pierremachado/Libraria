@@ -55,7 +55,7 @@ public class BookProfileController {
     @FXML
     void cancelAction(ActionEvent event) {
         AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
-        AdministratorHomeController.setCurrentSelectedBook(null);
+        BookService.setSelectedBook(null);
     }
 
     @FXML
@@ -66,8 +66,8 @@ public class BookProfileController {
     @FXML
     void removeBook(ActionEvent event) {
         try {
-            BookService.removerLivro(AdministratorHomeController.getCurrentSelectedBook());
-            AdministratorHomeController.setCurrentSelectedBook(null);
+            BookService.removerLivro(BookService.getSelectedBook());
+            BookService.setSelectedBook(null);
             MainWindowController.mainWindowController.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
         } catch (NotEnoughPermissionException e) {
             throw new RuntimeException(e);
@@ -76,13 +76,13 @@ public class BookProfileController {
 
     @FXML
     void initialize() {
-        lvTitulo.setText(AdministratorHomeController.getCurrentSelectedBook().getTitulo());
-        lvAutor.setText(AdministratorHomeController.getCurrentSelectedBook().getAutor());
-        lvEditora.setText(AdministratorHomeController.getCurrentSelectedBook().getEditora());
-        lvISBN.setText(AdministratorHomeController.getCurrentSelectedBook().getIsbn());
-        lvCategoria.setText(AdministratorHomeController.getCurrentSelectedBook().getCategoria());
-        lvAnoPubli.setText(AdministratorHomeController.getCurrentSelectedBook().getAnoPublicacao().toString());
-        amountAvailable.setText(Integer.valueOf(AdministratorHomeController.getCurrentSelectedBook().getQuantidadeDisponiveis()).toString());
+        lvTitulo.setText(BookService.getSelectedBook().getTitulo());
+        lvAutor.setText(BookService.getSelectedBook().getAutor());
+        lvEditora.setText(BookService.getSelectedBook().getEditora());
+        lvISBN.setText(BookService.getSelectedBook().getIsbn());
+        lvCategoria.setText(BookService.getSelectedBook().getCategoria());
+        lvAnoPubli.setText(BookService.getSelectedBook().getAnoPublicacao().toString());
+        amountAvailable.setText(Integer.valueOf(BookService.getSelectedBook().getQuantidadeDisponiveis()).toString());
     }
 
 }

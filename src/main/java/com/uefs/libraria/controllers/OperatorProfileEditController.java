@@ -52,7 +52,7 @@ public class OperatorProfileEditController {
     @FXML
     void cancelEdit(ActionEvent event) {
         AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
-        AdministratorHomeController.setCurrentSelectedUser(null);
+        UserService.setSelectedUser(null);
     }
 
     @FXML
@@ -77,7 +77,7 @@ public class OperatorProfileEditController {
     @FXML
     void initialize() {
         try {
-            userToEdit = UserService.updateUsuario(AdministratorHomeController.getCurrentSelectedUser());
+            userToEdit = UserService.updateUsuario(UserService.getSelectedUser());
 
             assert userToEdit != null;
             nameField.setText(userToEdit.getNome());

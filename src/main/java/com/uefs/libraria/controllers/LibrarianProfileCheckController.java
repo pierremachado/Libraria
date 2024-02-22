@@ -1,5 +1,6 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -48,30 +49,30 @@ public class LibrarianProfileCheckController implements Initializable {
     @FXML
     void cancelProfileCheck(ActionEvent event) {
         LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
-        LibrarianHomeController.setCurrentSelectedUser(null);
+        UserService.setSelectedUser(null);
     }
 
     @FXML
     void setOnProfile() {
-        nameLabel.setText(LibrarianHomeController.getCurrentSelectedUser().getNome());
-        surnameLabel.setText(LibrarianHomeController.getCurrentSelectedUser().getSobrenome());
-        usernameLabel.setText(LibrarianHomeController.getCurrentSelectedUser().getId());
-        accountTypeLabel.setText(LibrarianHomeController.getCurrentSelectedUser().getCargo());
+        nameLabel.setText(UserService.getSelectedUser().getNome());
+        surnameLabel.setText(UserService.getSelectedUser().getSobrenome());
+        usernameLabel.setText(UserService.getSelectedUser().getId());
+        accountTypeLabel.setText(UserService.getSelectedUser().getCargo());
 
-        if (LibrarianHomeController.getCurrentSelectedUser().getEndereco() == null ||
-                LibrarianHomeController.getCurrentSelectedUser().getEndereco().isEmpty()) {
+        if (UserService.getSelectedUser().getEndereco() == null ||
+                UserService.getSelectedUser().getEndereco().isEmpty()) {
             addressLabel.setText("Nada informado.");
         }
         else {
-            addressLabel.setText(LibrarianHomeController.getCurrentSelectedUser().getEndereco());
+            addressLabel.setText(UserService.getSelectedUser().getEndereco());
         }
 
-        if (LibrarianHomeController.getCurrentSelectedUser().getTelefone() == null ||
-                LibrarianHomeController.getCurrentSelectedUser().getTelefone().isEmpty()) {
+        if (UserService.getSelectedUser().getTelefone() == null ||
+                UserService.getSelectedUser().getTelefone().isEmpty()) {
             phoneLabel.setText("Nada informado.");
         }
         else {
-            phoneLabel.setText(LibrarianHomeController.getCurrentSelectedUser().getTelefone());
+            phoneLabel.setText(UserService.getSelectedUser().getTelefone());
         }
     }
 

@@ -61,7 +61,7 @@ public class BookProfileEditController {
     @FXML
     void cancelAction(ActionEvent event) {
         AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
-        AdministratorHomeController.setCurrentSelectedBook(null);
+        BookService.setSelectedBook(null);
     }
 
     @FXML
@@ -106,7 +106,7 @@ public class BookProfileEditController {
     @FXML
     void initialize() {
         try {
-            bookToEdit = BookService.updateLivro(AdministratorHomeController.getCurrentSelectedBook());
+            bookToEdit = BookService.updateLivro(BookService.getSelectedBook());
 
             errorWarningLabel.setText(null);
 

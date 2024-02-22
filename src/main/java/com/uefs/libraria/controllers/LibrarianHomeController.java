@@ -3,6 +3,7 @@ package com.uefs.libraria.controllers;
 import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.User;
 import com.uefs.libraria.services.LoginService;
+import com.uefs.libraria.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.uefs.libraria.controllers.MainWindowController.openPage;
+import static com.uefs.libraria.controllers.MainWindowController.wipeSelections;
 
 public class LibrarianHomeController {
 
@@ -65,11 +67,47 @@ public class LibrarianHomeController {
     private Button selfProfileCheckButton;
 
     @FXML
+    private Button showAllBooksButton;
+
+    @FXML
+    private Button showAllReadersButton;
+
+    @FXML
+    private Button showAllReservationsButton;
+
+    @FXML
+    private Button showAllLoansButton;
+
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
+    private void openAllBooksAction(ActionEvent event){
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
+    }
+
+    @FXML
+    private void showAllReadersAction(ActionEvent event){
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/UserTable.fxml"));
+    }
+
+    @FXML
+    private void showAllReservationsAction(ActionEvent event){
+        // todo
+    }
+
+    @FXML
+    private void showAllLoansAction(ActionEvent event){
+        // todo
+    }
+
+    @FXML
     void addBookAction(ActionEvent event) {
-        //todo
+        closeRightPaneOperation();
+        borderPane.setRight(openPage("/com/uefs/libraria/BookRegister.fxml"));
     }
 
     @FXML
@@ -92,12 +130,12 @@ public class LibrarianHomeController {
 
     @FXML
     void selfProfileCheckButton(ActionEvent event) {
-        LibrarianHomeController.setCurrentSelectedUser(LoginService.getCurrentLoggedUser());
+        UserService.setSelectedUser(LoginService.getCurrentLoggedUser());
         this.profileCheck();
     }
 
     public void refreshCenterTable() {
-        borderPane.setCenter(openPage("/com/uefs/libraria/ReaderAndBookTable.fxml"));
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
     }
 
     public static User getCurrentSelectedUser() {
@@ -129,13 +167,12 @@ public class LibrarianHomeController {
 
         usernameLabel.setText("@" + LoginService.getCurrentLoggedUser().getId());
 
-        borderPane.setCenter(openPage("/com/uefs/libraria/ReaderAndBookTable.fxml"));
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
 
     }
 
     public void closeRightPaneOperation(){
-        currentSelectedUser = null;
-        currentSelectedBook = null;
+        wipeSelections();
         borderPane.setRight(null);
     }
 

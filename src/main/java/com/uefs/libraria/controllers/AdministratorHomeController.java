@@ -1,8 +1,8 @@
 package com.uefs.libraria.controllers;
 
-import com.uefs.libraria.model.Book;
-import com.uefs.libraria.model.User;
 import com.uefs.libraria.services.LoginService;
+import com.uefs.libraria.services.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -16,15 +16,11 @@ import javafx.scene.layout.BorderPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.uefs.libraria.controllers.MainWindowController.mainWindowController;
-import static com.uefs.libraria.controllers.MainWindowController.openPage;
+import static com.uefs.libraria.controllers.MainWindowController.*;
 
 public class AdministratorHomeController implements Initializable {
 
     static AdministratorHomeController administratorHomeController;
-    private static User currentSelectedUser;
-    private static Book currentSelectedBook;
-    private static String search;
 
     @FXML
     private BorderPane borderPane;
@@ -60,6 +56,18 @@ public class AdministratorHomeController implements Initializable {
     private Button logoutButton;
 
     @FXML
+    private Button showAllBooksButton;
+
+    @FXML
+    private Button showAllUsersButton;
+
+    @FXML
+    private Button showAllReservationsButton;
+
+    @FXML
+    private Button showAllLoansButton;
+
+    @FXML
     private Label usernameLabel;
 
     @FXML
@@ -75,39 +83,38 @@ public class AdministratorHomeController implements Initializable {
     }
 
     @FXML
+    private void openAllBooksAction(ActionEvent event){
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
+    }
+
+    @FXML
+    private void showAllUsersAction(ActionEvent event){
+        wipeSelections();
+        this.borderPane.setCenter(openPage("/com/uefs/libraria/UserTable.fxml"));
+    }
+
+    @FXML
+    private void showAllReservationsAction(ActionEvent event){
+        // todo
+    }
+
+    @FXML
+    private void showAllLoansAction(ActionEvent event){
+        // todo
+    }
+
+    @FXML
     private void goToHome(MouseEvent event){
+        wipeSelections();
         this.refreshCenterTable();
         this.closeRightPaneOperation();
         this.searchTextField.clear();
     }
 
-    public static User getCurrentSelectedUser() {
-        return AdministratorHomeController.currentSelectedUser;
-    }
-
-    public static void setCurrentSelectedUser(User currentSelectedUser) {
-        AdministratorHomeController.currentSelectedUser = currentSelectedUser;
-    }
-
-    public static Book getCurrentSelectedBook() {
-        return AdministratorHomeController.currentSelectedBook;
-    }
-
-    public static void setCurrentSelectedBook(Book currentSelectedBook) {
-        AdministratorHomeController.currentSelectedBook = currentSelectedBook;
-    }
-
-    public static String getSearch(){
-        return search;
-    }
-
-    public static void setSearch(String key){
-        AdministratorHomeController.search = key;
-    }
-
     @FXML
     void setScreen() {
-        borderPane.setCenter(openPage("/com/uefs/libraria/UserAndBookTable.fxml"));
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
 
         greetingLabel.setText("Boas vindas," +
                 " " +
@@ -119,7 +126,7 @@ public class AdministratorHomeController implements Initializable {
         usernameLabel.setText("@" + LoginService.getCurrentLoggedUser().getId());
 
         selfProfileCheckButton.setOnAction(actionEvent -> {
-            setCurrentSelectedUser(LoginService.getCurrentLoggedUser());
+            UserService.setSelectedUser((LoginService.getCurrentLoggedUser()));
             profileCheck();
         });
 
@@ -134,8 +141,10 @@ public class AdministratorHomeController implements Initializable {
         generateReportButton.setOnAction(ActionEvent -> handleReport());
     }
 
+
+
     private void handleSearch(){
-        AdministratorHomeController.setSearch(searchTextField.getText());
+        UserService.setSearch(searchTextField.getText());
         try {
             switch(bookReaderChoiceBox.getValue()){
                 case "Livro" -> {borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));}
@@ -148,14 +157,19 @@ public class AdministratorHomeController implements Initializable {
     }
 
     private void handleReport(){
+        closeRightPaneOperation();
         borderPane.setRight(openPage("/com/uefs/libraria/Report.fxml"));
     }
 
     private void addUser(){
+        closeRightPaneOperation();
         borderPane.setRight(openPage("/com/uefs/libraria/UserRegister.fxml"));
     }
 
-    private void addBook() { borderPane.setRight(openPage("/com/uefs/libraria/BookRegister.fxml")); }
+    private void addBook() {
+        closeRightPaneOperation();
+        borderPane.setRight(openPage("/com/uefs/libraria/BookRegister.fxml"));
+    }
 
     public void profileCheck(){
         borderPane.setRight(openPage("/com/uefs/libraria/OperatorProfileCheck.fxml"));
@@ -170,17 +184,12 @@ public class AdministratorHomeController implements Initializable {
     }
 
     public void closeRightPaneOperation(){
-        currentSelectedUser = null;
-        currentSelectedBook = null;
+        wipeSelections();
         borderPane.setRight(null);
     }
 
-    public void setRightBorderPane(String url){
-        this.borderPane.setRight(openPage(url));
-    }
-
     public void refreshCenterTable() {
-        borderPane.setCenter(openPage("/com/uefs/libraria/UserAndBookTable.fxml"));
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
     }
 
     private void handleLogout(){

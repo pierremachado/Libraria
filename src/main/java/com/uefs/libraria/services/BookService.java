@@ -16,6 +16,18 @@ import java.util.List;
  * @version 1.0
  */
 public class BookService {
+
+    private static Book selectedBook;
+
+    public static Book getSelectedBook() {
+        return selectedBook;
+    }
+
+    public static void setSelectedBook(Book selectedBook) {
+        BookService.selectedBook = selectedBook;
+    }
+
+
     /**
      * Cria um livro e o adiciona no acervo da biblioteca, lançando uma exceção.
      *

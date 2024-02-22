@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
 import static com.uefs.libraria.controllers.MainWindowController.mainWindowController;
+import static com.uefs.libraria.controllers.MainWindowController.wipeSelections;
 
 public class LoginController{
 
@@ -34,6 +35,8 @@ public class LoginController{
 
     @FXML
     public void initialize() {
+        wipeSelections();
+
         choiceBox.getItems().addAll("Administrador", "Bibliotecário", "Leitor");
         choiceBox.setValue("Administrador");
 

@@ -56,8 +56,8 @@ public class OperatorProfileCheckController implements Initializable {
     @FXML
     private void removeUser(ActionEvent event){
         try {
-            UserService.removerUsuario(AdministratorHomeController.getCurrentSelectedUser());
-            AdministratorHomeController.setCurrentSelectedUser(null);
+            UserService.removerUsuario(UserService.getSelectedUser());
+            UserService.setSelectedUser(null);
             MainWindowController.mainWindowController.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
         } catch (NotEnoughPermissionException e) {
             throw new RuntimeException(e);
@@ -71,7 +71,7 @@ public class OperatorProfileCheckController implements Initializable {
     @FXML
     void cancelProfileCheck(ActionEvent event) {
         AdministratorHomeController.administratorHomeController.closeRightPaneOperation();
-        AdministratorHomeController.setCurrentSelectedUser(null);
+        UserService.setSelectedUser(null);
     }
 
     @FXML
@@ -81,28 +81,28 @@ public class OperatorProfileCheckController implements Initializable {
 
     @FXML
     void setOnProfile() {
-        nameLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getNome());
-        surnameLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getSobrenome());
-        usernameLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getId());
-        accountTypeLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getCargo());
+        nameLabel.setText(UserService.getSelectedUser().getNome());
+        surnameLabel.setText(UserService.getSelectedUser().getSobrenome());
+        usernameLabel.setText(UserService.getSelectedUser().getId());
+        accountTypeLabel.setText(UserService.getSelectedUser().getCargo());
 
-        if (AdministratorHomeController.getCurrentSelectedUser().getEndereco() == null ||
-                AdministratorHomeController.getCurrentSelectedUser().getEndereco().isEmpty()) {
+        if (UserService.getSelectedUser().getEndereco() == null ||
+                UserService.getSelectedUser().getEndereco().isEmpty()) {
             addressLabel.setText("Nada informado.");
         }
         else {
-            addressLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getEndereco());
+            addressLabel.setText(UserService.getSelectedUser().getEndereco());
         }
 
-        if (AdministratorHomeController.getCurrentSelectedUser().getTelefone() == null ||
-                AdministratorHomeController.getCurrentSelectedUser().getTelefone().isEmpty()) {
+        if (UserService.getSelectedUser().getTelefone() == null ||
+                UserService.getSelectedUser().getTelefone().isEmpty()) {
             phoneLabel.setText("Nada informado.");
         }
         else {
-            phoneLabel.setText(AdministratorHomeController.getCurrentSelectedUser().getTelefone());
+            phoneLabel.setText(UserService.getSelectedUser().getTelefone());
         }
 
-        if(LoginService.getCurrentLoggedUser() == AdministratorHomeController.getCurrentSelectedUser()){
+        if(LoginService.getCurrentLoggedUser() == UserService.getSelectedUser()){
             removeButton.setDisable(true);
         }
     }

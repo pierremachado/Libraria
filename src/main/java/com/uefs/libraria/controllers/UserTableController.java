@@ -1,6 +1,8 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.dao.DAO;
 import com.uefs.libraria.model.User;
+import com.uefs.libraria.services.LoginService;
 import com.uefs.libraria.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,17 +37,40 @@ public class UserTableController {
     }
 
     private void setUserTable(){
-        userData = FXCollections.observableArrayList(UserService.pesquisarUsuarioPorKey
-                (AdministratorHomeController.getSearch()));
+        switch (LoginService.getCurrentLoggedUser().getPermissao()) {
+            case ADMINISTRADOR -> {
+                if (UserService.getSearch() != null) {
+                    userData = FXCollections.observableArrayList(UserService.pesquisarUsuarioPorKey
+                            (UserService.getSearch()));
+                }
+                else {
+                    userData = FXCollections.observableArrayList(UserService.getAllUsers());
+                }
+            }
+
+            case BIBLIOTECARIO -> {
+                if (UserService.getSearch() != null) {
+                    userData = FXCollections.observableArrayList(UserService.pesquisarLeitorPorKey
+                            (UserService.getSearch()));
+                } else {
+                    userData = FXCollections.observableArrayList(DAO.getLeitorDAO().findAll());
+                }
+            }
+        }
+
 
         createUserTable(this.userTable, userData);
 
         userTable.setOnMouseClicked(MouseEvent -> {
-            AdministratorHomeController.setCurrentSelectedUser(userTable.getSelectionModel().getSelectedItem());
-            AdministratorHomeController.administratorHomeController.profileCheck();
+            UserService.setSelectedUser(userTable.getSelectionModel().getSelectedItem());
+
+            switch(LoginService.getCurrentLoggedUser().getPermissao()){
+                case ADMINISTRADOR -> AdministratorHomeController.administratorHomeController.profileCheck();
+                case BIBLIOTECARIO -> LibrarianHomeController.librarianHomeController.profileCheck();
+            }
         });
 
-        AdministratorHomeController.setSearch(null);
+        UserService.setSelectedUser(null);
     }
 
     static void createUserTable(TableView<User> userTable, ObservableList<User> userData) {

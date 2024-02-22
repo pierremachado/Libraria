@@ -16,6 +16,27 @@ import java.util.List;
  * @version 1.0
  */
 public class UserService {
+
+    private static User selectedUser;
+
+    private static String search;
+
+    public static User getSelectedUser() {
+        return selectedUser;
+    }
+
+    public static void setSelectedUser(User selectedUser) {
+        UserService.selectedUser = selectedUser;
+    }
+
+    public static String getSearch() {
+        return search;
+    }
+
+    public static void setSearch(String search) {
+        UserService.search = search;
+    }
+
     public static User criarUsuario(String nome, String sobrenome, String id, String senha, String endereco, String telefone, UserPermission tipo) throws NotEnoughPermissionException, IdAlreadyExistsException {
         if (!LoginService.verificarAdministrador()) {
             throw new NotEnoughPermissionException("Sem permissão necessária");
@@ -169,6 +190,27 @@ public class UserService {
         List<User> userListById = new ArrayList<>();
 
         for (User user : allUsers) {
+            String userKey =
+                    user.getNome() +
+                            " " +
+                            user.getSobrenome() +
+                            " " +
+                            user.getId() +
+                            " " +
+                            user.getCargo();
+
+            if (userKey.toLowerCase().strip().contains(key.toLowerCase().strip())){
+                userListById.add(user);
+            }
+        }
+
+        return userListById;
+    }
+
+    public static List<User> pesquisarLeitorPorKey(String key){
+        List<User> userListById = new ArrayList<>();
+
+        for (User user : DAO.getLeitorDAO().findAll()) {
             String userKey =
                     user.getNome() +
                             " " +
