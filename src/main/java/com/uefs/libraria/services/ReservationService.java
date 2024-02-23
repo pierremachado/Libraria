@@ -39,7 +39,7 @@ public class ReservationService {
      * @throws ReservationException             Caso o leitor já tenha ultrapassado o limite de reservas em seu nome
      * @throws UserIsBlockedException       Caso o leitor esteja bloqueado ou multado
      */
-    public static Reservation criarReserva(Book book) throws NotEnoughPermissionException, BookException, ReservationException, UserIsBlockedException {
+    public static Reservation criarReserva(Book book) throws NotEnoughPermissionException, ReservationException, UserIsBlockedException {
         if (!LoginService.verificarLeitor()) {
             throw new NotEnoughPermissionException("Apenas leitores podem fazer reservas");
         }
@@ -48,10 +48,6 @@ public class ReservationService {
 
         if (reader.getStatus() == ReaderStatus.BANIDO || reader.getStatus() == ReaderStatus.MULTADO) {
             throw new UserIsBlockedException("Leitor está bloqueado ou multado");
-        }
-
-        if (book.getQuantidadeDisponiveis() > 0) {
-            throw new BookException("Há unidades disponíveis do exemplar");
         }
 
         List<Reservation> reservasAtuais = DAO.getReservaDAO().findCurrentLeitor(reader.getId());
@@ -77,6 +73,8 @@ public class ReservationService {
      * @throws ReservationException             Caso a reserva já tenha sido cancelada ou emprestada
      */
     public static void cancelarReserva(Reservation reservation) throws NotEnoughPermissionException, ReservationException {
+        Reservation toUpdate = DAO.getReservaDAO().update(reservation);
+
         if (LoginService.verificarConvidado()) {
             throw new NotEnoughPermissionException("Convidados não podem cancelar reservas");
         }
@@ -91,12 +89,12 @@ public class ReservationService {
         }
 
         if (reservation.getStatus() == ReservationStatus.LIBERADO) {
-            Book book = DAO.getLivroDAO().findID(reservation.getIdLivro());
+            Book book = DAO.getLivroDAO().update(DAO.getLivroDAO().findID(reservation.getIdLivro()));
             book.aumentarQuantidade(1);
-            DAO.getLivroDAO().update(book);
+
         }
-        reservation.setStatus(ReservationStatus.CANCELADO);
-        DAO.getReservaDAO().update(reservation);
+        toUpdate.setStatus(ReservationStatus.CANCELADO);
+
     }
 
     public static Reservation pesquisarReservaPorId(String id) throws NotEnoughPermissionException {

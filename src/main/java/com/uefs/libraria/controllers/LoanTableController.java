@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.uefs.libraria.dao.DAO;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
 import com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.Reader;
 import com.uefs.libraria.model.enums.LoanStatus;
 import com.uefs.libraria.model.enums.UserPermission;
 import com.uefs.libraria.services.LendingService;
@@ -51,6 +52,7 @@ public class LoanTableController {
                     LibrarianHomeController.librarianHomeController.loanCheck();
                 }
                 case LEITOR -> {
+                    ReaderHomeController.readerHomeController.loanCheck();
                 }
                 case CONVIDADO -> {
                 }
@@ -76,12 +78,7 @@ public class LoanTableController {
                 }
             }
             case LEITOR -> {
-                try {
-                    loanData = FXCollections.observableArrayList(LendingService.pesquisarEmprestimoPorId(LoginService
-                            .getCurrentLoggedUser().getId()));
-                } catch (NotEnoughPermissionException e) {
-                    return;
-                }
+                loanData = FXCollections.observableArrayList(DAO.getEmprestimoDAO().findIdLeitor(LoginService.getCurrentLoggedUser().getId()));
             }
         }
 

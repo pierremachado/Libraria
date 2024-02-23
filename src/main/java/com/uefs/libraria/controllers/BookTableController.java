@@ -50,8 +50,9 @@ public class BookTableController {
                 case UserPermission.BIBLIOTECARIO -> {
                     LibrarianHomeController.librarianHomeController.bookCheck();
                 }
-
-                // todo
+                case UserPermission.LEITOR -> {
+                    ReaderHomeController.readerHomeController.bookCheck();
+                }
             }
         });
     }

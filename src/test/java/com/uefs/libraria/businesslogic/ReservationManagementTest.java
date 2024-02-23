@@ -63,7 +63,7 @@ public class ReservationManagementTest {
         try{
             reservation = ReservationService.criarReserva(BookService.pesquisarLivroPorChave("Eu sei o que você").get(2));
         }
-        catch (UserIsBlockedException | NotEnoughPermissionException | BookException | ReservationException e){
+        catch (UserIsBlockedException | NotEnoughPermissionException | ReservationException e){
             e.printStackTrace();
         }
 
@@ -109,7 +109,7 @@ public class ReservationManagementTest {
         try{
             reservation = ReservationService.criarReserva(BookService.pesquisarLivroPorChave("Eu sei o que você").get(2));
         }
-        catch (UserIsBlockedException | NotEnoughPermissionException | BookException | ReservationException e){
+        catch (UserIsBlockedException | NotEnoughPermissionException | ReservationException e){
             e.printStackTrace();
         }
 

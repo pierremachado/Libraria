@@ -151,6 +151,8 @@ public class AdministratorHomeController implements Initializable {
             switch(bookReaderChoiceBox.getValue()){
                 case "Livro" -> {borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));}
                 case "Usuário" -> {borderPane.setCenter(openPage("/com/uefs/libraria/UserTable.fxml"));}
+                case "Reserva" -> {borderPane.setCenter(openPage("/com/uefs/libraria/ReservationTable.fxml"));}
+                case "Empréstimo" -> {borderPane.setCenter(openPage("/com/uefs/libraria/LoanTable.fxml"));}
             }
 
         } catch (Exception e){

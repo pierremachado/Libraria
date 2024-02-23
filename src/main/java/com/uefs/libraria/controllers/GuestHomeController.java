@@ -1,6 +1,7 @@
 package com.uefs.libraria.controllers;
 
 import com.uefs.libraria.services.LoginService;
+import com.uefs.libraria.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +11,9 @@ import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.uefs.libraria.controllers.MainWindowController.openPage;
+import static com.uefs.libraria.controllers.MainWindowController.wipeSelections;
 
 public class GuestHomeController {
 
@@ -33,7 +37,10 @@ public class GuestHomeController {
 
     @FXML
     void goToHome(MouseEvent event) {
-
+        wipeSelections();
+        this.refreshCenterTable();
+        this.closeRightPaneOperation();
+        this.searchTextField.clear();
     }
 
     @FXML
@@ -44,16 +51,22 @@ public class GuestHomeController {
 
     @FXML
     void searchBookAction(ActionEvent event) {
-
+        UserService.setSearch(searchTextField.getText());
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
     }
 
     @FXML
     void initialize() {
-        assert borderPane != null : "fx:id=\"borderPane\" was not injected: check your FXML file 'GuestHome.fxml'.";
-        assert logoutButton != null : "fx:id=\"logoutButton\" was not injected: check your FXML file 'GuestHome.fxml'.";
-        assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'GuestHome.fxml'.";
-        assert searchTextField != null : "fx:id=\"searchTextField\" was not injected: check your FXML file 'GuestHome.fxml'.";
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
+    }
 
+    public void closeRightPaneOperation(){
+        wipeSelections();
+        borderPane.setRight(null);
+    }
+
+    public void refreshCenterTable() {
+        borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
     }
 
 }

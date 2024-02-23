@@ -1,12 +1,17 @@
 package com.uefs.libraria.dao.Reservation;
 
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.User;
 import com.uefs.libraria.model.enums.ReservationStatus;
 import com.uefs.libraria.util.FileStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.uefs.libraria.dao.DAO.getReservaDAO;
 import static java.lang.String.valueOf;
 
 public class ReservationFileDAO implements ReservationDAO {
@@ -17,6 +22,18 @@ public class ReservationFileDAO implements ReservationDAO {
     public ReservationFileDAO() {
         this.fs = new FileStorage("reservation", "reservation");
         this.reservationList = fs.read();
+        this.nextId = calculateNextId();
+    }
+
+    private int calculateNextId() {
+        int maxId = 0;
+        for (Reservation reservation : reservationList) {
+            int id = Integer.parseInt(reservation.getIdReserva());
+            if (id > maxId) {
+                maxId = id;
+            }
+        }
+        return maxId + 1;
     }
 
     @Override
@@ -26,6 +43,29 @@ public class ReservationFileDAO implements ReservationDAO {
         fs.save(reservationList);
         return obj;
     }
+
+    @Override
+    public void updateReservationId(User userToEdit, String newId){
+        for(Reservation reservation : this.reservationList){
+            if (Objects.equals(reservation.getIdLeitor(), userToEdit.getId())){;
+                reservation.setIdLeitor(newId);
+            }
+            fs.save(reservationList);
+        }
+    }
+
+    @Override
+    public void updateReservationIsbn(Book bookToEdit, String newIsbn){
+        for(Reservation reservation : getReservaDAO().findAll()){
+            if (Objects.equals(reservation.getIdLivro(), bookToEdit.getIsbn())){
+                reservation.setIdLivro(newIsbn);
+            }
+        }
+
+        fs.save(reservationList);
+
+    }
+
 
     @Override
     public void deleteID(String id) {

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.uefs.libraria.controllers.ReaderLoanProfileController">
+   <children>
+      <VBox spacing="20.0" style="-fx-background-color: #e3e3e3; -fx-background-radius: 20px;">
+         <children>
+            <Label text="Empréstimo">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="TOP_CENTER" spacing="20.0">
+               <children>
+                  <ImageView fx:id="lvImagem" fitHeight="182.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../assets/book-cover-placeholder.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Título">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="bookName" onMouseClicked="#showBookProfile" text="Nome" underline="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Label>
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Leitor">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="readerName" onMouseClicked="#showReaderProfile" text="Nome" underline="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Label>
+                     </children>
+                  </VBox>
+                  <VBox />
+               </children>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Data de empréstimo">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loanDate" text="Nome" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Data limite">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loanLimit" text="Nome" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox spacing="20.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Data de retorno">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loanReturnDate" text="Nome" />
+                     </children>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <Label text="Status">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="loanStatus" text="Nome" />
+                     </children>
+                  </VBox>
+                  <VBox />
+                  <VBox>
+                     <children>
+                        <Label text="Renovado">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="renovationLabel" text="Nome" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" spacing="20.0">
+               <children>
+                  <Button fx:id="renewLoanButton" mnemonicParsing="false" onAction="#renewLoanAction" prefWidth="85.0" style="-fx-background-color: #131415; -fx-background-radius: 20px; -fx-border-radius: 20px; -fx-border-color: #131415;" text="Renovar" textFill="#e3e3e3">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="closeWindowButton" cancelButton="true" mnemonicParsing="false" onAction="#closeWindowAction" prefWidth="85.0" style="-fx-border-color: ff2626; -fx-border-radius: 20px; -fx-background-color: rgba(0,0,0,0);" text="Fechar" textFill="#ff2626">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.uefs.libraria.dao.DAO;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
 import com.uefs.libraria.model.Book;
+import com.uefs.libraria.model.Reader;
 import com.uefs.libraria.model.Reservation;
 import com.uefs.libraria.model.enums.ReservationStatus;
 import com.uefs.libraria.model.enums.UserPermission;
@@ -51,6 +52,7 @@ public class ReservationTableController {
                     LibrarianHomeController.librarianHomeController.reservationCheck();
                 }
                 case LEITOR -> {
+                    ReaderHomeController.readerHomeController.reservationCheck();
                 }
                 case CONVIDADO -> {
                 }
@@ -59,18 +61,24 @@ public class ReservationTableController {
     }
 
     private void setReservationTable() {
-        ObservableList<Reservation> reservationData;
+        ObservableList<Reservation> reservationData = null;
 
-        if (UserService.getSearch() != null){
-            try {
-                reservationData = FXCollections.observableArrayList(ReservationService.pesquisarReservaPorId(UserService.getSearch()));
-            } catch (NotEnoughPermissionException e) {
-                return;
+        switch(LoginService.getCurrentLoggedUser().getPermissao()) {
+            case ADMINISTRADOR, BIBLIOTECARIO -> {
+                if (UserService.getSearch() != null){
+                    try {
+                        reservationData = FXCollections.observableArrayList(ReservationService.pesquisarReservaPorId(UserService.getSearch()));
+                    } catch (NotEnoughPermissionException e) {
+                        return;
+                    }
+                }
+                else{
+                    reservationData = FXCollections.observableArrayList(DAO.getReservaDAO().findAll());
+                }
             }
-        }
-        else{
-            reservationData = FXCollections.observableArrayList(DAO.getReservaDAO().findAll());
-
+            case LEITOR -> {
+                reservationData = FXCollections.observableArrayList(DAO.getReservaDAO().findLeitor(LoginService.getCurrentLoggedUser().getId()));
+            }
         }
 
         createReservationTable(this.reservationTable, reservationData);

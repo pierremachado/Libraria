@@ -1,7 +1,9 @@
 package com.uefs.libraria.dao.Reservation;
 
 import com.uefs.libraria.dao.CRUD;
+import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.User;
 
 import java.util.List;
 
@@ -21,4 +23,8 @@ public interface ReservationDAO extends CRUD<Reservation> {
     void deleteAllByBook(String idLivro);
 
     void deleteAllByLeitor(String idLeitor);
+
+    void updateReservationId(User userToEdit, String newId);
+
+    void updateReservationIsbn(Book bookToEdit, String newIsbn);
 }

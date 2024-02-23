@@ -1,10 +1,14 @@
 package com.uefs.libraria.dao.Loan;
 
+import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.uefs.libraria.dao.DAO.getEmprestimoDAO;
 import static java.lang.String.valueOf;
 
 /**
@@ -25,6 +29,27 @@ public class LoanListDAO implements LoanDAO {
         int index = this.lista.indexOf(obj);
         this.lista.set(index, obj);
         return obj;
+    }
+
+    @Override
+    public void updateLoanId(User userToEdit, String newId){
+        for(Loan loan : getEmprestimoDAO().findAll()){
+            if(Objects.equals(loan.getIdLeitor(), userToEdit.getId())){
+                loan.setIdLeitor(newId);
+            }
+            if(Objects.equals(loan.getIdOperador(), userToEdit.getId())){
+                loan.setIdOperador(newId);
+            }
+        }
+    }
+
+    @Override
+    public void updateLoanIsbn(Book bookToEdit, String newIsbn){
+        for(Loan loan : getEmprestimoDAO().findAll()){
+            if(Objects.equals(loan.getIdLivro(), bookToEdit.getIsbn())){
+                loan.setIdLivro(newIsbn);
+            }
+        }
     }
 
     @Override

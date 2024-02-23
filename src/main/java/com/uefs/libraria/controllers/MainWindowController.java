@@ -24,10 +24,7 @@ public class MainWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         mainWindowController = this;
 
-        TimeService.setCurrentLocalDateTime(LocalDateTime.now());
-        FinesService.aplicarMultas();
-        FinesService.desbloquearMultas();
-        ReservationService.atualizarReservas();
+        updateAll();
 
         try {
             callLoginScreen();
@@ -36,28 +33,44 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    private static void updateAll() {
+        TimeService.setCurrentLocalDateTime(LocalDateTime.now());
+        FinesService.aplicarMultas();
+        FinesService.desbloquearMultas();
+        ReservationService.atualizarReservas();
+    }
+
     @FXML
     public void callLoginScreen(){
+        updateAll();
         this.refreshMainWindow("/com/uefs/libraria/Login.fxml");
     }
 
     @FXML
     public void callAdministratorHomeScreen(){
+        updateAll();
         this.refreshMainWindow("/com/uefs/libraria/AdministratorHome.fxml");
     }
 
     @FXML
-    public void callLibrarianHomeScreen() {this.refreshMainWindow("/com/uefs/libraria/LibrarianHome.fxml");}
+    public void callLibrarianHomeScreen() {
+        updateAll();
+        this.refreshMainWindow("/com/uefs/libraria/LibrarianHome.fxml");}
 
     @FXML
-    public void callReaderHomeScreen() {this.refreshMainWindow("/com/uefs/libraria/ReaderHome.fxml");}
+    public void callReaderHomeScreen() {
+        updateAll();
+        this.refreshMainWindow("/com/uefs/libraria/ReaderHome.fxml");}
 
     @FXML
-    public void callGuestHomeScreen() {this.refreshMainWindow("/com/uefs/libraria/GuestHome.fxml");}
+    public void callGuestHomeScreen() {
+        updateAll();
+        this.refreshMainWindow("/com/uefs/libraria/GuestHome.fxml");}
 
     public void refreshMainWindow(String url){
         wipeSelections();
         this.mainBorderPane.setCenter(openPage(url));
+        updateAll();
     }
 
     public static void wipeSelections(){

@@ -1,11 +1,16 @@
 package com.uefs.libraria.dao.Reservation;
 
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.User;
 import com.uefs.libraria.model.enums.ReservationStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.uefs.libraria.dao.DAO.getReservaDAO;
 import static java.lang.String.valueOf;
 
 /**
@@ -34,6 +39,24 @@ public class ReservationListDAO implements ReservationDAO {
             if (reservation.getIdReserva().equals(id)) {
                 this.reservationList.remove(reservation);
                 return;
+            }
+        }
+    }
+
+    @Override
+    public void updateReservationId(User userToEdit, String newId){
+        for(Reservation reservation : this.reservationList){
+            if (Objects.equals(reservation.getIdLeitor(), userToEdit.getId())){
+                reservation.setIdLeitor(newId);
+            }
+        }
+    }
+
+    @Override
+    public void updateReservationIsbn(Book bookToEdit, String newIsbn){
+        for(Reservation reservation : getReservaDAO().findAll()){
+            if (Objects.equals(reservation.getIdLivro(), bookToEdit.getIsbn())){
+                reservation.setIdLivro(newIsbn);
             }
         }
     }

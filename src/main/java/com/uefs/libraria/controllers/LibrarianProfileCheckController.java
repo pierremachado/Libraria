@@ -1,5 +1,6 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.services.LoginService;
 import com.uefs.libraria.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,7 +49,15 @@ public class LibrarianProfileCheckController implements Initializable {
 
     @FXML
     void cancelProfileCheck(ActionEvent event) {
-        LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
+        switch(LoginService.getCurrentLoggedUser().getPermissao()){
+            case BIBLIOTECARIO -> {
+                LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
+            }
+            case LEITOR -> {
+                ReaderHomeController.readerHomeController.closeRightPaneOperation();
+            }
+        }
+
         UserService.setSelectedUser(null);
     }
 

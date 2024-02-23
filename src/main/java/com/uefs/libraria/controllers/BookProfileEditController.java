@@ -1,8 +1,11 @@
 package com.uefs.libraria.controllers;
 
+import com.uefs.libraria.dao.DAO;
 import com.uefs.libraria.exceptions.EditIdWithOngoingLoansException;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
 import com.uefs.libraria.model.Book;
+import com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.Reservation;
 import com.uefs.libraria.services.BookService;
 import com.uefs.libraria.services.LoginService;
 import javafx.event.ActionEvent;
@@ -15,7 +18,10 @@ import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static com.uefs.libraria.dao.DAO.*;
 
 public class BookProfileEditController {
 
@@ -97,6 +103,15 @@ public class BookProfileEditController {
             return;
         }
 
+        Book findEqualBook = BookService.pesquisarLivroPorIsbn(id);
+        if(findEqualBook != null && !findEqualBook.equals(bookToEdit)){
+            errorWarningLabel.setText("ISBN já cadastrado.");
+            return;
+        }
+
+        DAO.getReservaDAO().updateReservationIsbn(bookToEdit, id);
+        DAO.getEmprestimoDAO().updateLoanIsbn(bookToEdit, id);
+
         bookToEdit.setTitulo(title);
         bookToEdit.setAutor(author);
         bookToEdit.setCategoria(category);
@@ -104,6 +119,8 @@ public class BookProfileEditController {
         bookToEdit.setIsbn(id);
         bookToEdit.setQuantidadeDisponiveis(amount);
         bookToEdit.setAnoPublicacao(year);
+
+        bookToEdit = null;
 
         switch (LoginService.getCurrentLoggedUser().getPermissao()){
             case ADMINISTRADOR -> MainWindowController.mainWindowController.callAdministratorHomeScreen();

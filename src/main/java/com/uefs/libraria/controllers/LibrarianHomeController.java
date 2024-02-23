@@ -159,13 +159,29 @@ public class LibrarianHomeController {
                 " " +
                 LoginService.getCurrentLoggedUser().getNome());
 
-        bookReaderChoiceBox.getItems().addAll("Livro", "Leitor");
+        bookReaderChoiceBox.getItems().addAll("Livro", "Leitor", "Reserva", "Empréstimo");
         bookReaderChoiceBox.setValue("Livro");
 
         usernameLabel.setText("@" + LoginService.getCurrentLoggedUser().getId());
 
         borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));
 
+        searchButton.setOnAction(ActionEvent -> {handleSearch();});
+    }
+
+    private void handleSearch(){
+        UserService.setSearch(searchTextField.getText());
+        try {
+            switch(bookReaderChoiceBox.getValue()){
+                case "Livro" -> {borderPane.setCenter(openPage("/com/uefs/libraria/BookTable.fxml"));}
+                case "Leitor" -> {borderPane.setCenter(openPage("/com/uefs/libraria/UserTable.fxml"));}
+                case "Reserva" -> {borderPane.setCenter(openPage("/com/uefs/libraria/ReservationTable.fxml"));}
+                case "Empréstimo" -> {borderPane.setCenter(openPage("/com/uefs/libraria/LoanTable.fxml"));}
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void closeRightPaneOperation(){

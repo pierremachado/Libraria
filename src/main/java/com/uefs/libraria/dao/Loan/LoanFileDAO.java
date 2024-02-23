@@ -1,11 +1,17 @@
 package com.uefs.libraria.dao.Loan;
 
+import com.uefs.libraria.dao.DAO;
+import com.uefs.libraria.model.Book;
 import com.uefs.libraria.model.Loan;
+import com.uefs.libraria.model.Reservation;
+import com.uefs.libraria.model.User;
 import com.uefs.libraria.util.FileStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import static com.uefs.libraria.dao.DAO.getEmprestimoDAO;
 import static java.lang.String.valueOf;
 
 public class LoanFileDAO implements LoanDAO {
@@ -16,6 +22,18 @@ public class LoanFileDAO implements LoanDAO {
     public LoanFileDAO() {
         this.fs = new FileStorage("loan", "loan");
         this.loanList = fs.read();
+        this.nextId = calculateNextId();
+    }
+
+    private int calculateNextId() {
+        int maxId = 0;
+        for (Loan loan : loanList) {
+            int id = Integer.parseInt(loan.getIdEmprestimo());
+            if (id > maxId) {
+                maxId = id;
+            }
+        }
+        return maxId + 1;
     }
 
     @Override
@@ -24,6 +42,29 @@ public class LoanFileDAO implements LoanDAO {
         this.loanList.set(index, obj);
         fs.save(loanList);
         return obj;
+    }
+
+    @Override
+    public void updateLoanId(User userToEdit, String newId){
+        for(Loan loan : getEmprestimoDAO().findAll()){
+            if(Objects.equals(loan.getIdLeitor(), userToEdit.getId())){
+                loan.setIdLeitor(newId);
+            }
+            if(Objects.equals(loan.getIdOperador(), userToEdit.getId())){
+                loan.setIdOperador(newId);
+            }
+        }
+        fs.save(loanList);
+    }
+
+    @Override
+    public void updateLoanIsbn(Book bookToEdit, String newIsbn){
+        for(Loan loan : getEmprestimoDAO().findAll()){
+            if(Objects.equals(loan.getIdLivro(), bookToEdit.getIsbn())){
+                loan.setIdLivro(newIsbn);
+            }
+            fs.save(loanList);
+        }
     }
 
     @Override
