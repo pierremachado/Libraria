@@ -4,6 +4,7 @@ import com.uefs.libraria.exceptions.BookAmountUnderZeroException;
 import com.uefs.libraria.exceptions.IdAlreadyExistsException;
 import com.uefs.libraria.exceptions.NotEnoughPermissionException;
 import com.uefs.libraria.services.BookService;
+import com.uefs.libraria.services.LoginService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -57,7 +58,12 @@ public class BookRegisterController {
     @FXML
     void initialize() {
         addBookButton.setOnAction(event -> handleAddBook());
-        cancelButton.setOnAction(event -> administratorHomeController.closeRightPaneOperation());
+        cancelButton.setOnAction(event -> {
+            switch(LoginService.getCurrentLoggedUser().getPermissao()){
+                case ADMINISTRADOR -> administratorHomeController.closeRightPaneOperation();
+                case BIBLIOTECARIO -> LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
+            }
+        });
         errorWarningLabel.setText(null);
     }
 
@@ -100,7 +106,16 @@ public class BookRegisterController {
             return;
         }
 
-        administratorHomeController.closeRightPaneOperation();
-        administratorHomeController.refreshCenterTable();
+        switch(LoginService.getCurrentLoggedUser().getPermissao()){
+            case ADMINISTRADOR -> {
+                administratorHomeController.closeRightPaneOperation();
+                administratorHomeController.refreshCenterTable();
+            }
+            case BIBLIOTECARIO -> {
+                LibrarianHomeController.librarianHomeController.closeRightPaneOperation();
+                LibrarianHomeController.librarianHomeController.refreshCenterTable();
+            }
+        }
+
     }
 }
